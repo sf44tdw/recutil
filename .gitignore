@@ -33,7 +33,8 @@ nbproject/*
 nbproject/
 nbproject
 nb-configuration.xml
-	
+nbactions.xml
+
 # Build
 out
 build
