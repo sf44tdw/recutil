@@ -24,7 +24,7 @@ import org.apache.commons.lang3.ArrayUtils;
  *
  * @author normal
  */
-public class DummyExecutor extends CommandExecutor {
+public final class DummyExecutor extends CommandExecutor {
 
     private String cmd = null;
 
