@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#コマンド用キッカー配置
+
+SOURCE_SCRIPT="executor"
+
+BASEDIR=$(cd $(dirname $0); pwd)
+
+DIST="../bin"
+
+cd ../
+
+LIST=`find . -type f -name "*jar-with-dependencies.jar" | sed 's!^.*/!!' | sed -e 's/-.*\.jar$//' `
+
+cd ${BASEDIR}
+
+for L in ${LIST}
+do
+  cat ${BASEDIR}/${SOURCE_SCRIPT} > ${DIST}/${L}
+  chmod 755 ${DIST}/${L}
+done
+
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tv SYSTEM "xmltv.dtd">
+
+<tv generator-info-name="tsEPG2xml" generator-info-url="http://localhost/">
+  <channel id="GR_1064" tp="24">
+    <display-name lang="ja_JP">テレビ朝日</display-name>
+    <transport_stream_id>32741</transport_stream_id>
+    <original_network_id>32741</original_network_id>
+    <service_id>1064</service_id>
+  </channel>
+  <channel id="GR_1065" tp="24">
+    <display-name lang="ja_JP">テレビ朝日</display-name>
+    <transport_stream_id>32741</transport_stream_id>
+    <original_network_id>32741</original_network_id>
+    <service_id>1065</service_id>
+  </channel>
+  <channel id="GR_1066" tp="24">
+    <display-name lang="ja_JP">テレビ朝日</display-name>
+    <transport_stream_id>32741</transport_stream_id>
+    <original_network_id>32741</original_network_id>
+    <service_id>1066</service_id>
+  </channel>
+  <programme start="20141229120000 +0900" stop="20141229150000 +0900" channel="GR_1064" event_id="7431">
+    <title lang="ja_JP">ワイド！スクランブル　年末スペシャル【字】</title>
+    <desc lang="ja_JP">インドネシアで旅客機不明▽日本を驚かせた今年のニュースを徹底検証▽中国汚職官僚を追及する正義の味方に密着▽池上彰が緊急出演!!今こそ知るべきイスラム教の世界ほか</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20141229150000 +0900" stop="20141229172500 +0900" channel="GR_1064" event_id="7433">
+    <title lang="ja_JP">年末相棒セレクション・スペシャル版１月１日夜９時は相棒スペシャル！【字】</title>
+    <desc lang="ja_JP">相棒５　＃１１「バベルの塔〜史上最悪のカウントダウン！爆破予告ホテルの罠」水谷豊、寺脇康文ほか▽右京と薫は、小野田に衆議院議員のパーティーに強引に連れていかれる。</desc>
+    <category lang="ja_JP">ドラマ</category>
+    <category lang="en">drama</category>
+  </programme>
+  <programme start="20141229172500 +0900" stop="20141229173000 +0900" channel="GR_1064" event_id="7434">
+    <title lang="ja_JP">大晦日はクイズサバイバー【字】</title>
+    <desc lang="ja_JP">１２月３１日よる６時　くりぃむしちゅー＆林修先生！　数で勝負の芸能人１００人ＶＳ頭脳明晰な知識人５０人が負けたら即脱落！７時間半の早押しクイズバトルで激突！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+</tv>

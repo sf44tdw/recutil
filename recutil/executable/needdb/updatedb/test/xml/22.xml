@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tv SYSTEM "xmltv.dtd">
+
+<tv generator-info-name="tsEPG2xml" generator-info-url="http://localhost/">
+  <channel id="GR_1048" tp="22">
+    <display-name lang="ja_JP">ＴＢＳ１</display-name>
+    <transport_stream_id>32739</transport_stream_id>
+    <original_network_id>32739</original_network_id>
+    <service_id>1048</service_id>
+  </channel>
+  <programme start="20141229135000 +0900" stop="20141229135500 +0900" channel="GR_1048" event_id="43874">
+    <title lang="ja_JP">ごごネタ！脳活！ＴＶ【字】</title>
+    <desc lang="ja_JP">今日は「錯覚クイズ【海と橋】篇」▼お手軽、短時間で脳を活性化させるクイズを出題！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20141229135500 +0900" stop="20141229145400 +0900" channel="GR_1048" event_id="44729">
+    <title lang="ja_JP">トコトン掘り下げ隊！生き物にサンキュー！！【ネコ第三弾】【再】【字】</title>
+    <desc lang="ja_JP">ネコのあるある行動の謎を解明、そして、増えつつあるぽっちゃりネコの生活に！まだまだ尽きないネコの魅力をたっぷりとお見せします！</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20141229145400 +0900" stop="20141229150000 +0900" channel="GR_1048" event_id="43876">
+    <title lang="ja_JP">ＴＢＳニュース</title>
+    <desc lang="ja_JP">最新のニュースをお伝えします。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+</tv>

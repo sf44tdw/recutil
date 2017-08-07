@@ -1,0 +1,23 @@
+<!-- 全てのログを標準出力から追い出す。-->
+<configuration>
+    <property name="LOG_DIR" value="./recutil_log" /><property name="FILENAME_COMMON" value="reserve" />
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/${FILENAME_COMMON}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOG_DIR}/${FILENAME_COMMON}.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- keep 30 days worth of history -->
+            <maxHistory>30</maxHistory> 
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%-5r %d{yyyy-MM-dd HH:mm:ss} [%t] %-5le %-40.40lo{36} - %msg %n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender> 
+
+    <root level="INFO">
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

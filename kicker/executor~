@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#自身のファイル名の文字列を含むjarを探して実行する。
+COMMANDNAME=`basename $0`
+
+BASEDIR=$(cd $(dirname $0); pwd)
+
+JARDIR="${BASEDIR}/jar"
+
+cd ${JARDIR}
+
+#echo ${JARDIR}
+
+JARFILE=`find . -type f -name "${COMMANDNAME}*jar-with-dependencies.jar"| sed 's!^.*/!!'`
+
+cd ${BASEDIR}
+
+JARPATH=${JARDIR}/${JARFILE}
+
+#echo ${JARPATH}
+
+SBT_OPTS=''
+java $SBT_OPTS -jar ${JARPATH} ${@}
+
+

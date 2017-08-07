@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tv SYSTEM "xmltv.dtd">
+
+<tv generator-info-name="tsEPG2xml" generator-info-url="http://localhost/">
+  <channel id="GR_1072" tp="23">
+    <display-name lang="ja_JP">テレビ東京1</display-name>
+    <transport_stream_id>32742</transport_stream_id>
+    <original_network_id>32742</original_network_id>
+    <service_id>1072</service_id>
+  </channel>
+  <channel id="GR_1073" tp="23">
+    <display-name lang="ja_JP">テレビ東京2</display-name>
+    <transport_stream_id>32742</transport_stream_id>
+    <original_network_id>32742</original_network_id>
+    <service_id>1073</service_id>
+  </channel>
+  <programme start="20141229135500 +0900" stop="20141229140000 +0900" channel="GR_1072" event_id="9494">
+    <title lang="ja_JP">今夜９時放送「世界ナゼそこに？日本人スペシャル」オススメ</title>
+    <desc lang="ja_JP">12/29(月)夜9時から放送「世界ナゼそこに？日本人スペシャル」番組のみどころを紹介します。</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20141229140000 +0900" stop="20141229150000 +0900" channel="GR_1072" event_id="8995">
+    <title lang="ja_JP">スポーツがあったから【東北復興物語▽羽生結弦▽釜石ラグビーほか】</title>
+    <desc lang="ja_JP">ソチ五輪日本人唯一の金メダリストとなった羽生結弦。彼の支えになったのは東日本大震災で絆を深めた恩人たちだった。若き天才の活躍の裏に隠さた、もう１つの物語を描く。</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20141229150000 +0900" stop="20141229164500 +0900" channel="GR_1072" event_id="8996">
+    <title lang="ja_JP">クリスマス　オン　アイス　２０１４【多】</title>
+    <desc lang="ja_JP">髙橋大輔と浅田真央、史上初の夢のコラボをたっぷりと！「お姫様抱っこ」その舞台裏をカメラがとらえました！永久保存版の豪華アイスショーです！</desc>
+    <category lang="ja_JP">スポーツ</category>
+    <category lang="en">sports</category>
+  </programme>
+  <programme start="20141229164500 +0900" stop="20141229180000 +0900" channel="GR_1072" event_id="8997">
+    <title lang="ja_JP">浅田真央・舞のＴＲＹ＆ＧＯ〜初体験！素顔のプライベート旅〜【再】【字】</title>
+    <desc lang="ja_JP">浅田真央が姉の舞と一緒に、今までやりたくてもできなかったことを体験！ニュージーランドで「大自然のリンクで滑る」さらに「人生初のバンジー・ジャンプ」まで</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20141229180000 +0900" stop="20141229210000 +0900" channel="GR_1072" event_id="8998">
+    <title lang="ja_JP">緊急中継！世界の秘境から究極の家が！住んでる人が見たい！世界の超！絶景ハウス３【字】</title>
+    <desc lang="ja_JP">異色なキャストで注目！頑張る女性たちの前代未聞・冒険ドキュメント第３弾‼世界中にある超絶景の中に佇む家を写真１枚から自力で探し出し、さらにホームステイも敢行！</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20141229210000 +0900" stop="20141229231800 +0900" channel="GR_1072" event_id="9495">
+    <title lang="ja_JP">世界ナゼそこに？日本人スペシャル「ワケあり逆転夫婦２時間半スペシャル」【字】</title>
+    <desc lang="ja_JP">今回は２時間半ＳＰ!ヨルダンで現地人の夫を日本に残し、４人の子どもを育てる日本人妻を発見。さらにペルーでも現地人の妻を日本に残し秘境の村で暮らす日本人夫がいた!</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20141229231800 +0900" stop="20141229232400 +0900" channel="GR_1072" event_id="9476">
+    <title lang="ja_JP">ボクシングあさって！夢の３大世界戦</title>
+    <desc lang="ja_JP">内山高志が一年ぶりにリングに帰って来る！大みそか３大世界戦を完全特集！内山高志、河野公平、田口良一の一挙手一投足を追います。対戦相手の海外独占映像も！</desc>
+    <category lang="ja_JP">スポーツ</category>
+    <category lang="en">sports</category>
+  </programme>
+  <programme start="20141229232400 +0900" stop="20141230005500 +0900" channel="GR_1072" event_id="9001">
+    <title lang="ja_JP">ネットで調べてもほとんど出てこない裏ニュース〜本当は教えたくなかった（秘）テク〜【終】【字】</title>
+    <desc lang="ja_JP">2014（秘）アイデア総決算！「ＬＩＮＥ長者」元手ゼロ…明日から月収１００万円▽「ネオホスト」さとり世代の新商売で競争激化▽「ピンクタクシー」不況打破！過激サービス</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20141230005500 +0900" stop="20141230010000 +0900" channel="GR_1072" event_id="9002">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20141230010000 +0900" stop="20141230034000 +0900" channel="GR_1072" event_id="9003">
+    <title lang="ja_JP">孤独のグルメ傑作選②年の瀬ほっこり独り飯〜全Seasonより厳選3夜連続大放送！</title>
+    <desc lang="ja_JP">井之頭五郎が帰ってきた！独り自由に食べまくる!!伝説のつくねピーマンから幻の博多ＳＰまで特選13話を3夜連続一挙放送!!年末も夜食旋風吹き荒れまくり!!【主演】松重豊</desc>
+    <category lang="ja_JP">ドラマ</category>
+    <category lang="en">drama</category>
+  </programme>
+  <programme start="20141230034000 +0900" stop="20141230053000 +0900" channel="GR_1072" event_id="9129">
+    <title lang="ja_JP">大江戸捜査網　傑作選</title>
+    <desc lang="ja_JP">新春１月２日(金)夜６時から一挙５時間放送「大江戸捜査網２０１５」に、内藤勘解由役で出演する里見浩太朗の主演作を厳選放送！▽「初見参、夜叉面の女」ほか</desc>
+    <category lang="ja_JP">ドラマ</category>
+    <category lang="en">drama</category>
+  </programme>
+  <programme start="20141230053000 +0900" stop="20141230060000 +0900" channel="GR_1072" event_id="9005">
+    <title lang="ja_JP">にっぽん演歌の夢祭りＳＰ【再】</title>
+    <desc lang="ja_JP">日本を代表する演歌歌手が勢ぞろいする「にっぽん演歌の夢祭り」の埼玉公演の見どころをお届けします。</desc>
+    <category lang="ja_JP">音楽</category>
+    <category lang="en">music</category>
+  </programme>
+  <programme start="20141230060000 +0900" stop="20141230075500 +0900" channel="GR_1072" event_id="9149">
+    <title lang="ja_JP">ＰＧＡグランドスラム　オブ　ゴルフ　２０１４【字】</title>
+    <desc lang="ja_JP">世界最強ゴルファー決定戦！その年の４大メジャー大会を制した優勝者による夢の競演。バビューダ諸島ポート・ロイヤルGCで優勝をかけて激突する！</desc>
+    <category lang="ja_JP">スポーツ</category>
+    <category lang="en">sports</category>
+  </programme>
+  <programme start="20141230075500 +0900" stop="20141230080000 +0900" channel="GR_1072" event_id="9007">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20141230080000 +0900" stop="20141230095500 +0900" channel="GR_1072" event_id="9008">
+    <title lang="ja_JP">新春トップアスリート頂上決戦！“ＳＨＯＷ　ＧＵＴＳ　スポーツ２０１４”【再】【字】</title>
+    <desc lang="ja_JP">プロ野球、女子ゴルフ、卓球、Ｊリーグを代表するトップアスリート達が独自の新競技に挑戦！バレンティン、横峯さくら、福原愛、石川佳純、ザック日本代表らが真剣勝負！！</desc>
+    <category lang="ja_JP">スポーツ</category>
+    <category lang="en">sports</category>
+  </programme>
+  <programme start="20141230095500 +0900" stop="20141230100000 +0900" channel="GR_1072" event_id="9009">
+    <title lang="ja_JP">激走2700キロ！モナコからリスボンへ　トラック乗り継ぎの旅INヨーロッパ２　オススメ</title>
+    <desc lang="ja_JP">１２月３０日(火)夜６時から放送！「激走２７００キロ！モナコからリスボンへ　トラック乗り継ぎの旅　IN　ヨーロッパ２」番組のみどころを紹介します。</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20141230100000 +0900" stop="20141230112500 +0900" channel="GR_1072" event_id="9481">
+    <title lang="ja_JP">ニッポン無名偉人伝５【字】</title>
+    <desc lang="ja_JP">70年前のハワイ。日本語学校の排斥運動、祖国からの真珠湾攻撃…そんな逆境の中、日本語新聞を発行し、勇気と日本人の魂を示し続けた偉大なる名も無き新聞人の人生に迫る！</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20141230112500 +0900" stop="20141230113000 +0900" channel="GR_1072" event_id="9011">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20141230113000 +0900" stop="20141230120000 +0900" channel="GR_1072" event_id="9012">
+    <title lang="ja_JP">ナナナ侍と探る「大江戸捜査網２０１５」【字】</title>
+    <desc lang="ja_JP">「死して屍拾う者なし」あの人気時代劇が２３年ぶりに復活！その見所を一足先にチェック。ナナナが撮影所に潜入し撮影秘話や出演者の本音を徹底取材！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20141230120000 +0900" stop="20141230135500 +0900" channel="GR_1072" event_id="9013">
+    <title lang="ja_JP">全国昼めし旅〜おらが村の昼めしグランプリ〜【字】</title>
+    <desc lang="ja_JP">松葉ガニの豪快漁師飯×茨城の水を一滴も使わないアンコウ鍋×宇和島とろ〜り甘い鯛飯新潟の鮭イクラ＆絶品料理×米沢牛の山菜鍋北海道の白子バター七変化×大分温泉めしほか</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20141230135500 +0900" stop="20141230140000 +0900" channel="GR_1072" event_id="9014">
+    <title lang="ja_JP">2015年1/2(金)夜６時放送「大江戸捜査網２０１５」オススメ</title>
+    <desc lang="ja_JP">「死して屍拾う者なし」テレビ東京にて放送したあの人気時代劇が２３年ぶりに復活！隠密同心が様々な手段を駆使し、裏にはびこる江戸の悪を斬り捨てていく痛快娯楽時代劇！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20141230140000 +0900" stop="20141230155500 +0900" channel="GR_1072" event_id="9015">
+    <title lang="ja_JP">所さんの楽しいゴルフ８　香妻琴乃＆木戸愛…美人プロと爆笑バトル！【字】</title>
+    <desc lang="ja_JP">所ジョージ軍団ＶＳ女子プロがガチンコ勝負!!ＬＰＧＡきっての美人プロと芸能界トップクラスの猛者軍団が９ホールの真剣対決だっ！！▽爆笑チャレンジ企画ホールも…ほか</desc>
+    <category lang="ja_JP">スポーツ</category>
+    <category lang="en">sports</category>
+  </programme>
+  <programme start="20141230155500 +0900" stop="20141230160000 +0900" channel="GR_1072" event_id="9016">
+    <title lang="ja_JP">明日よる９時３０分！ボクシング３大世界戦</title>
+    <desc lang="ja_JP">内山高志が一年ぶりに、リングに帰って来る！大みそか３大世界戦を完全特集！内山高志、河野公平、田口良一の一挙手一投足を追います。対戦相手の海外独占映像も！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20141230160000 +0900" stop="20141230180000 +0900" channel="GR_1072" event_id="9017">
+    <title lang="ja_JP">厳選いい宿　スペシャル＜冬の絶景露天と郷土の味覚！！＞【字】【デ】</title>
+    <desc lang="ja_JP">人気の伊豆・富士・群馬からお得な１万円以下の宿をたっぷりとご紹介！箱根からは今年12月新装オープン、テレビ初公開の極上宿！旬の「越前かに」激安宿も必見です。</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20141230180000 +0900" stop="20141230205400 +0900" channel="GR_1072" event_id="9018">
+    <title lang="ja_JP">激走2700キロ！モナコ→リスボン　欧州トラック乗り継ぎの旅２【字】</title>
+    <desc lang="ja_JP">トラックをヒッチハイクして進む無謀な旅…海外ＳＰ第２弾！モナコからポルトガルへ！道中は世界遺産＆地中海の絶景が…アポ無しガチンコ旅はトラブルの連続！ゴールなるか</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20141230205400 +0900" stop="20141230225400 +0900" channel="GR_1072" event_id="9496">
+    <title lang="ja_JP">開運！なんでも鑑定団【出たー今年最高額！超豪華２時間スペシャル】【字】</title>
+    <desc lang="ja_JP">今回は年末2時間スペシャル！わずか22歳で夭折した天才画家の作品を発見！果して本物か？高速道路のパーキングエリアで物々交換し手に入れた幻の焼物に驚きの鑑定結果が！</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20141230225400 +0900" stop="20141230230000 +0900" channel="GR_1072" event_id="9020">
+    <title lang="ja_JP">戦士の逸品　ゲスト：エム・ヴイ・エム商事　石田希世士社長【字】【デ】</title>
+    <desc lang="ja_JP">日本を代表する経営者たち。生き残りをかけた「戦場」で男たちは必ず「逸品」を携帯していた！フルーツを自動販売機で売る！？そのアイデア誕生には苦い経験があった。</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20141230230000 +0900" stop="20141231002500 +0900" channel="GR_1072" event_id="9021">
+    <title lang="ja_JP">東京センチメンタル【花子とアンの吉田鋼太郎　初主演ドラマ】【字】</title>
+    <desc lang="ja_JP">「花子とアン」出演の吉田鋼太郎主演！東京下町に実在する店を舞台に、和菓子職人・久留里卓三の日常と淡い恋を描く、ちょっぴり切なくてノスタルジックなおとなの物語。</desc>
+    <category lang="ja_JP">ドラマ</category>
+    <category lang="en">drama</category>
+  </programme>
+  <programme start="20141231002500 +0900" stop="20141231003000 +0900" channel="GR_1072" event_id="9022">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20141231003000 +0900" stop="20141231010000 +0900" channel="GR_1072" event_id="9500">
+    <title lang="ja_JP">ナッツライフ　〜２０１４バズッたあれこれ〜</title>
+    <desc lang="ja_JP">2014年にバズッた(流行した)キーワードを振り返る、おもしろネット動画満載の脱線トークバラエティー。台本なし、オールアドリブ！芸人の楽屋喋りが番組に…！？</desc>
+    <category lang="ja_JP">アニメ／特撮</category>
+    <category lang="en">anime</category>
+  </programme>
+  <programme start="20141231010000 +0900" stop="20141231013000 +0900" channel="GR_1072" event_id="9024">
+    <title lang="ja_JP">今夜もドル箱Ｖ　▽黄門ちゃま　おしりかじり興奮ＳＰ</title>
+    <desc lang="ja_JP">元祖パチンコ・バラエティ‼制限時間２時間でサンドウィッチマンVSゲストの出玉対決。人気女性ライターも登場！パチンコ最新情報もテンコ盛り〜‼</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20141231013000 +0900" stop="20141231013500 +0900" channel="GR_1072" event_id="9025">
+    <title lang="ja_JP">カリーノ・コニ　アンコーラ「染色ごっこナ〜ノ!!」ほか</title>
+    <desc lang="ja_JP">セルの染色アートにうっとりのビアンカとファビオ。それを見ていたコニ「あんなのカ〜ンタ〜ン！」</desc>
+    <category lang="ja_JP">アニメ／特撮</category>
+    <category lang="en">anime</category>
+  </programme>
+  <programme start="20141231013500 +0900" stop="20141231041500 +0900" channel="GR_1072" event_id="9026">
+    <title lang="ja_JP">孤独のグルメ傑作選③年の瀬ほっこり独り飯〜全Seasonより厳選3夜連続大放送！</title>
+    <desc lang="ja_JP">いよいよ最終夜！井之頭五郎が独り自由に食べまくり、夜食旋風吹き荒れる!?ステーキ丼に博多ＳＰまで、年内見納め見逃すな！【主演】松重豊</desc>
+    <category lang="ja_JP">ドラマ</category>
+    <category lang="en">drama</category>
+  </programme>
+  <programme start="20141231041500 +0900" stop="20141231060000 +0900" channel="GR_1072" event_id="9130">
+    <title lang="ja_JP">大江戸捜査網　傑作選</title>
+    <desc lang="ja_JP">『死して屍、拾う者なし」１月２日(金)夜６時から一挙５時間放送の「大江戸捜査網２０１５」に、内藤勘解由役で出演する里見浩太朗主演の名作を厳選放送！▽恐怖の辻斬りほか</desc>
+    <category lang="ja_JP">ドラマ</category>
+    <category lang="en">drama</category>
+  </programme>
+  <programme start="20141231060000 +0900" stop="20141231085500 +0900" channel="GR_1072" event_id="9497">
+    <title lang="ja_JP">ポケットモンスター　２０１４大みそかメガ盛りスペシャル！！【字】</title>
+    <desc lang="ja_JP">大みそかはポケモン３時間スペシャルで楽しもう！過去の放送から選んだ伝説ポケモン登場回のセレクション、そしてＸＹのダイジェスト＆見どころもたっぷりで目が離せない！</desc>
+    <category lang="ja_JP">アニメ／特撮</category>
+    <category lang="en">anime</category>
+  </programme>
+  <programme start="20141231085500 +0900" stop="20141231090000 +0900" channel="GR_1072" event_id="9030">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20141231090000 +0900" stop="20141231105500 +0900" channel="GR_1072" event_id="9031">
+    <title lang="ja_JP">ウソのような本当の瞬間！３０秒後に絶対見られるＴＶ【再】【字】</title>
+    <desc lang="ja_JP">誰もが思わず「ウソでしょ？」とつっこみたくなる衝撃の瞬間を45連発！30秒後には必ず証拠映像を見せる番組の第7弾！【出演】伊集院光、ハライチ、小島瑠璃子、生駒里奈ほか</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20141231105500 +0900" stop="20141231110000 +0900" channel="GR_1072" event_id="9032">
+    <title lang="ja_JP">2015年1/2(金)夜６時放送「大江戸捜査網２０１５」オススメ</title>
+    <desc lang="ja_JP">「死して屍拾う者なし」テレビ東京にて放送したあの人気時代劇が２３年ぶりに復活！隠密同心が様々な手段を駆使し、裏にはびこる江戸の悪を斬り捨てていく痛快娯楽時代劇！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20141231110000 +0900" stop="20141231132500 +0900" channel="GR_1072" event_id="9033">
+    <title lang="ja_JP">“充電させてもらえませんか？”出川哲朗爆走お伊勢参りスペシャル【字】</title>
+    <desc lang="ja_JP">“電動スクーター”で行くガチンコ人情すがり旅！充電１回18円で30km!?皆様がステキな年を迎えられますよう、目指すは横浜から450キロ先の伊勢神宮！テンパる出川で年忘れ!</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20141231132500 +0900" stop="20141231133000 +0900" channel="GR_1072" event_id="9034">
+    <title lang="ja_JP">１２/３１(水)夕方５時から放送「第４７回年忘れにっぽんの歌」オススメ</title>
+    <desc lang="ja_JP">豪華歌手夢の競演！歌謡史に輝く大ヒット曲をお届け！12/31(水)夕方5時から生放送「第47回年忘れにっぽんの歌」番組のみどころを紹介します！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20141231133000 +0900" stop="20141231170000 +0900" channel="GR_1072" event_id="9035">
+    <title lang="ja_JP">大食い世界一決定戦！ニューヨーク爆食決戦【字】</title>
+    <desc lang="ja_JP">世界一の大食い大国はどこか？ニューヨークで日・米・独・タイが激突！全米を震撼させた“異次元女王”モリーが日本のＴＶ初登場！元日放送の第２回大会の速報も！</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20141231170000 +0900" stop="20141231213000 +0900" channel="GR_1072" event_id="9036">
+    <title lang="ja_JP">第４７回年忘れにっぽんの歌</title>
+    <desc lang="ja_JP">今年の年忘れにっぽんの歌は、演歌×新体操、そして演歌×アナ雪×書道のコラボや有名そば屋から生中継など、今までにない様々な企画・演出にチャレンジします！</desc>
+    <category lang="ja_JP">音楽</category>
+    <category lang="en">music</category>
+  </programme>
+  <programme start="20141231213000 +0900" stop="20141231233000 +0900" channel="GR_1072" event_id="9037">
+    <title lang="ja_JP">プロボクシング　ＴＨＥ　ＢＥＳＴ　ＯＦ　ＢＥＳＴ　大みそか３大世界戦ＳＰ</title>
+    <desc lang="ja_JP">大みそかボクシング・スペシャル第４弾！日本人Ｎｏ.１王者・内山高志が１年ぶりにリングに上がる注目の一戦をはじめ、ＫＯ必至のファイト３連発！！</desc>
+    <category lang="ja_JP">スポーツ</category>
+    <category lang="en">sports</category>
+  </programme>
+  <programme start="20141231233000 +0900" stop="20150101004500 +0900" channel="GR_1072" event_id="9038">
+    <title lang="ja_JP">東急ジルベスターコンサート　2014-2015【SS】</title>
+    <desc lang="ja_JP">毎年恒例クラシックの名曲が終わった瞬間に新年を迎えるカウントダウンコンサート。今年のカウントダウン曲はシベリウスの「フィンランディア」。◇5.1サラウンド</desc>
+    <category lang="ja_JP">音楽</category>
+    <category lang="en">music</category>
+  </programme>
+  <programme start="20150101004500 +0900" stop="20150101005000 +0900" channel="GR_1072" event_id="9039">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150101005000 +0900" stop="20150101050000 +0900" channel="GR_1072" event_id="9150">
+    <title lang="ja_JP">明けまして、ざっくりハイタッチです！４時間も？生放送スペシャル</title>
+    <desc lang="ja_JP">今年もやります、大型生放送バラエティ！４時間ドキドキ爆笑祭‼▼フット後藤の笑顔を取り戻せ！▼天王洲お正月満喫ツアー▼１時間のトークリレー！ガチ漫談‼ほか</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150101050000 +0900" stop="20150101053000 +0900" channel="GR_1072" event_id="9485">
+    <title lang="ja_JP">ナナナ侍と探る「大江戸捜査網２０１５」【字】</title>
+    <desc lang="ja_JP">「死して屍拾う者なし」あの人気時代劇が２３年ぶりに復活！その見所を一足先にチェック。ナナナが撮影所に潜入し撮影秘話や出演者の本音を徹底取材！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150101053000 +0900" stop="20150101070000 +0900" channel="GR_1072" event_id="9041">
+    <title lang="ja_JP">仲間由紀恵の蒼い地球８〜世界遺産を守る日本人〜【再】【字】</title>
+    <desc lang="ja_JP">テーマ「世界遺産」仲間由紀恵がカンボジア・アンコール遺跡群へ！そこで活躍する若き日本人修復師の思いとは…▽ガラパゴス動物危機◆1/4(日)午前11時「蒼い地球９」放送</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150101070000 +0900" stop="20150101075500 +0900" channel="GR_1072" event_id="9042">
+    <title lang="ja_JP">新春皇室特番　〜両陛下　愛と絆の道のり〜【字】</title>
+    <desc lang="ja_JP">結婚５６年目を迎えられた両陛下、いつの時もいたわり合い、支え合ってきたお二人。両陛下の仲睦まじいお姿を中心にこの一年の天皇ご一家の映像を綴ってまいります。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150101075500 +0900" stop="20150101080000 +0900" channel="GR_1072" event_id="9043">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150101080000 +0900" stop="20150101112500 +0900" channel="GR_1072" event_id="9168">
+    <title lang="ja_JP">池上彰のＪＡＰＡＮプロジェクト〜日本の底力スペシャル〜【再】【字】</title>
+    <desc lang="ja_JP">池上彰がニッポンの“過去・現在・未来”を見に行く！▼和食を無形文化遺産に押し上げた力▼外国人が驚く日本人の作法▼日本製紙石巻工場の奇跡▼ナレーション：井上真央</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150101112500 +0900" stop="20150101113000 +0900" channel="GR_1072" event_id="9045">
+    <title lang="ja_JP">大食い世界一決定戦！今夜、激闘!!</title>
+    <desc lang="ja_JP">世界一の大食い大国はどこか？ロサンゼルスで日・米・中・豪が激突！前回大会でアメリカに屈した日本は、女王ギャル曽根が６年ぶり戦線復帰！悲願の初優勝なるか？</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150101113000 +0900" stop="20150101130000 +0900" channel="GR_1072" event_id="9046">
+    <title lang="ja_JP">おしかけスピリチュアル　大江戸捜査網ＳＰ【字】</title>
+    <desc lang="ja_JP">“スピリチュアル女子大生”のＣＨＩＥが「大江戸捜査網2015」の撮影現場に突然おしかけ！本人しか知らない情報に一同驚愕⁉さらに番組最後で豪華なお年玉プレゼント‼</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150101130000 +0900" stop="20150101153000 +0900" channel="GR_1072" event_id="9047">
+    <title lang="ja_JP">田舎に泊まろう！〜2015年元日スペシャル〜【字】</title>
+    <desc lang="ja_JP">元祖ガチ“お泊り交渉番組”「田舎に泊まろう！」がパワーアップ。１月１日は家族揃って、有名人の「今晩、泊めて下さい！」にドキドキして下さい▽鈴木奈々、ピーターほか</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150101153000 +0900" stop="20150101180000 +0900" channel="GR_1072" event_id="9048">
+    <title lang="ja_JP">そうだ旅に行こうＳＰ　明けまして初風呂８連発！穴場で最高の温泉ハシゴしよう！【字】</title>
+    <desc lang="ja_JP">大女優から女芸人まで、女性達だけで最高の温泉をハシゴ旅！石川、大分、新潟、福島と、日本を代表する温泉地の穴場温泉を一挙公開！ほか、番組厳選の湯宿も紹介！</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150101180000 +0900" stop="20150101225400 +0900" channel="GR_1072" event_id="9049">
+    <title lang="ja_JP">大食い世界一決定戦！　テレビ東京開局５０周年特別企画</title>
+    <desc lang="ja_JP">世界一の大食い大国はどこか？ロサンゼルスで日・米・中・豪が激突！前回大会でアメリカに屈した日本は、女王ギャル曽根が６年ぶりに戦線復帰！悲願の初優勝なるか？</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150101225400 +0900" stop="20150101230000 +0900" channel="GR_1072" event_id="9050">
+    <title lang="ja_JP">生きるを伝える【字】</title>
+    <desc lang="ja_JP">毎回、逆境を乗り越えて一生懸命生きている人、あるいは生き抜いた人の生きざまを紹介する、ヒューマンドキュメンタリー番組です。</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150101230000 +0900" stop="20150102003000 +0900" channel="GR_1072" event_id="9051">
+    <title lang="ja_JP">天才アスリート世界への階段〜みらいのつくりかた新春ＳＰ〜【錦織圭超最新映像!!】</title>
+    <desc lang="ja_JP">日本テニス界の歴史を変えた錦織圭。彼の飛躍の裏にあった「勝利の方程式」とは？さらに「第２の錦織」育成術を大公開‼これを見れば東京五輪で子供をメダリストにできる⁉</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150102003000 +0900" stop="20150102003500 +0900" channel="GR_1072" event_id="9052">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150102003500 +0900" stop="20150102023500 +0900" channel="GR_1072" event_id="9053">
+    <title lang="ja_JP">ＲＯＡＤ　ＴＯ　ＮＩＮＪＡ　－ＮＡＲＵＴＯ　ＴＨＥ　ＭＯＶＩＥ－</title>
+    <desc lang="ja_JP">２０１２年夏に公開された劇場版ＮＡＲＵＴＯ「ＲＯＡＤ　ＴＯ　ＮＩＮＪＡ　－ＮＡＲＵＴＯ　ＴＨＥ　ＭＯＶＩＥ－」を地上派初放送。原作者、岸本斉史自らの企画・原案。</desc>
+    <category lang="ja_JP">映画</category>
+    <category lang="en">cinema</category>
+  </programme>
+  <programme start="20150102023500 +0900" stop="20150102040000 +0900" channel="GR_1072" event_id="9054">
+    <title lang="ja_JP">新春ロードショー「フライペーパー！史上最低の銀行強盗」地上波初放送！【二】</title>
+    <desc lang="ja_JP">２組の強盗が鉢合わせ！至上最低の銀行強盗！「ハングオーバー！」シリーズの脚本家コンビが放つ痛快アクションエンターテインメント！(2011年/米・独)</desc>
+    <category lang="ja_JP">映画</category>
+    <category lang="en">cinema</category>
+  </programme>
+  <programme start="20150102040000 +0900" stop="20150102053000 +0900" channel="GR_1072" event_id="9055">
+    <title lang="ja_JP">新春ロードショー「ベイビー・トーク」【二】</title>
+    <desc lang="ja_JP">赤ちゃんが思っていることを話して、さらには大人たちの恋の行方を解説するという奇抜！？なアイデアで大ヒット！(1989年/米)</desc>
+    <category lang="ja_JP">映画</category>
+    <category lang="en">cinema</category>
+  </programme>
+  <programme start="20150102053000 +0900" stop="20150102065500 +0900" channel="GR_1072" event_id="9056">
+    <title lang="ja_JP">激ウマ探して500km！ラーメン食べまくり旅【再】【字】</title>
+    <desc lang="ja_JP">東京から京都までドライブしながらラーメンを食べまくる旅。どんなラーメン店と出会うかはまったく予想不可能。美味しくて楽しく、でも過酷（？）なラーメン旅です。</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150102065500 +0900" stop="20150102070000 +0900" channel="GR_1072" event_id="9057">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150102070000 +0900" stop="20150102115500 +0900" channel="GR_1072" event_id="9141">
+    <title lang="ja_JP">ローカル路線バスの旅傑作選▽1/3(土)夜6:30放送!19弾大阪〜金沢ふれあい珍道中【字】</title>
+    <desc lang="ja_JP">太川陽介＆蛭子能収の人気シリーズ傑作選!■山口市〜室戸岬■御殿場〜直江津…バスがない!宿がない!トラブル続出のガチンコ旅!◆最新作は１月３日夜６時30分〜</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150102115500 +0900" stop="20150102120000 +0900" channel="GR_1072" event_id="9153">
+    <title lang="ja_JP">2015年1/2(金)夜６時放送「大江戸捜査網２０１５」オススメ</title>
+    <desc lang="ja_JP">「死して屍拾う者なし」テレビ東京にて放送したあの人気時代劇が２３年ぶりに復活！隠密同心が様々な手段を駆使し、裏にはびこる江戸の悪を斬り捨てていく痛快娯楽時代劇！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150102120000 +0900" stop="20150102132800 +0900" channel="GR_1072" event_id="9162">
+    <title lang="ja_JP">お正月だよ！爆笑寄席２０１５〜吉本上方漫才〜</title>
+    <desc lang="ja_JP">総勢１４組の東西人気漫才師が新春のなんばグランド花月に集結！２０１５年の幕開けを大笑いで彩っていただきます！漫才やネタのほかトークもはさみながらお送りする９０分</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150102132800 +0900" stop="20150102133000 +0900" channel="GR_1072" event_id="9154">
+    <title lang="ja_JP">2015年1/2(金)夜６時放送「大江戸捜査網２０１５」オススメ</title>
+    <desc lang="ja_JP">「死して屍拾う者なし」テレビ東京にて放送したあの人気時代劇が２３年ぶりに復活！隠密同心が様々な手段を駆使し、裏にはびこる江戸の悪を斬り捨てていく痛快娯楽時代劇！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150102133000 +0900" stop="20150102163000 +0900" channel="GR_1072" event_id="9059">
+    <title lang="ja_JP">新春！お笑い名人寄席▽浅草の人気芸人５０組登場で大爆笑の３時間！</title>
+    <desc lang="ja_JP">爆笑問題＆ナイツ＆サンド＆小朝＆Ｕ字＆テツトモ＆我が家＆木久扇＆ケーシー高峰！さらに日本エレキテル連合にどぶろっくも参戦でマギー、遼河が大爆笑！</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150102163000 +0900" stop="20150102180000 +0900" channel="GR_1072" event_id="9060">
+    <title lang="ja_JP">激ウマ探して８００ｋｍ！ラーメン食べまくり旅【字】</title>
+    <desc lang="ja_JP">ラーメンをこよなく愛するパンチ佐藤＆内藤大助が、東京から青森県大間崎まで８００kmの道のりをドライブしながらひたすらラーメンを食べまくる旅！</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150102180000 +0900" stop="20150102230900 +0900" channel="GR_1072" event_id="9061">
+    <title lang="ja_JP">新春ワイド時代劇「大江戸捜査網２０１５〜隠密同心、悪を斬る！」【字】【デ】</title>
+    <desc lang="ja_JP">「死して屍拾う者なし」テレビ東京にて放送したあの人気時代劇が２３年ぶりに復活！隠密同心が様々な手段を駆使し、裏にはびこる江戸の悪を斬り捨てていく痛快娯楽時代劇！</desc>
+    <category lang="ja_JP">ドラマ</category>
+    <category lang="en">drama</category>
+  </programme>
+  <programme start="20150102230900 +0900" stop="20150102231500 +0900" channel="GR_1072" event_id="9063">
+    <title lang="ja_JP">１００年の音楽【ラデツキー行進曲】【字】</title>
+    <desc lang="ja_JP">川井郁子がお贈りする『１００年の音楽』。新しい年の始まりは、祝福のムードがあふれるマーチ『ラデツキー行進曲』をお送りします。</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150102231500 +0900" stop="20150103004000 +0900" channel="GR_1072" event_id="9064">
+    <title lang="ja_JP">共感百景〜痛いほど気持ちがわかる　あるある〜【字】</title>
+    <desc lang="ja_JP">劇団ひとりがＭＣの新感覚エンターテインメント第２弾！特別顧問に歌人・俵万智、東直子を迎え、お題に沿った誰もが共感できる詩＝共感詩を発表。最優秀共感詩は！？</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150103004000 +0900" stop="20150103004500 +0900" channel="GR_1072" event_id="9065">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150103004500 +0900" stop="20150103024500 +0900" channel="GR_1072" event_id="9066">
+    <title lang="ja_JP">劇場版銀魂　完結篇　万事屋よ永遠なれ</title>
+    <desc lang="ja_JP">週刊少年ジャンプ人気連載中の「銀魂」。その原作者・空知英秋氏みずからがストーリー・キャラクターの原案を手がけた意欲作が、ついに地上波初登場。</desc>
+    <category lang="ja_JP">映画</category>
+    <category lang="en">cinema</category>
+  </programme>
+  <programme start="20150103024500 +0900" stop="20150103050000 +0900" channel="GR_1072" event_id="9067">
+    <title lang="ja_JP">新春ロードショー「王妃の紋章」地上波初放送！【二】</title>
+    <desc lang="ja_JP">中国は後唐・五代十国の時代。「菊の節句」とも称される9月9日の重陽節を前にした王宮が舞台。愛と憎しみが渦巻いていた。(2007年・中国/香港)</desc>
+    <category lang="ja_JP">映画</category>
+    <category lang="en">cinema</category>
+  </programme>
+  <programme start="20150103050000 +0900" stop="20150103075500 +0900" channel="GR_1072" event_id="9499">
+    <title lang="ja_JP">主治医が見つかる診療所　予習復習ＳＰ【腸と脳を大特集！免疫力アップ＆老化防止】【字】</title>
+    <desc lang="ja_JP">腸をキレイにする身近食材、レシピ＆腸内細菌の世界的権威の善玉菌を増やす休日＆やせる腸の作り方＆ボケ防止！脳の新回路をつなぐ方法など◆1/5(月)夜6:57から3時間SP！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150103075500 +0900" stop="20150103080000 +0900" channel="GR_1072" event_id="9069">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150103080000 +0900" stop="20150103095500 +0900" channel="GR_1072" event_id="9070">
+    <title lang="ja_JP">お正月ズラ！妖怪ウォッチ　もんげーめでたい２時間スペシャル！【字】</title>
+    <desc lang="ja_JP">妖怪ウォッチの中でも大人気を誇る、コマさんとコマじろう。そのコマさんシリーズの中から３つの人気エピソードを一挙放送！番組の進行もコマさん、コマじろうが担当！</desc>
+    <category lang="ja_JP">アニメ／特撮</category>
+    <category lang="en">anime</category>
+  </programme>
+  <programme start="20150103095500 +0900" stop="20150103100000 +0900" channel="GR_1072" event_id="9071">
+    <title lang="ja_JP">1/3(土)夕方6:30「ローカル路線バスの旅19弾　大阪城〜金沢兼六園」オススメ</title>
+    <desc lang="ja_JP">1/3(土)夕方6:30〜放送！おなじみ太川陽介＆蛭子能収に、マルシアをマドンナに迎えて大阪城〜金沢の兼六園を３泊４日で目指す！番組のみどころを紹介します！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150103100000 +0900" stop="20150103133000 +0900" channel="GR_1072" event_id="9159">
+    <title lang="ja_JP">ＹＯＵは何しに日本へ？　傑作選【字】</title>
+    <desc lang="ja_JP">傑作選をお届け!過去の空港インタビューしたYOUを部門ごとに№1を決定!YOUは何しに大賞、イベントYOU、家族4人自転車旅密着▽成田空港直撃▽YOUはなぜカツオ漁を学びに?</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150103133000 +0900" stop="20150103133500 +0900" channel="GR_1072" event_id="9073">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150103133500 +0900" stop="20150103153000 +0900" channel="GR_1072" event_id="9074">
+    <title lang="ja_JP">新春トップアスリート頂上決戦！“SHOW　GUTS　SPORTS　2015”【字】</title>
+    <desc lang="ja_JP">各界を代表するアスリートが番組独自の新競技でその技とプライドを競う第３弾‼出演:髙橋大輔、上田桃子、石川佳純、ホークス内川聖一・今宮健太、浦和レッズ選手</desc>
+    <category lang="ja_JP">スポーツ</category>
+    <category lang="en">sports</category>
+  </programme>
+  <programme start="20150103153000 +0900" stop="20150103165500 +0900" channel="GR_1072" event_id="9075">
+    <title lang="ja_JP">ポンコツ＆さまぁ〜ずＳＰ　がんばれ！狩野＆児嶋　油もらって鹿児島へ！【字】</title>
+    <desc lang="ja_JP">鹿児島を目指す油もらい旅も静岡を進行中。果たして無事到着出来るのか…？今回のスペシャルでは番組初の意外な展開が待ち受けている！？麻生久美子も緊急参戦！！</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150103165500 +0900" stop="20150103170000 +0900" channel="GR_1072" event_id="9076">
+    <title lang="ja_JP">未来の主役　地球の子どもたち【字】</title>
+    <desc lang="ja_JP">世界の様々な国で暮らす子どもたちの生活を通じて、夢を持つことの素晴しさ、家族の絆、豊かさの意味などを問いかける。</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150103170000 +0900" stop="20150103183000 +0900" channel="GR_1072" event_id="9077">
+    <title lang="ja_JP">大正製薬新春スペシャル　演歌の花道２０１５【字】</title>
+    <desc lang="ja_JP">伝説の演歌番組が今年もお正月限定で復活！めぐる季節を数えれば、遠いふるさと思い出す。そんな故郷を思い起こすピッタリの名曲の数々をお届けします！</desc>
+    <category lang="ja_JP">音楽</category>
+    <category lang="en">music</category>
+  </programme>
+  <programme start="20150103183000 +0900" stop="20150103220900 +0900" channel="GR_1072" event_id="9078">
+    <title lang="ja_JP">土曜スペシャル「ローカル路線バス乗り継ぎの旅　第19弾　大阪城〜金沢兼六園」【字】</title>
+    <desc lang="ja_JP">太川陽介＆蛭子能収にマルシアを迎えて送る19弾！シリーズ最難関ルートにトラブル連発…バスが無い！過酷な旅に「私もう歩けなぃ」リタイアか!?ゴールか!?衝撃の結末が…</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150103220900 +0900" stop="20150103221500 +0900" channel="GR_1072" event_id="9080">
+    <title lang="ja_JP">ぴかぴかマンボ「新年会でシミをつけたら…外出先での応急処置」【字】</title>
+    <desc lang="ja_JP">外出先で突然汚してしまったお洋服…。今回は、お手洗いでできる応急処置をご紹介！帰宅したら、応急処置に加えてきちんとお洗濯をしましょう♪</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150103221500 +0900" stop="20150103224500 +0900" channel="GR_1072" event_id="9081">
+    <title lang="ja_JP">美の巨人たち　歌川広重『東海道五拾三次之内　日本橋・朝之景』【字】</title>
+    <desc lang="ja_JP">毎回一つの作品にスポットを当て、そこに秘められたドラマや謎を探る美術エンターテインメント番組。今日の1枚は、歌川広重作『東海道五拾三次之内　日本橋・朝之景』。</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150103224500 +0900" stop="20150103231500 +0900" channel="GR_1072" event_id="9082">
+    <title lang="ja_JP">クロスロード＜盆栽師　平尾成志＞【字】</title>
+    <desc lang="ja_JP">盆栽師の平尾成志(３３歳)が登場。世界的な名門“加藤蔓青園”で修業を積んで盆栽師となり、海外にも活動の幅を広げる日々に密着する。</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150103231500 +0900" stop="20150104001500 +0900" channel="GR_1072" event_id="9083">
+    <title lang="ja_JP">ゴッドタン　スペシャル　芸人マジ歌選手権【字】</title>
+    <desc lang="ja_JP">芸人がマジで歌を作り、歌い上げるオリジナルソング発表会！審査員が牛乳を吹いたら即終了！最後まで歌いきれるのか…⁉▽ヒム子重大発表▽劇団ひとり新展開▽後藤新曲ほか</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150104001500 +0900" stop="20150104011000 +0900" channel="GR_1072" event_id="9084">
+    <title lang="ja_JP">ニッポン元気計画！眠れるスター目覚ましバラエティ“ハックツベリー”</title>
+    <desc lang="ja_JP">▽河本“沈没船の財宝”発掘▽パンク黒瀬に後藤爆発!!◆フットボールアワー後藤扮する後藤Ｐが、あらゆる分野の“眠れるスター”を発掘するバラエティ！</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150104011000 +0900" stop="20150104014000 +0900" channel="GR_1072" event_id="9085">
+    <title lang="ja_JP">買物の時間</title>
+    <desc lang="ja_JP">生活に役立つ商品を紹介する通販番組。</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150104014000 +0900" stop="20150104042000 +0900" channel="GR_1072" event_id="9086">
+    <title lang="ja_JP">新春ロードショー「コンタクト」　宇宙の彼方で、彼女が接触したものは…？【二】</title>
+    <desc lang="ja_JP">それは宇宙の声から始まった。未知の宇宙で人類を待っているはずの知的存在と出会うため、彼女は旅立つ。未知の感動を約束する壮大なドラマが今、始まる…。(1997年・米)</desc>
+    <category lang="ja_JP">映画</category>
+    <category lang="en">cinema</category>
+  </programme>
+  <programme start="20150104042000 +0900" stop="20150104043500 +0900" channel="GR_1072" event_id="9087">
+    <title lang="ja_JP">話題の医学「年頭所感」</title>
+    <desc lang="ja_JP">現在の医療のあり方や医療そのもの、医療の今後等を、その道の権威が解説する。</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150104043500 +0900" stop="20150104053000 +0900" channel="GR_1072" event_id="9088">
+    <title lang="ja_JP">ものスタ　サンデー</title>
+    <desc lang="ja_JP">「も」っといい商品を教えて！！「の」んびりしてはいられない「ス」ぐに買いたくなっちゃう商品を「タ」っぷりとご紹介するショッピング番組</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150104053000 +0900" stop="20150104060000 +0900" channel="GR_1072" event_id="9089">
+    <title lang="ja_JP">洋子の演歌一直線</title>
+    <desc lang="ja_JP">演歌歌手の長山洋子が司会を務める歌謡番組。日本を代表する歌手から新人歌手まで幅広く紹介。</desc>
+    <category lang="ja_JP">音楽</category>
+    <category lang="en">music</category>
+  </programme>
+  <programme start="20150104060000 +0900" stop="20150104065500 +0900" channel="GR_1072" event_id="9090">
+    <title lang="ja_JP">サンデーテレショップ</title>
+    <desc lang="ja_JP">日曜日の朝に送る情報番組。お得な情報をダイレクトに皆様の家庭にお届けします。</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150104065500 +0900" stop="20150104070000 +0900" channel="GR_1072" event_id="9506">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150104070000 +0900" stop="20150104073000 +0900" channel="GR_1072" event_id="9092">
+    <title lang="ja_JP">レディ　ジュエルペット「新年を占うのもレディのたしなみ」【字】</title>
+    <desc lang="ja_JP">ロイヤルパレスに来てはじめての新年。ももなはカイエンと二人で朝日を見に出かける。塔の上で朝日を浴びたカップルは幸せな一年を過ごせるという言い伝えがあるのだ。</desc>
+    <category lang="ja_JP">アニメ／特撮</category>
+    <category lang="en">anime</category>
+  </programme>
+  <programme start="20150104073000 +0900" stop="20150104080000 +0900" channel="GR_1072" event_id="9093">
+    <title lang="ja_JP">ふるさと再生　日本の昔ばなし【字】【デ】</title>
+    <desc lang="ja_JP">「分福茶釜」「あんばらやみの馬」「天の岩戸」の３本です。みんな見てね！！</desc>
+    <category lang="ja_JP">アニメ／特撮</category>
+    <category lang="en">anime</category>
+  </programme>
+  <programme start="20150104080000 +0900" stop="20150104085500 +0900" channel="GR_1072" event_id="10117">
+    <title lang="ja_JP">ピラメキーノ　お年玉もらえちゃうよ！新年ＳＰ【字】</title>
+    <desc lang="ja_JP">新年ＳＰ！お年玉をもらいにタカラトミーに潜入！玩具をいっぱいGETし、視聴者のみんなにプレゼント▽「コドモー１ＧＰ」開催！人気芸人たちが子役の前でネタ披露！ほか</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150104085500 +0900" stop="20150104090000 +0900" channel="GR_1072" event_id="9095">
+    <title lang="ja_JP">１/４(日)夕方６時から放送「池上彰の２０１５年を見に行く」オススメ</title>
+    <desc lang="ja_JP">池上彰が生放送で新春初解説！2015年はどんな年になるのか？翌日、仕事に戻る“働く戦士”に、2015年の世界情勢と日本の未来を伝える▼1/4(日)夕方6時から放送！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150104090000 +0900" stop="20150104110000 +0900" channel="GR_1072" event_id="9096">
+    <title lang="ja_JP">和風総本家【再】「世界で見つけたMade　in　Japan」【字】</title>
+    <desc lang="ja_JP">世界の思いがけない場所で活躍している日本製のものを発見する。また、製造した日本の職人と日本製の「モノ」を愛用する異国の人々との心の交流を描く好評シリーズ。</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150104110000 +0900" stop="20150104122500 +0900" channel="GR_1072" event_id="9097">
+    <title lang="ja_JP">仲間由紀恵の蒼い地球９【字】</title>
+    <desc lang="ja_JP">次世代に遺すべき国内の“ネクスト世界遺産”と、地元が直面しているユネスコ登録までの試練に立ち向かっている人々の活動を紹介します。【出演】仲間由紀恵</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150104122500 +0900" stop="20150104123000 +0900" channel="GR_1072" event_id="9098">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150104123000 +0900" stop="20150104133600 +0900" channel="GR_1072" event_id="9501">
+    <title lang="ja_JP">開運！なんでも鑑定団【再】【1500万だまし取られた男が買った絵は本物？】【字】</title>
+    <desc lang="ja_JP">友人に紹介された人物と土地購入の契約をしたものの、悪質な詐欺だった!そのお詫びとして今度は有名絵師の掛軸を安く買えるよう仲介され購入したが、果たして本物か!?</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150104133600 +0900" stop="20150104155500 +0900" channel="GR_1072" event_id="9100">
+    <title lang="ja_JP">ドラマスペシャル　松本清張　強き蟻【再】【字】【解】</title>
+    <desc lang="ja_JP">松本清張原作を米倉涼子主演でドラマ化。31歳上の男と結婚した伊佐子は、10億円の財産を秘かに狙っている。だが、愛人が殺人容疑で逮捕され、伊佐子の計画は崩れ始める…</desc>
+    <category lang="ja_JP">ドラマ</category>
+    <category lang="en">drama</category>
+  </programme>
+  <programme start="20150104155500 +0900" stop="20150104160000 +0900" channel="GR_1072" event_id="9101">
+    <title lang="ja_JP">中国世界遺産ものがたり【廬山9　この世の桃源郷】【字】</title>
+    <desc lang="ja_JP">中国の世界遺産の圧倒的映像美と歴史の奥深さを伝える。紫禁城、万里の長城などスケール感溢れる数々の世界遺産をハイビジョンの映像でお送りする。</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150104160000 +0900" stop="20150104180000 +0900" channel="GR_1072" event_id="9102">
+    <title lang="ja_JP">男子ごはん　新春スペシャル【字】【デ】</title>
+    <desc lang="ja_JP">岡村隆史、長瀬智也、榮倉奈々が登場！新春２時間スペシャル。長瀬手作りカレーや榮倉のリクエストメニュー、ランプ肉のステーキなどが登場！さらにお酒に合うおつまみも。</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150104180000 +0900" stop="20150104205400 +0900" channel="GR_1072" event_id="9103">
+    <title lang="ja_JP">池上彰の２０１５年を見に行く〜世界の出来事は日本につながっている〜</title>
+    <desc lang="ja_JP">池上彰が生放送で新春初解説！２０１５年はどんな年になるのか？翌日、仕事に戻る“働く戦士”に、２０１５年の世界情勢と日本の未来を伝える。</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150104205400 +0900" stop="20150104231800 +0900" channel="GR_1072" event_id="9104">
+    <title lang="ja_JP">和風総本家お正月スペシャル「日本の職人２４時」【字】</title>
+    <desc lang="ja_JP">日本列島…真冬の戦い▽炎と格闘！登り窯…一子相伝技▽復活！神田老舗そば…年越し密着▽命がけの正月準備…断崖絶壁！巨大しめ縄▽大行列！港町食堂▽伝統和紙…雪さらし</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150104231800 +0900" stop="20150104232400 +0900" channel="GR_1072" event_id="9105">
+    <title lang="ja_JP">ＨＯＰＥ　ｆｏｒ　ｔｏｍｏｒｒｏｗ【字】</title>
+    <desc lang="ja_JP">ある人の助言や手助けで困難を乗り越えた人が、お世話になった人物に再び会いに行き、その時の感謝を伝えるミニドキュメンタリー。</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150104232400 +0900" stop="20150105000000 +0900" channel="GR_1072" event_id="9106">
+    <title lang="ja_JP">ネオスポ　▽奇跡のコラボ！浅田真央＆髙橋大輔の演技全て見せます！</title>
+    <desc lang="ja_JP">奇跡のコラボ！浅田真央＆髙橋大輔の演技全て見せます！どこよりもたっぷりと！▽ボクシング世界戦のウラガワ▽錦織世界一への挑戦ほか</desc>
+    <category lang="ja_JP">スポーツ</category>
+    <category lang="en">sports</category>
+  </programme>
+  <programme start="20150105000000 +0900" stop="20150105003000 +0900" channel="GR_1072" event_id="9107">
+    <title lang="ja_JP">ＳＵＰＥＲ　ＧＴ＋「ニスモＧＴ－Ｒの軌跡」【字】</title>
+    <desc lang="ja_JP">6年間の苦悩の末、ついに2014年チャンピオンを獲得したニスモ。その6年間の苦悩と熾烈を極めたチャンピオン争いの裏側に迫ります。</desc>
+    <category lang="ja_JP">スポーツ</category>
+    <category lang="en">sports</category>
+  </programme>
+  <programme start="20150105003000 +0900" stop="20150105010000 +0900" channel="GR_1072" event_id="9108">
+    <title lang="ja_JP">乃木坂って、どこ？【乃木坂４６オモテ年表ウラ年表】</title>
+    <desc lang="ja_JP">１stアルバム発売記念！乃木坂４６オモテ年表ウラ年表！デビューからの３年間を年表で振り返る！あの時メンバーに起こった出来事を告白！</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150105010000 +0900" stop="20150105010500 +0900" channel="GR_1072" event_id="9109">
+    <title lang="ja_JP">ＴＸＮニュース</title>
+    <desc lang="ja_JP">日本や世界の最新ニュースをコンパクトにお伝えする。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150105010500 +0900" stop="20150105013500 +0900" channel="GR_1072" event_id="9110">
+    <title lang="ja_JP">センニュウ★感　▽南キャン（秘）新ネタ披露【字】</title>
+    <desc lang="ja_JP">南海キャンディーズ１０年ぶりの新作漫才を披露！ド緊張の山里＆しずちゃんは爆笑をとれるか！？▽さらにテレビ東京に潜入！テレ東ってホントにお金がない！？</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105013500 +0900" stop="20150105023500 +0900" channel="GR_1072" event_id="9480">
+    <title lang="ja_JP">一狩りいこうぜ！４Ｇ　スペシャル【終】</title>
+    <desc lang="ja_JP">一狩りいこうぜ！Presents　オールスター狩謝祭　狩１グランプリ開催！過去シリーズで２連覇中のアメリカザリガニを倒すのはどのチームだ！？</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150105023500 +0900" stop="20150105030500 +0900" channel="GR_1072" event_id="9505">
+    <title lang="ja_JP">アニメマシテ　スペシャル【浅沼晋太郎×日笠陽子】</title>
+    <desc lang="ja_JP">アニメマシテ初の2日連続SP！MCは浅沼晋太郎×日笠陽子！▽「美男高校地球防衛部LOVE!」よりメインキャストがスタジオに！▽「戦国無双」より草尾毅のインタビューも！</desc>
+    <category lang="ja_JP">アニメ／特撮</category>
+    <category lang="en">anime</category>
+  </programme>
+  <programme start="20150105030500 +0900" stop="20150105040500 +0900" channel="GR_1072" event_id="9510">
+    <title lang="ja_JP">GOLDを獲れ!26億の欲望　金を巡るミャンマー争奪戦、密着ドキュメント</title>
+    <desc lang="ja_JP">最後のフロンティア、ミャンマーに眠るという膨大な金(GOLD)を隣国中国・インドが狙う。翻弄される地元の小さな鉱山村に密着、経済成長の影を描いたドキュメント！</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150105040500 +0900" stop="20150105043500 +0900" channel="GR_1072" event_id="9151">
+    <title lang="ja_JP">東京オートサロン２０１５スペシャル</title>
+    <desc lang="ja_JP">国内二大自動車ショーのひとつとして、毎年注目を集めるカスタムカーイベント「東京オートサロン2015」の見どころをA-classを中心に大紹介します！！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105051000 +0900" stop="20150105054500 +0900" channel="GR_1072" event_id="9171">
+    <title lang="ja_JP">お達者ライフ</title>
+    <desc lang="ja_JP">舞の海が知って得する健康情報＆人気健康アイテムをご紹介！気軽に楽して毎日を健やかに暮らしたい方、必見！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105054500 +0900" stop="20150105064000 +0900" channel="GR_1072" event_id="9172">
+    <title lang="ja_JP">Ｎｅｗｓモーニングサテライト</title>
+    <desc lang="ja_JP">東京・NYを結び、世界の経済ニュースを朝一番でお届け。日本時間の夜から朝にかけて動くアメリカの経済ニュースを速報。地上波随一の情報量と多角的な分析でお伝えします。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150105064000 +0900" stop="20150105064500 +0900" channel="GR_1072" event_id="9174">
+    <title lang="ja_JP">ピラメキーノ６４０▽ダン・ダン　ドゥビ・ズバー！</title>
+    <desc lang="ja_JP">ピラメキーノは、子供たちの間で話題沸騰の“本格子供番組”。「ちゃんとしたオトナになるために」をテーマに、月曜から金曜まで毎日あさ６時４０分から放送！</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150105064500 +0900" stop="20150105073000 +0900" channel="GR_1072" event_id="9175">
+    <title lang="ja_JP">おはスタ【映画『妖怪ウォッチ』デカニャン大特集▼オレのオレカ▼ポケモン部】</title>
+    <desc lang="ja_JP">おはスタ645GO!GO!!!▽大ヒット公開中！映画『妖怪ウォッチ　誕生の秘密だニャン!』ストーリーのカギを握るキャラクターを毎日特別紹介!今日はナゾの妖怪「デカニャン」</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105073000 +0900" stop="20150105080000 +0900" channel="GR_1072" event_id="9177">
+    <title lang="ja_JP">しまじろうのわお！「おとうさんと　おしょうがつ」【字】</title>
+    <desc lang="ja_JP">世界の、自然の、不思議がいっぱい！「わお！」（驚き）がつまった３０分！親子で楽しめる、しまじろうのテレビ番組です。</desc>
+    <category lang="ja_JP">アニメ／特撮</category>
+    <category lang="en">anime</category>
+  </programme>
+  <programme start="20150105080000 +0900" stop="20150105081500 +0900" channel="GR_1072" event_id="9178">
+    <title lang="ja_JP">厳選いい宿＜西伊豆・戸田１万円以下の穴場宿＞【字】【デ】</title>
+    <desc lang="ja_JP">西伊豆・戸田から１万円以下の穴場宿をご紹介。名湯につかり、もてなしは駿河湾の海の幸づくし。ボリューム満点で9900円はお得です。お見逃しなく！</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150105081500 +0900" stop="20150105092100 +0900" channel="GR_1072" event_id="9179">
+    <title lang="ja_JP">ドラマブレイク　ホジュン〜伝説の心医〜　＃53【二】</title>
+    <desc lang="ja_JP">世界記憶遺産「東医宝鑑」の編纂に命を賭け「心医」と呼ばれ敬われたホ・ジュンの波瀾万丈の生涯を描く歴史エンターテインメント大河ドラマ。全68話日本語字幕二カ国語放送</desc>
+    <category lang="ja_JP">ドラマ</category>
+    <category lang="en">drama</category>
+  </programme>
+  <programme start="20150105092100 +0900" stop="20150105092800 +0900" channel="GR_1072" event_id="9180">
+    <title lang="ja_JP">Ｍナビ</title>
+    <desc lang="ja_JP">午前９時から取引が開始される東京株式市場。取引開始から３０分間が１日のマーケットの動きを方向づける大切な時間です。この時間の株価の動きをお伝えします。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150105092800 +0900" stop="20150105111300 +0900" channel="GR_1072" event_id="9181">
+    <title lang="ja_JP">なないろ日和！▽快適ショッピングスタジオ▽東京都議会特番▽テレビ東京ショッピング</title>
+    <desc lang="ja_JP">▽快適ショッピングスタジオ▽東京都議会特番　議長・副議長正月番組▽テレビ東京ショッピング</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105111300 +0900" stop="20150105113500 +0900" channel="GR_1072" event_id="9182">
+    <title lang="ja_JP">Ｍプラス　１１</title>
+    <desc lang="ja_JP">最新のニュースとマーケット情報をいち早くお伝えします。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150105113500 +0900" stop="20150105114500 +0900" channel="GR_1072" event_id="9183">
+    <title lang="ja_JP">太陽と緑の健やかタイム</title>
+    <desc lang="ja_JP">健康を大切にする人にスポットをあて、こだわりの生活をご紹介します。</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105114500 +0900" stop="20150105124000 +0900" channel="GR_1072" event_id="9184">
+    <title lang="ja_JP">昼めし旅〜あなたのご飯見せてください！〜【日本の島ＳＰ】</title>
+    <desc lang="ja_JP">日本の島のお昼ご飯スペシャル！湘南・江の島…絶景食堂の孫娘の大好物…おじいちゃんの愛情カツ丼▽八丈島でまるごと１匹キハダマグロづくし＆名物ムロアジ天丼</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20150105124000 +0900" stop="20150105133500 +0900" channel="GR_1072" event_id="9185">
+    <title lang="ja_JP">【新】Ｓ・セガール劇場「①沈黙の宿命」【字】【二】</title>
+    <desc lang="ja_JP">【日本初放送】懲りない最強オヤジ！セガール主演・脚本・制作総指揮の唯一の刑事ドラマ。シアトル警察の武闘派隊長が精鋭部隊を率いて刃向かう猛者を鉄拳制裁【一話完結】</desc>
+    <category lang="ja_JP">ドラマ</category>
+    <category lang="en">drama</category>
+  </programme>
+  <programme start="20150105133500 +0900" stop="20150105153500 +0900" channel="GR_1072" event_id="9186">
+    <title lang="ja_JP">午後ロード「Ｘ－メン」新春SP大ヒットシリーズ第１作ミュータント、それは進化か【字】【二】</title>
+    <desc lang="ja_JP">人類に忌み嫌われながらも共存を望むプロフェッサーＸ。ミュータントによる人類支配を目指すマグニートーとの対決の時が迫る！スーパーヒーローアクション!!(2000年/米)</desc>
+    <category lang="ja_JP">映画</category>
+    <category lang="en">cinema</category>
+  </programme>
+  <programme start="20150105153500 +0900" stop="20150105160000 +0900" channel="GR_1072" event_id="9187">
+    <title lang="ja_JP">Ｌ４ＹＯＵ！プラス</title>
+    <desc lang="ja_JP">月曜日は「あったかモコモコペット」特集。寒〜いこの季節、思わず抱きしめたくなる「ふわふわペット」が続々登場！そして、飼うにあたっての注意点を獣医さんに聞きます。</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105160000 +0900" stop="20150105165200 +0900" channel="GR_1072" event_id="9188">
+    <title lang="ja_JP">Ｌ４ＹＯＵ！『２０１５年開運占い特集』</title>
+    <desc lang="ja_JP">ラスト陰陽師、橋本京明さんが2015年の金運、健康運、全体運をランキング形式で発表さらに行けば運勢アップ！？開運、パワースポットや運勢アップのアイテムなども紹介！</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105165200 +0900" stop="20150105172000 +0900" channel="GR_1072" event_id="9189">
+    <title lang="ja_JP">ＮＥＷＳ　アンサー▽2015年いよいよ家計に吉報！【字】</title>
+    <desc lang="ja_JP">１日のニュースが３０分でわかる、コンパクトなニュース番組。私たちの暮らしに影響の大きい“意味あるニュース”を深く掘り下げます。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150105172000 +0900" stop="20150105175000 +0900" channel="GR_1072" event_id="9190">
+    <title lang="ja_JP">別冊主治医が見つかる診療所　健康スイッチ▽名医×草野仁×ニッチェ箱根健康ツアー【字】</title>
+    <desc lang="ja_JP">▽名医×草野仁×ニッチェが箱根健康ツアーＳＰ！内臓脂肪減らす温泉入り方＆パターゴルフ！絶品足柄牛ステーキで脂肪付かない食べ方！【出演】草野仁、ニッチェ</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105175000 +0900" stop="20150105180000 +0900" channel="GR_1072" event_id="9191">
+    <title lang="ja_JP">買物の時間ｍｉｎｉ</title>
+    <desc lang="ja_JP">生活に役立つ商品を紹介する通販番組</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105180000 +0900" stop="20150105183000 +0900" channel="GR_1072" event_id="9192">
+    <title lang="ja_JP">オレカバトル＆ドラゴンコレクション【字】【デ】</title>
+    <desc lang="ja_JP">【オレカ】俺たちオレカ少年団！【ドラコレ】激白！ユナのヒ・ミ・ツ！</desc>
+    <category lang="ja_JP">アニメ／特撮</category>
+    <category lang="en">anime</category>
+  </programme>
+  <programme start="20150105183000 +0900" stop="20150105185700 +0900" channel="GR_1072" event_id="9193">
+    <title lang="ja_JP">ヒーローバンク【字】</title>
+    <desc lang="ja_JP">『差し押さえロボ￥弁天王!!』敵のスパイだった紅もみじのせいで、弁天を取り逃がしてしまったカイト達。次なる作戦は、差し押さえの塔への奇襲攻撃だ。</desc>
+    <category lang="ja_JP">アニメ／特撮</category>
+    <category lang="en">anime</category>
+  </programme>
+  <programme start="20150105185700 +0900" stop="20150105215400 +0900" channel="GR_1072" event_id="9195">
+    <title lang="ja_JP">主治医が見つかる診療所【健康寿命がのびる！全国の食材＆新習慣】【字】</title>
+    <desc lang="ja_JP">▽血管を若返らせる!!北海道「幻の黒い豆」▽草津で要介護者半減「認知症防ぐ歩き方」▽大分・寝たきりにならない島の発酵食▽尿漏れ＆頻尿を解決！カイロはり方＆漢方薬</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105215400 +0900" stop="20150105220000 +0900" channel="GR_1072" event_id="9197">
+    <title lang="ja_JP">ＴＯＫＹＯガルリ【字】</title>
+    <desc lang="ja_JP">有名無名を問わず今を真摯に生きる人をゲストに迎えた、遠藤久美子の良質なショートトーク番組です。タイトルのガルリとはフランス語で画廊を意味する言葉です。</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20150105220000 +0900" stop="20150105225400 +0900" channel="GR_1072" event_id="9198">
+    <title lang="ja_JP">未来世紀ジパング【意外に保守的!？そんなイタリアに日本の焼き肉店が挑戦！】【字】【デ】</title>
+    <desc lang="ja_JP">食には意外にも保守的なイタリア。その地へ日本の人気の焼き肉店が進出。果たして赤身の肉を好むイタリア人に、サシの入った和牛は受け入れられたのか！？</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150105225400 +0900" stop="20150105230000 +0900" channel="GR_1072" event_id="9199">
+    <title lang="ja_JP">未来シティ研究所【字】</title>
+    <desc lang="ja_JP">未来の街や暮らし、ライフスタイルはどうなるかを予測する未来都市創造番組。</desc>
+    <category lang="ja_JP">情報／ワイドショー</category>
+    <category lang="en">information</category>
+  </programme>
+  <programme start="20150105230000 +0900" stop="20150105235800 +0900" channel="GR_1072" event_id="9200">
+    <title lang="ja_JP">ワールドビジネスサテライト</title>
+    <desc lang="ja_JP">キャスター大江麻理子。ビジネスや生活に役立つ「自分につながる」経済ニュース番組。ヒット商品を先取りした「トレンドたまご」、経済の最新情報を伝えるコーナーなど。</desc>
+    <category lang="ja_JP">ニュース／報道</category>
+    <category lang="en">news</category>
+  </programme>
+  <programme start="20150105235800 +0900" stop="20150106004500 +0900" channel="GR_1072" event_id="9201">
+    <title lang="ja_JP">家、ついて行ってイイですか？【字】</title>
+    <desc lang="ja_JP">終電を逃した人に、タクシー代を払う代わりに「家、ついて行ってイイですか？」とお願いし家について行き、それぞれの家で発見される素敵な人生ドラマを追いかけます。</desc>
+    <category lang="ja_JP">バラエティ</category>
+    <category lang="en">variety</category>
+  </programme>
+  <programme start="20141229140000 +0900" stop="20141229150000 +0900" channel="GR_1073" event_id="8995">
+    <title lang="ja_JP">スポーツがあったから【東北復興物語▽羽生結弦▽釜石ラグビーほか】</title>
+    <desc lang="ja_JP">ソチ五輪日本人唯一の金メダリストとなった羽生結弦。彼の支えになったのは東日本大震災で絆を深めた恩人たちだった。若き天才の活躍の裏に隠さた、もう１つの物語を描く。</desc>
+    <category lang="ja_JP">その他</category>
+    <category lang="en">etc</category>
+  </programme>
+  <programme start="20141229150000 +0900" stop="20141229164500 +0900" channel="GR_1073" event_id="8996">
+    <title lang="ja_JP">クリスマス　オン　アイス　２０１４【多】</title>
+    <desc lang="ja_JP">髙橋大輔と浅田真央、史上初の夢のコラボをたっぷりと！「お姫様抱っこ」その舞台裏をカメラがとらえました！永久保存版の豪華アイスショーです！</desc>
+    <category lang="ja_JP">スポーツ</category>
+    <category lang="en">sports</category>
+  </programme>
+</tv>
