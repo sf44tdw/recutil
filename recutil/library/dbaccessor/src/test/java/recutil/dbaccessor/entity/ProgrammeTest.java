@@ -177,19 +177,6 @@ public class ProgrammeTest {
     }
 
     /**
-     * Test of getInsertDatetime method, of class Programme.
-     */
-    @Test
-    public void testGetInsertDatetime() {
-        LOG.info("getInsertDatetime");
-        Programme instance = new Programme();
-        Date expResult = new Date(1470700800000L);
-        instance.setUpdateTime(expResult);
-        Date result = instance.getUpdateTime();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getChannelId method, of class Programme.
      */
     @Test

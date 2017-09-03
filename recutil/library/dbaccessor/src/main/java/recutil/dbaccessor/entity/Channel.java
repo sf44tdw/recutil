@@ -18,21 +18,17 @@ package recutil.dbaccessor.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,17 +42,22 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
  * @author normal
  */
 @Entity
-@Table(catalog = "EPG_TEST", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"CHANNEL_ID", "CHANNEL_NO"})})
+@Table(catalog = "EPG", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"CHANNEL_ID", "CHANNEL_NO"})}, indexes = {
+    @Index(name = "CHANNEL_NO_I", columnList = "CHANNEL_NO")})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Channel.findAll", query = "SELECT c FROM Channel c"),
-    @NamedQuery(name = "Channel.findByChannelId", query = "SELECT c FROM Channel c WHERE c.channelId = :channelId"),
-    @NamedQuery(name = "Channel.findByChannelNo", query = "SELECT c FROM Channel c WHERE c.channelNo = :channelNo"),
-    @NamedQuery(name = "Channel.findByAllParams", query = "SELECT c FROM Channel c WHERE c.channelId = :channelId AND c.channelNo = :channelNo AND c.displayName = :displayName"),
+    @NamedQuery(name = "Channel.findAll", query = "SELECT c FROM Channel c")
+    ,
+    @NamedQuery(name = "Channel.findByChannelId", query = "SELECT c FROM Channel c WHERE c.channelId = :channelId")
+    ,
+    @NamedQuery(name = "Channel.findByChannelNo", query = "SELECT c FROM Channel c WHERE c.channelNo = :channelNo")
+    ,
+    @NamedQuery(name = "Channel.findByAllParams", query = "SELECT c FROM Channel c WHERE c.channelId = :channelId AND c.channelNo = :channelNo AND c.displayName = :displayName")
+    ,
     @NamedQuery(name = "Channel.deleteAll", query = "DELETE FROM Channel")
 })
-public class Channel  implements Serializable {
+public class Channel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -69,24 +70,9 @@ public class Channel  implements Serializable {
     @Lob
     @Column(name = "DISPLAY_NAME", length = 65535)
     private String displayName;
-    /**
-     * 日時が自動入力されるので、null可。
-     */
-    @Basic(optional = false)
-    @Column(name = "UPDATE_TIME", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "channelId")
     private Collection<Programme> programmeCollection;
-
-    /**
-     * 更新日時の自動入力。
-     */
-    @PrePersist
-    @PreUpdate
-    protected void autoSetUpdateTime() {
-        setUpdateTime(new Date());
-    }
 
     public Channel() {
     }
@@ -95,10 +81,9 @@ public class Channel  implements Serializable {
         this.channelId = channelId;
     }
 
-    public Channel(String channelId, int channelNo, Date updateTime) {
+    public Channel(String channelId, int channelNo) {
         this.channelId = channelId;
         this.channelNo = channelNo;
-        this.updateTime = new Date(updateTime.getTime());
     }
 
     public int getChannelNo() {
@@ -123,17 +108,6 @@ public class Channel  implements Serializable {
 
     public void setChannelId(String channelId) {
         this.channelId = channelId;
-    }
-
-    public Date getUpdateTime() {
-        return new Date(updateTime.getTime());
-    }
-    
-    /**
-     * このメソッドに設定した値は、追加/更新時の日時で自動的に上書きされる。
-     */
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = new Date(updateTime.getTime());
     }
 
     @XmlTransient

@@ -30,7 +30,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.TypedQuery;
-import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -42,7 +41,7 @@ import recutil.dbaccessor.manager.EntityManagerMaker;
  * @author normal
  */
 @Entity
-@Table(catalog = "EPG_TEST", schema = "")
+@Table(catalog = "EPG", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Excludechannel.findAll", query = "SELECT e FROM Excludechannel e")
@@ -65,7 +64,7 @@ public class Excludechannel implements Serializable {
      */
     @PrePersist
     @PreUpdate
-    protected void isExistID() {
+    protected void isExistChannelId() {
         try (EntityManagerMaker mk = new EntityManagerMaker()) {
             if (this.channelId == null) {
                 return;
@@ -96,8 +95,6 @@ public class Excludechannel implements Serializable {
     public void setChannelId(String channelId) {
         this.channelId = channelId;
     }
-    @Version
-    private int version;
 
     @Override
     public int hashCode() {
