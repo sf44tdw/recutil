@@ -5,7 +5,7 @@
     <class>recutil.dbaccessor.entity.Excludechannel</class>
     <class>recutil.dbaccessor.entity.Channel</class>
     <class>recutil.dbaccessor.entity.Programme</class>
-    <shared-cache-mode>NONE</shared-cache-mode>
+    <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://address:port/dbname?zeroDateTimeBehavior=convertToNull"/>
             <property name="javax.persistence.jdbc.user" value="username"/>
