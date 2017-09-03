@@ -11,3 +11,5 @@ PATH=/usr/bin:/bin
 THIS_DIR=$(cd $(dirname $0); pwd)
 
 DESTDIR=${THIS_DIR}/recutil_bin
+
+JARDIR=${DESTDIR}/recutil_jar
