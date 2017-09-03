@@ -55,7 +55,7 @@ pwd >> ${LOGFILE} 2>&1
 for L in ${LIST}
 do
   cat ${SOURCE_SCRIPT} > ${DESTDIR}/${L}
-  chmod 755 ${DESTDIR}/${L}
+  chmod 711 ${DESTDIR}/${L}
 done
 
 echo "キッカー作成完了" >> ${LOGFILE}
