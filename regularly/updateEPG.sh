@@ -84,7 +84,7 @@ separator
 separator
 echo "EPGDB更新" >> ${LOGFILE}
 
-/usr/local/bin/updatedb -c "UTF-8" -d ${epgdir} 1>>${LOGFILE} 2>&1
+/usr/local/bin/updateepgdb -c "UTF-8" -d ${epgdir} 1>>${LOGFILE} 2>&1
 separator
 
 
