@@ -69,7 +69,8 @@ public class Main {
         public static final String OPTION_FILE = "-f";
     }
 
-    protected static final MessageFormat RECORD_COMMAND = new MessageFormat("executerecordcommand -i {0} -s {1}");
+    //秒数をカンマ区切りにはしないように。
+    protected static final MessageFormat RECORD_COMMAND = new MessageFormat("executerecordcommand -i {0} -s {1,number,#}");
 
     protected static final String DATETIME_FORMAT = recutil.commmonutil.Util.getDbDatePattern();
 

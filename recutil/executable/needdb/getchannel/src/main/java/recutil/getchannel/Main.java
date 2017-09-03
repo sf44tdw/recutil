@@ -194,7 +194,7 @@ public class Main {
 
                 Collections.sort(table, new ChannelComparator_AscendingByChannelNo());
 
-                MessageFormat format = new MessageFormat(OUTPUT_FORMAT);
+                final MessageFormat format = new MessageFormat(OUTPUT_FORMAT);
 
                 int count = 0;
                 for (Channel ch : table) {
