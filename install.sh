@@ -15,10 +15,10 @@ echo "コピー開始。${DESTDIR} -> ${INSTALL_TARGET_DIR}">> ${LOGFILE}
 make_dir_if_not_exist ${INSTALL_TARGET_DIR}
 chmod -R a+x ${DESTDIR}
 chmod -R a-x ${JARDIR}
-cp -f -p ./regularly/updateEPG.sh ${DESTDIR}
+\cp -f -p ./regularly/updateEPG.sh ${DESTDIR}
 cd ${DESTDIR}
 find > ${INSTALL_FILE_LIST} 2>>${LOGFILE}
-cp -r -v -f -p * ${INSTALL_TARGET_DIR} >> ${LOGFILE} 2>&1
+\cp -r -v -f -p * ${INSTALL_TARGET_DIR} >> ${LOGFILE} 2>&1
 echo "コピー完了。${DESTDIR} -> ${INSTALL_TARGET_DIR}">> ${LOGFILE}
 echo '***************************************************************************************************************************************' >> ${LOGFILE}
 
