@@ -71,6 +71,9 @@ public class Main {
 
     private static final Range<Long> RANGE_LIMIT_SECOND = Range.between(0L, 120L);
 
+    //toStringだとカンマとかが入るので、形式を指定。
+    protected static final MessageFormat LONG_TO_STRING = new MessageFormat("{0,number,#}");
+    
     //Date型の値は内部ではlongにより保持されているが、recpt1の録画時間はint型のため、制限をかける。
     private static final long MAX_SECOND = Integer.MAX_VALUE;
     private static final long MAX_MINUTE = MAX_SECOND / 60;
@@ -204,7 +207,7 @@ public class Main {
         } catch (org.apache.commons.cli.ParseException ex) {
             help.printHelp("放送開始時刻とチャンネルIDから番組名、 チャンネルIDからチャンネル番号を確認し、 recpt1コマンドを実行する。" + getSep()
                     + "実行されてから指定の秒数以内に始まる番組のうち、最近のものを番組名用に選択する。" + getSep(), opts);
-            LOG.warn("解釈不能なオプション。", ex);
+            System.out.println(ex);
             throw ex;
         }
 
@@ -344,7 +347,7 @@ public class Main {
 
             LOG.debug("コマンド用情報 = " + param.toString());
 
-            CommandResult res = exec.execCommand(RECORDCOMMAND, STRIP_OPTION, B25_OPTION, Long.toString(param.getPhysicalChannelNumber()), Long.toString(param.getDuration()), param.getFileName());
+            CommandResult res = exec.execCommand(RECORDCOMMAND, STRIP_OPTION, B25_OPTION, LONG_TO_STRING.format(new Object[]{param.getPhysicalChannelNumber()}), LONG_TO_STRING.format(new Object[]{param.getDuration()}), param.getFileName());
 
             LOG.info(res.toString());
 

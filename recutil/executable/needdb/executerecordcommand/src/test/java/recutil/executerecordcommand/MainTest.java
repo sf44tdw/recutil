@@ -30,6 +30,7 @@ import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.testdata.TestData;
 import static recutil.executerecordcommand.Main.DATE_PATTERN;
+import static recutil.executerecordcommand.Main.LONG_TO_STRING;
 import static recutil.executerecordcommand.Main.getSep;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
@@ -166,7 +167,23 @@ public class MainTest {
             throw ex;
         }
     }
-
+//    /**
+//     * Test of start method, of class Main.
+//     */
+//    @Test(expected = org.apache.commons.cli.ParseException.class)
+//    public void testStart1_2_2() throws Throwable {
+//        try {
+//            LOG.info("start1_2_2");
+//            //カンマあり(10,000)に変換される。
+//            long x = 100022555550L;
+//            String[] args = {"-i", TestData.CH2_ID, "-s", Long.toString(x), "-r", "120"};
+//            Main instance = new Main();
+//            instance.start(new DummyExecutor(), PID, nowTime, args);
+//        } catch (Throwable ex) {
+//            LOG.error("エラー。", ex);
+//            throw ex;
+//        }
+//    }
     /**
      * Test of start method, of class Main.
      */
@@ -331,7 +348,7 @@ public class MainTest {
             Programme exP = this.getTestProgrammes().get(0);
             LOG.info(ReflectionToStringBuilder.reflectionToString(exP));
             long x = (exP.getStopDatetime().getTime() - exP.getStartDatetime().getTime()) / 1000;
-            String[] args = {"-i", TestData.CH5_ID, "-s", Long.toString(x), "-r", "60"};
+            String[] args = {"-i", TestData.CH5_ID, "-s", LONG_TO_STRING.format(new Object[]{x}), "-r", "60"};
             Main instance = new Main();
 
             DummyExecutor de = new DummyExecutor();
@@ -362,7 +379,7 @@ public class MainTest {
             Programme exP = this.getTestProgrammes().get(0);
             LOG.info(ReflectionToStringBuilder.reflectionToString(exP));
             long x = (exP.getStopDatetime().getTime() - exP.getStartDatetime().getTime()) / 1000;
-            String[] args = {"-i", TestData.CH5_ID, "-s", Long.toString(x), "-r", "120"};
+            String[] args = {"-i", TestData.CH5_ID, "-s", LONG_TO_STRING.format(new Object[]{x}), "-r", "120"};
             Main instance = new Main();
 
             DummyExecutor de = new DummyExecutor();
@@ -394,7 +411,7 @@ public class MainTest {
             Programme exP = this.getTestProgrammes().get(0);
             LOG.info(ReflectionToStringBuilder.reflectionToString(exP));
             long x = (exP.getStopDatetime().getTime() - exP.getStartDatetime().getTime()) / 1000;
-            String[] args = {"-i", TestData.CH5_ID, "-s", Long.toString(x)};
+            String[] args = {"-i", TestData.CH5_ID, "-s", LONG_TO_STRING.format(new Object[]{x})};
             Main instance = new Main();
 
             DummyExecutor de = new DummyExecutor();
