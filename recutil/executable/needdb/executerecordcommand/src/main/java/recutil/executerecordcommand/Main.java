@@ -176,8 +176,8 @@ public class Main {
 
         final Option rangenOption = Option.builder("r")
                 .longOpt("range")
-                .required(true)
-                .desc("放送開始日時範囲オプション。実行時刻を起点として、放送開始日時として検索する時間の範囲を秒単位で指定する。最大120秒。")
+                .required(false)
+                .desc("放送開始日時範囲オプション。実行時刻を起点として、放送開始日時として検索する時間の範囲を秒単位で指定する。最大120秒。省略した場合、120秒とみなす。")
                 .hasArg(true)
                 .type(Long.class)
                 .build();
@@ -247,9 +247,9 @@ public class Main {
         if (cl.hasOption(rangenOption.getOpt())) {
             range = Long.valueOf(cl.getOptionValue(rangenOption.getOpt()));
         } else {
-            //オプション未設定の場合。必須オプションなのでここには来ないはず。
-            final String s = "放送開始日時範囲が設定されていません。";
-            throw new IllegalArgumentException(s);
+            //オプション未設定の場合。
+           LOG.info("放送開始日時範囲が設定されていません。最大値とします。");
+           range=120L;
         }
         if (!Main.RANGE_LIMIT_SECOND.contains(range)) {
             final String s = "放送開始日時範囲が正しくありません。0より小さいか、上限を超えています。値 = " + cl.getOptionValue(rangenOption.getOpt());

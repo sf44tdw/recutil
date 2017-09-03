@@ -167,23 +167,6 @@ public class MainTest {
     /**
      * Test of start method, of class Main.
      */
-    @Test(expected = org.apache.commons.cli.ParseException.class)
-    public void testStart1_3_1() throws Throwable {
-        try {
-            LOG.info("start1_3_1");
-            long x = (TestData.PG1_STOP_TIME - TestData.PG1_START_TIME) / 1000;
-            String[] args = {"-i", TestData.CH2_ID, "-s", Long.toString(x)};
-            Main instance = new Main();
-            instance.start(new DummyExecutor(), PID, nowTime, args);
-        } catch (Throwable ex) {
-            LOG.error("エラー。", ex);
-            throw ex;
-        }
-    }
-
-    /**
-     * Test of start method, of class Main.
-     */
     @Test(expected = IllegalArgumentException.class)
     public void testStart1_4_1() throws Throwable {
         try {
@@ -397,4 +380,34 @@ public class MainTest {
 
     }
 
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart2_2_2() throws Throwable {
+        try {
+            LOG.info("start2_2_2");
+
+            Programme exP = this.getTestProgrammes().get(0);
+            LOG.info(ReflectionToStringBuilder.reflectionToString(exP));
+            long x = (exP.getStopDatetime().getTime() - exP.getStartDatetime().getTime()) / 1000;
+            String[] args = {"-i", TestData.CH5_ID, "-s", Long.toString(x)};
+            Main instance = new Main();
+
+            DummyExecutor de = new DummyExecutor();
+            instance.start(de, PID, nowTime, args);
+            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), recutil.commmonutil.Util.parseDateToString(nowTime), PID, exP.getTitle()};
+            String asT = Main.FILENAME_FORMAT.format(params);
+            LOG.info(asT);
+            assertTrue(ArrayUtils.contains(de.getParam(), asT));
+            assertEquals(de.getCmd(), Main.RECORDCOMMAND);
+            assertTrue(ArrayUtils.contains(de.getParam(), Main.STRIP_OPTION));
+            assertTrue(ArrayUtils.contains(de.getParam(), Main.B25_OPTION));
+            assertTrue(ArrayUtils.contains(de.getParam(), Integer.toString(TestData.CH5_CHNO)));
+            assertTrue(ArrayUtils.contains(de.getParam(), Long.toString(x)));
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
 }
