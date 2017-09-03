@@ -16,8 +16,10 @@
  */
 package recutil.executerecordcommand;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -53,6 +55,8 @@ import recutil.loggerconfigurator.LoggerConfigurator;
  *
  * これが実行されてから指定の秒数以内に始まる番組のうち、最近のものを選択して録画ファイルのファイル名の一部とする。
  *
+ * ファイルは基本的に実行者のホームディレクトリに作成される。
+ *
  * @author normal
  */
 public class Main {
@@ -76,10 +80,12 @@ public class Main {
     private static final Range<Long> MINUTE_DURATION_LIMIT = Range.between(0L, MAX_MINUTE);
     private static final Range<Long> HOUR_DURATION_LIMIT = Range.between(0L, MAX_HOUR);
 
+    protected static final String DATE_PATTERN = "yyyyMMddHHmmss";
+
     /**
      * ファイル名フォーマット
      */
-    protected static final MessageFormat FILENAME_FORMAT = new MessageFormat("{4}_I{0}_C{1}_D{2}_P{3}");
+    protected static final MessageFormat FILENAME_FORMAT = new MessageFormat("{4}_I{0}_C{1}_D{2}_P{3}.ts");
 
     /**
      * 録画コマンド
@@ -248,8 +254,8 @@ public class Main {
             range = Long.valueOf(cl.getOptionValue(rangenOption.getOpt()));
         } else {
             //オプション未設定の場合。
-           LOG.info("放送開始日時範囲が設定されていません。最大値とします。");
-           range=120L;
+            LOG.info("放送開始日時範囲が設定されていません。最大値とします。");
+            range = 120L;
         }
         if (!Main.RANGE_LIMIT_SECOND.contains(range)) {
             final String s = "放送開始日時範囲が正しくありません。0より小さいか、上限を超えています。値 = " + cl.getOptionValue(rangenOption.getOpt());
@@ -324,13 +330,14 @@ public class Main {
                 throw new IllegalArgumentException("チャンネル情報、番組情報とも取得できませんでした。");
             }
 
+            final String userHome = System.getProperty("user.home");
             final Object[] params;
             if (p != null) {
-                params = new Object[]{p.getChannelId().getChannelId(), p.getChannelId().getChannelNo(), recutil.commmonutil.Util.parseDateToString(nowTime), pid, p.getTitle()};
-                param = new RecordParameter(p.getChannelId().getChannelNo(), duration_second, Main.FILENAME_FORMAT.format(params));
+                params = new Object[]{p.getChannelId().getChannelId(), p.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), pid, p.getTitle()};
+                param = new RecordParameter(p.getChannelId().getChannelNo(), duration_second, new File (userHome,Main.FILENAME_FORMAT.format(params)).getAbsolutePath());
             } else if (c != null) {
-                params = new Object[]{c.getChannelId(), c.getChannelNo(), recutil.commmonutil.Util.parseDateToString(nowTime), pid, ""};
-                param = new RecordParameter(c.getChannelNo(), duration_second, Main.FILENAME_FORMAT.format(params));
+                params = new Object[]{c.getChannelId(), c.getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), pid, "", };
+                param = new RecordParameter(c.getChannelNo(), duration_second, new File (userHome,Main.FILENAME_FORMAT.format(params)).getAbsolutePath());
             } else {
                 param = null;
             }

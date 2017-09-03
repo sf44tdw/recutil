@@ -5,6 +5,8 @@
  */
 package recutil.executerecordcommand;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ import recutil.consolesnatcher.ConsoleSnatcher;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.testdata.TestData;
+import static recutil.executerecordcommand.Main.DATE_PATTERN;
 import static recutil.executerecordcommand.Main.getSep;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
@@ -333,8 +336,8 @@ public class MainTest {
 
             DummyExecutor de = new DummyExecutor();
             instance.start(de, PID, nowTime, args);
-            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), recutil.commmonutil.Util.parseDateToString(nowTime), PID, exP.getTitle()};
-            String asT = Main.FILENAME_FORMAT.format(params);
+            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle()};
+            String asT = new File (System.getProperty("user.home"),Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
             assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);
@@ -364,8 +367,8 @@ public class MainTest {
 
             DummyExecutor de = new DummyExecutor();
             instance.start(de, PID, nowTime, args);
-            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), recutil.commmonutil.Util.parseDateToString(nowTime), PID, exP.getTitle()};
-            String asT = Main.FILENAME_FORMAT.format(params);
+            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle()};
+            String asT = new File (System.getProperty("user.home"),Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
             assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);
@@ -396,8 +399,8 @@ public class MainTest {
 
             DummyExecutor de = new DummyExecutor();
             instance.start(de, PID, nowTime, args);
-            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), recutil.commmonutil.Util.parseDateToString(nowTime), PID, exP.getTitle()};
-            String asT = Main.FILENAME_FORMAT.format(params);
+            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle(),System.getProperty("user.home")};
+            String asT = new File (System.getProperty("user.home"),Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
             assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);

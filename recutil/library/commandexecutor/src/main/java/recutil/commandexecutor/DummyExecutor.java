@@ -26,11 +26,6 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public final class DummyExecutor extends CommandExecutor {
 
-    private String cmd = null;
-
-    private String[] param = null;
-
-
 
     @Override
     public CommandResult _execCommand(String cmd, String... param) {
