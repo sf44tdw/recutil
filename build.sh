@@ -17,7 +17,6 @@ prepare_deploy(){
 separator
 cd ${THIS_DIR}
 #依存ファイルをすべて組み込んだ実行可能jarを1か所に集める。既にある場合は上書きする。
-JARDIR=${DESTDIR}/recutil_jar
 
 make_dir_if_not_exist ${JARDIR}
 

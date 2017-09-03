@@ -13,7 +13,8 @@ touch ${LOGFILE}
 echo '***************************************************************************************************************************************'>> ${LOGFILE}
 echo "コピー開始。${DESTDIR} -> ${INSTALL_TARGET_DIR}">> ${LOGFILE}
 make_dir_if_not_exist ${INSTALL_TARGET_DIR}
-chmod 711 ./regularly/updateEPG.sh
+chmod -R a+x ${DESTDIR}
+chmod -R a-x ${JARDIR}
 cp -f -p ./regularly/updateEPG.sh ${DESTDIR}
 cd ${DESTDIR}
 find > ${INSTALL_FILE_LIST} 2>>${LOGFILE}
