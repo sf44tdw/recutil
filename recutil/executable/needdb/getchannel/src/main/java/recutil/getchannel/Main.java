@@ -55,7 +55,7 @@ public class Main {
     private static enum channelState {
         ALL, BY_NO, BY_ID
     };
-    protected static final String OUTPUT_FORMAT = "{0}/{1} ,物理チャンネル番号 = {2}, チャンネルID = {3} ,局名 = {4}";
+    protected static final String OUTPUT_FORMAT = "{0,number,#}/{1,number,#} ,物理チャンネル番号 = {2,number,#}, チャンネルID = {3} ,局名 = {4}";
 
     public static final String getSep() {
         return System.getProperty("line.separator");

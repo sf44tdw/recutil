@@ -1,12 +1,12 @@
 <!-- 全てのログを標準出力から追い出す。-->
 
 <configuration>
-    <property name="LOG_DIR" value="./recutil_log" /><property name="FILENAME_COMMON" value="loggerconfigurator_test" />
+    <property name="LOG_DIR" value="recutil_log" /><property name="FILENAME_COMMON" value="loggerconfigurator_test" />
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_DIR}/${FILENAME_COMMON}.log</file>
+        <file>${HOME}/${LOG_DIR}/${FILENAME_COMMON}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>${LOG_DIR}/${FILENAME_COMMON}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${HOME}/${LOG_DIR}/${FILENAME_COMMON}.%d{yyyy-MM-dd}.log</fileNamePattern>
 
             <!-- keep 30 days worth of history -->
             <maxHistory>30</maxHistory> 

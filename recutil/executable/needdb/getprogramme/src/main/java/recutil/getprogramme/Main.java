@@ -77,7 +77,7 @@ public class Main {
     }
 
     protected static enum OUTPUT_FORMAT_TYPE {
-        DEFAULT("{0}/{1} ,チャンネルID = {2} ,物理チャンネル番号 = {3} ,番組ID = {4} ,放送開始日時 = {5} ,放送終了日時 = {6} ,番組名 = {7}"),
+        DEFAULT("{0}/{1} ,チャンネルID = {2} ,物理チャンネル番号 = {3,number,#} ,番組ID = {4,number,#} ,放送開始日時 = {5} ,放送終了日時 = {6} ,番組名 = {7}"),
         TITLE_ONLY("{0}");
 
         private final String formatString;
