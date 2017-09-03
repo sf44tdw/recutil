@@ -37,11 +37,13 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 
 /**
+ * Tableアノテーションのcatalog,schemaについては、MariaDBのCREATE
+ * INDEX時にSCHEMA.INDEXNAMEや、SCHEMA.TABLENAMEのようにしてSQLを発行すると不具合が出るので指定しない。
  *
  * @author normal
  */
 @Entity
-@Table(catalog = "EPG", schema = "")
+@Table()
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Excludechannel.findAll", query = "SELECT e FROM Excludechannel e")

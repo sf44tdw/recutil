@@ -38,11 +38,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 /**
- *
+ * Tableアノテーションのcatalog,schemaについては、MariaDBのCREATE
+ * INDEX時にSCHEMA.INDEXNAMEや、SCHEMA.TABLENAMEのようにしてSQLを発行すると不具合が出るので指定しない。
  * @author normal
  */
 @Entity
-@Table(catalog = "EPG", schema = "", uniqueConstraints = {
+@Table( uniqueConstraints = {
     @UniqueConstraint(columnNames = {"CHANNEL_ID", "CHANNEL_NO"})}, indexes = {
     @Index(name = "CHANNEL_NO_I", columnList = "CHANNEL_NO")})
 @XmlRootElement
