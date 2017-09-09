@@ -73,7 +73,7 @@ public class Main {
 
     //toStringだとカンマとかが入るので、形式を指定。
     protected static final MessageFormat LONG_TO_STRING = new MessageFormat("{0,number,#}");
-    
+
     //Date型の値は内部ではlongにより保持されているが、recpt1の録画時間はint型のため、制限をかける。
     private static final long MAX_SECOND = Integer.MAX_VALUE;
     private static final long MAX_MINUTE = MAX_SECOND / 60;
@@ -206,7 +206,9 @@ public class Main {
             cl = parser.parse(opts, args);
         } catch (org.apache.commons.cli.ParseException ex) {
             help.printHelp("放送開始時刻とチャンネルIDから番組名、 チャンネルIDからチャンネル番号を確認し、 recpt1コマンドを実行する。" + getSep()
-                    + "実行されてから指定の秒数以内に始まる番組のうち、最近のものを番組名用に選択する。" + getSep(), opts);
+                    + "ファイルはホームディレクトリ直下に作成する。" + getSep()
+                    + "実行されてから指定の秒数以内に始まる番組のうち、最近のものをファイル名の番組名部分用に選択する。見つからない場合は空欄。" + getSep()
+                    + "ファイル名=番組名(あれば)、チャンネルID、チャンネル番号、録画開始日時、このプロセスのPIDを連結したもの。" + getSep(), opts);
             System.out.println(ex);
             throw ex;
         }
@@ -337,10 +339,10 @@ public class Main {
             final Object[] params;
             if (p != null) {
                 params = new Object[]{p.getChannelId().getChannelId(), p.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), pid, p.getTitle()};
-                param = new RecordParameter(p.getChannelId().getChannelNo(), duration_second, new File (userHome,Main.FILENAME_FORMAT.format(params)).getAbsolutePath());
+                param = new RecordParameter(p.getChannelId().getChannelNo(), duration_second, new File(userHome, Main.FILENAME_FORMAT.format(params)).getAbsolutePath());
             } else if (c != null) {
-                params = new Object[]{c.getChannelId(), c.getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), pid, "", };
-                param = new RecordParameter(c.getChannelNo(), duration_second, new File (userHome,Main.FILENAME_FORMAT.format(params)).getAbsolutePath());
+                params = new Object[]{c.getChannelId(), c.getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), pid, "",};
+                param = new RecordParameter(c.getChannelNo(), duration_second, new File(userHome, Main.FILENAME_FORMAT.format(params)).getAbsolutePath());
             } else {
                 param = null;
             }
