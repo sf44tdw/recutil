@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.dbaccessor.testdata.TestData;
+import static recutil.dbaccessor.testdata.TestData.getTestDbEm;
 
 /**
  *
@@ -77,7 +78,7 @@ public class ExcludechannelTest {
         dat.reloadDB();
         Excludechannel instance = new Excludechannel();
         instance.setChannelId("DUMMY_1234@@@");
-        try (EntityManagerMaker mk = new EntityManagerMaker()) {
+        try (EntityManagerMaker mk = getTestDbEm()) {
             EntityManager man = mk.getEntityManager();
             man.persist(instance);
         }

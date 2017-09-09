@@ -26,18 +26,28 @@ import javax.persistence.Persistence;
  */
 public final class EntityManagerMaker implements AutoCloseable {
 
+    private final SelectedPersistenceName name;
+
     private final EntityManagerFactory emf;
 
-    private static final String PERSISTANCE = "RecUtil_dbaccessor_jar_1.0-SNAPSHOTPU";
-
-    public EntityManagerMaker() {
-        emf = Persistence.createEntityManagerFactory(PERSISTANCE);
+    /**
+     * 接続するDBを選択できる。テスト用。
+     *
+     * @param name 接続先。
+     */
+    public EntityManagerMaker(SelectedPersistenceName name) {
+        if (name == null) {
+            throw new NullPointerException("Persistenceが選択されていません。");
+        } else {
+            this.name = name;
+            emf = Persistence.createEntityManagerFactory(this.name.getPersistenceName());
+        }
     }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-
+    
     @Override
     public void close() {
         emf.close();

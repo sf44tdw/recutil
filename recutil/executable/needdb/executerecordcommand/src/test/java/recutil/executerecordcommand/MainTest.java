@@ -28,6 +28,8 @@ import recutil.commandexecutor.DummyExecutor;
 import recutil.consolesnatcher.ConsoleSnatcher;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
+import recutil.dbaccessor.manager.PERSISTENCE;
+import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.dbaccessor.testdata.TestData;
 import static recutil.executerecordcommand.Main.DATE_PATTERN;
 import static recutil.executerecordcommand.Main.LONG_TO_STRING;
@@ -101,7 +103,8 @@ public class MainTest {
     public void setUp() {
         dat.reloadDB();
 
-        try (EntityManagerMaker mk = new EntityManagerMaker()) {
+        SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
+        try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             EntityManager man = mk.getEntityManager();
             EntityTransaction trans = man.getTransaction();
             trans.begin();
@@ -184,6 +187,7 @@ public class MainTest {
 //            throw ex;
 //        }
 //    }
+
     /**
      * Test of start method, of class Main.
      */
@@ -354,7 +358,7 @@ public class MainTest {
             DummyExecutor de = new DummyExecutor();
             instance.start(de, PID, nowTime, args);
             final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle()};
-            String asT = new File (System.getProperty("user.home"),Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
+            String asT = new File(System.getProperty("user.home"), Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
             assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);
@@ -385,7 +389,7 @@ public class MainTest {
             DummyExecutor de = new DummyExecutor();
             instance.start(de, PID, nowTime, args);
             final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle()};
-            String asT = new File (System.getProperty("user.home"),Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
+            String asT = new File(System.getProperty("user.home"), Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
             assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);
@@ -416,8 +420,8 @@ public class MainTest {
 
             DummyExecutor de = new DummyExecutor();
             instance.start(de, PID, nowTime, args);
-            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle(),System.getProperty("user.home")};
-            String asT = new File (System.getProperty("user.home"),Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
+            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle(), System.getProperty("user.home")};
+            String asT = new File(System.getProperty("user.home"), Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
             assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);

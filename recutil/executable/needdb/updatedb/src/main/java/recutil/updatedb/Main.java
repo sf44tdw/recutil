@@ -32,6 +32,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import recutil.dbaccessor.manager.EntityManagerMaker;
+import recutil.dbaccessor.manager.PERSISTENCE;
+import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.dataextractor.channel.AllChannelDataExtractor;
 import recutil.updatedb.dataextractor.channel.ChannelData;
@@ -58,6 +60,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
             new Main().start(args);
             System.exit(0);
         } catch (Throwable ex) {
@@ -82,7 +85,7 @@ public class Main {
     }
 
     protected void start(String[] args) throws org.apache.commons.cli.ParseException {
-        
+
         final Option targetDirectoryOption = Option.builder("d")
                 .required(true)
                 .longOpt("directory")
@@ -155,7 +158,7 @@ public class Main {
 
         em.makeEntities();
 
-        try (EntityManagerMaker emm = new EntityManagerMaker()) {
+        try (EntityManagerMaker emm = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             final EntityManager manager = emm.getEntityManager();
 
             EntityTransaction trans = manager.getTransaction();

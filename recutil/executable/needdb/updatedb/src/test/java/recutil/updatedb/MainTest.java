@@ -29,6 +29,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import recutil.dbaccessor.manager.EntityManagerMaker;
+import recutil.dbaccessor.manager.PERSISTENCE;
+import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.common.Const;
 import recutil.updatedb.dataextractor.channel.AllChannelDataExtractor;
@@ -46,6 +48,7 @@ public class MainTest {
     private static final Logger LOG = LoggerConfigurator.getCallerLogger();
 
     public MainTest() {
+        SelectedPersistenceName.selectPersistence(PERSISTENCE.TEST);
     }
 
     @BeforeClass
@@ -183,7 +186,7 @@ public class MainTest {
 
         public boolean check() {
             boolean ret = true;
-            try (EntityManagerMaker emm = new EntityManagerMaker()) {
+            try (EntityManagerMaker emm = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
                 final EntityManager em = emm.getEntityManager();
 
                 ret = ret && this.checkChannelTable(em);
@@ -213,7 +216,7 @@ public class MainTest {
      * Test of start method, of class Main.
      */
     @Test
-    public void testStart04_02() throws Throwable{
+    public void testStart04_02() throws Throwable {
         try {
             LOG.info("start04_02");
             String[] args = {"-d", Const.getXMLTESTDATADIR().getAbsolutePath(), "-c", "UTF-8"};

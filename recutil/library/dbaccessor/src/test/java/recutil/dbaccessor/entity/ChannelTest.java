@@ -30,6 +30,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.testdata.TestData;
+import static recutil.dbaccessor.testdata.TestData.getTestDbEm;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -74,7 +75,7 @@ public class ChannelTest {
         List<String> expChannelId = dat.getAllChannslIdList();
         final int expSize = expChannelId.size();
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Channel> table;
         TypedQuery<Channel> ql = result.createNamedQuery("Channel.findAll", Channel.class);
@@ -110,7 +111,7 @@ public class ChannelTest {
 
         final int expSize = 1;
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Channel> table;
         TypedQuery<Channel> ql = result.createNamedQuery("Channel.findByAllParams", Channel.class);

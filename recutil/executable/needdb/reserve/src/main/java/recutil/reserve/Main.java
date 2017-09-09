@@ -43,6 +43,8 @@ import recutil.commandexecutor.Executor;
 import static recutil.commmonutil.Util.parseDateToString;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
+import recutil.dbaccessor.manager.PERSISTENCE;
+import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import static recutil.reserve.Main.RESERVE_COMMAND_PARAMS.OPTION_FILE;
 import static recutil.reserve.Main.RESERVE_COMMAND_PARAMS.OPTION_TIME;
@@ -84,6 +86,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
             if (true) {
                 new Main().start(new Executor(), args);
             } else {
@@ -179,7 +182,7 @@ public class Main {
         }
 
         final Programme p;
-        try (EntityManagerMaker mk = new EntityManagerMaker()) {
+        try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             EntityManager man = mk.getEntityManager();
             final TypedQuery<Programme> ql;
             ql = man.createNamedQuery("Programme.findByChannelIdAndEventIdAndStartDatetime", Programme.class);

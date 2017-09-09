@@ -45,6 +45,8 @@ import recutil.commandexecutor.Executor;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
+import recutil.dbaccessor.manager.PERSISTENCE;
+import recutil.dbaccessor.manager.SelectedPersistenceName;
 
 import recutil.loggerconfigurator.LoggerConfigurator;
 
@@ -115,7 +117,7 @@ public class Main {
         try {
             //ファイル名用に自身のプロセスIDを取得。
             final String PID = java.lang.management.ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-
+            SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
             //実行時刻(秒単位切り捨て)
             final Date nowTime;
             ZonedDateTime d = ZonedDateTime.now();
@@ -271,7 +273,7 @@ public class Main {
         final Date rangeDate = new Date(nowTime.getTime() + (range * 1000));
 
         final RecordParameter param;
-        try (EntityManagerMaker mk = new EntityManagerMaker()) {
+        try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             EntityManager man = mk.getEntityManager();
             final TypedQuery<Programme> ql_p;
             ql_p = man.createQuery(GET_PROGRAMME_QUERY, Programme.class);

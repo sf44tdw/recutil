@@ -36,6 +36,8 @@ import org.slf4j.Logger;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.manager.EntityManagerMaker;
+import recutil.dbaccessor.manager.PERSISTENCE;
+import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -63,6 +65,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
             new Main().start(args);
             System.exit(0);
         } catch (Throwable ex) {
@@ -128,8 +131,8 @@ public class Main {
         if (cl.hasOption(updateAllOption.getOpt())) {
             channelIds.addAll(Arrays.asList(cl.getOptionValues(updateAllOption.getOpt())));
         }
-
-        try (EntityManagerMaker emm = new EntityManagerMaker()) {
+        
+        try (EntityManagerMaker emm = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             final EntityManager em = emm.getEntityManager();
 
             if (printAll == true) {

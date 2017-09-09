@@ -43,6 +43,7 @@ import static recutil.dbaccessor.query.QueryString.Programme.USEABLE_PROGRAMME_B
 import static recutil.dbaccessor.query.QueryString.Programme.USEABLE_PROGRAMME_BY_START_DATETIME;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.dbaccessor.testdata.TestData;
+import static recutil.dbaccessor.testdata.TestData.getTestDbEm;
 
 /**
  *
@@ -89,7 +90,7 @@ public class QueryStringTest {
 
         int expSize = expChannelId.size();
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Channel> table;
         TypedQuery<Channel> ql = result.createQuery(qlString, Channel.class);
@@ -129,7 +130,7 @@ public class QueryStringTest {
 
         int expSize = expChannelNo.size();
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Channel> table;
         TypedQuery<Channel> ql = result.createQuery(qlString, Channel.class);
@@ -168,7 +169,7 @@ public class QueryStringTest {
 
         int expSize = expChannelId.size();
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Channel> table;
         TypedQuery<Channel> ql = result.createQuery(qlString, Channel.class);
@@ -207,7 +208,7 @@ public class QueryStringTest {
 
         int expSize = expEventId.size();
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Programme> table;
         TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
@@ -248,7 +249,7 @@ public class QueryStringTest {
 
         int expSize = expEventId.size();
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Programme> table;
         TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
@@ -289,7 +290,7 @@ public class QueryStringTest {
 
         int expSize = expEventId.size();
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Programme> table;
         TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
@@ -331,7 +332,7 @@ public class QueryStringTest {
 
         int expSize = expEventId.size();
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Programme> table;
         TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
@@ -372,7 +373,7 @@ public class QueryStringTest {
 
         int expSize = expEventId.size();
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Programme> table;
         TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
@@ -413,7 +414,7 @@ public class QueryStringTest {
 
         int expSize = expEventId.size();
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Programme> table;
         TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
