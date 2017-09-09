@@ -116,18 +116,9 @@ public class Main {
                 .type(Integer.class)
                 .build();
 
-        final Option startDateTimeOption = Option.builder("s")
-                .longOpt("startdatetime")
-                .required(true)
-                .desc("放送開始日時オプション。放送開始日時を指定する。" + getSep()
-                        + "形式 = " + DATETIME_FORMAT + getSep())
-                .hasArg()
-                .type(Date.class)
-                .build();
         Options opts = new Options();
         opts.addOption(ChannelIdOption);
         opts.addOption(eventIdOption);
-        opts.addOption(startDateTimeOption);
         CommandLineParser parser = new DefaultParser();
 
         HelpFormatter help = new HelpFormatter();
@@ -162,31 +153,15 @@ public class Main {
             LOG.debug("番組ID = {}", Integer.toString(eventId));
         }
 
-        final Date startDateTime;
-        if (cl.hasOption(startDateTimeOption.getOpt())) {
-            SimpleDateFormat sdf = new SimpleDateFormat(DATETIME_FORMAT);
-            try {
-                startDateTime = sdf.parse(cl.getOptionValue(startDateTimeOption.getOpt()));
-            } catch (java.text.ParseException ex) {
-                final String s = "放送開始日時を取得できませんでした。";
-                throw new IllegalArgumentException(s, ex);
-            }
-        } else {
-            startDateTime = null;
-        }
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("放送開始時刻 = {}", parseDateToString(startDateTime));
-        }
 
         final Programme p;
         try (EntityManagerMaker mk = new EntityManagerMaker()) {
             EntityManager man = mk.getEntityManager();
             final TypedQuery<Programme> ql;
-            ql = man.createNamedQuery("Programme.findByChannelIdAndEventIdAndStartDatetime", Programme.class);
+            ql = man.createNamedQuery("Programme.findByChannelIdAndEventId", Programme.class);
 
             ql.setParameter("channelId", channelId);
             ql.setParameter("eventId", eventId);
-            ql.setParameter("startDatetime", startDateTime);
             //制約上、複数件該当することはない。
             Programme _p;
             try {
