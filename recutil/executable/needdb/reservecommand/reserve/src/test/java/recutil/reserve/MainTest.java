@@ -5,7 +5,6 @@
  */
 package recutil.reserve;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -20,6 +19,7 @@ import recutil.consolesnatcher.ConsoleSnatcher;
 import recutil.dbaccessor.testdata.TestData;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import static recutil.reserve.Main.getSep;
+import recutil.reservecommon.AtExecutor.RESERVE_COMMAND_PARAMS;
 
 /**
  *
@@ -142,10 +142,10 @@ public class MainTest {
             String out = this.stdout.getOutput();
             assertFalse(out.contains("番組が見つかりませんでした"));
             String cmd = exe.getCmd();
-            assertEquals(cmd, Main.RESERVE_COMMAND_PARAMS.RESERVE_COMMAND);
+            assertEquals(cmd, RESERVE_COMMAND_PARAMS.RESERVE_COMMAND);
             String[] param = exe.getParam();
-            assertEquals(param[0], Main.RESERVE_COMMAND_PARAMS.OPTION_TIME);
-            assertEquals(param[2], Main.RESERVE_COMMAND_PARAMS.OPTION_FILE);
+            assertEquals(param[0], RESERVE_COMMAND_PARAMS.OPTION_TIME);
+            assertEquals(param[2], RESERVE_COMMAND_PARAMS.OPTION_FILE);
         } catch (Throwable ex) {
             LOG.error("エラー。", ex);
             throw ex;

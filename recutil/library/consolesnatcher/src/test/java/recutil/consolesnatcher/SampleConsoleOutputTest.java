@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.slf4j.Logger;
+import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -41,7 +42,7 @@ public class SampleConsoleOutputTest {
     @After
     public void resetSystem() {
 
-        String DEFAULT_LINE_SEPARATOR = System.getProperty("line.separator");
+        String DEFAULT_LINE_SEPARATOR = getDefaultLineSeparator();
 
         // バッファにたまっている内容を一時退避
         String std = stdout.getOutput();

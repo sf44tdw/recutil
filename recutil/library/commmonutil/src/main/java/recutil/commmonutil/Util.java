@@ -59,7 +59,7 @@ public final class Util {
      * @return ダンプ結果の文字列
      */
     public static String dumpList(List<?> x) {
-        String DEFAULT_LINE_SEPARATOR = getDefaultLineSeparator();
+        final String DEFAULT_LINE_SEPARATOR = getDefaultLineSeparator();
         StringBuilder s = new StringBuilder();
         s.append(DEFAULT_LINE_SEPARATOR).append(DEFAULT_LINE_SEPARATOR);
         for (Object obj : x) {
@@ -68,7 +68,6 @@ public final class Util {
         s.append(DEFAULT_LINE_SEPARATOR);
         return s.toString();
     }
-
 
     /**
      * <p>

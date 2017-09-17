@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>recutil</groupId>
-        <artifactId>needdb</artifactId>
+        <artifactId>reservecommand</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>reserve</artifactId>
@@ -38,7 +38,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>commandexecutor</artifactId>
+            <artifactId>reservecommon</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
