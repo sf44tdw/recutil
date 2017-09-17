@@ -156,7 +156,6 @@ public class Main {
             LOG.debug("番組ID = {}", Integer.toString(eventId));
         }
 
-
         final Programme p;
         try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             EntityManager man = mk.getEntityManager();
@@ -239,6 +238,9 @@ public class Main {
         final String CRLF = getSep();
 
         if (!((p.getStartDatetime() == null) || (p.getStopDatetime() == null))) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("番組情報 = {}", p);
+            }
             at = (p.getStopDatetime().getTime() - p.getStartDatetime().getTime()) / 1000;
         } else {
             buf.append("番組情報の、放送時間フィールドのうち、いずれかがnullです。");
