@@ -35,6 +35,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import recutil.dbaccessor.manager.EntityManagerMaker;
+import recutil.dbaccessor.manager.SelectedPersistenceName;
 
 /**
  * Tableアノテーションのcatalog,schemaについては、MariaDBのCREATE
@@ -67,7 +68,7 @@ public class Excludechannel implements Serializable {
     @PrePersist
     @PreUpdate
     protected void isExistChannelId() {
-        try (EntityManagerMaker mk = new EntityManagerMaker()) {
+        try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             if (this.channelId == null) {
                 return;
             }

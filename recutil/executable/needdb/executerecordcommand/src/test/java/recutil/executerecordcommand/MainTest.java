@@ -28,6 +28,8 @@ import recutil.commandexecutor.DummyExecutor;
 import recutil.consolesnatcher.ConsoleSnatcher;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
+import recutil.dbaccessor.manager.PERSISTENCE;
+import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.dbaccessor.testdata.TestData;
 import static recutil.executerecordcommand.Main.DATE_PATTERN;
 import static recutil.executerecordcommand.Main.LONG_TO_STRING;
@@ -101,7 +103,8 @@ public class MainTest {
     public void setUp() {
         dat.reloadDB();
 
-        try (EntityManagerMaker mk = new EntityManagerMaker()) {
+        SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
+        try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             EntityManager man = mk.getEntityManager();
             EntityTransaction trans = man.getTransaction();
             trans.begin();
@@ -184,6 +187,7 @@ public class MainTest {
 //            throw ex;
 //        }
 //    }
+
     /**
      * Test of start method, of class Main.
      */
@@ -339,6 +343,59 @@ public class MainTest {
 
     /**
      * Test of start method, of class Main.
+     * パースで例外が起きる。
+     */
+    @Test(expected = NullPointerException.class)
+    public void testStart1_7_1() throws Throwable {
+        try {
+            LOG.info("start1_7_1");
+            long x = (TestData.PG1_STOP_TIME - TestData.PG1_START_TIME) / 1000;
+            String[] args = {"-i", TestData.CH2_ID, "-s", Long.toString(x), "-r", "120", "-d", null};
+            Main instance = new Main();
+            instance.start(new DummyExecutor(), PID, nowTime, args);
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testStart1_7_2() throws Throwable {
+        try {
+            LOG.info("start1_7_2");
+            long x = (TestData.PG1_STOP_TIME - TestData.PG1_START_TIME) / 1000;
+            String[] args = {"-i", TestData.CH2_ID, "-s", Long.toString(x), "-r", "120", "-d", ""};
+            Main instance = new Main();
+            instance.start(new DummyExecutor(), PID, nowTime, args);
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testStart1_7_3() throws Throwable {
+        try {
+            LOG.info("start1_7_3");
+            long x = (TestData.PG1_STOP_TIME - TestData.PG1_START_TIME) / 1000;
+            String[] args = {"-i", TestData.CH2_ID, "-s", Long.toString(x), "-r", "120", "-d", "wjwleuqlw"};
+            Main instance = new Main();
+            instance.start(new DummyExecutor(), PID, nowTime, args);
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
+
+   
+    /**
+     * Test of start method, of class Main.
      */
     @Test
     public void testStart2_1_1() throws Throwable {
@@ -354,7 +411,7 @@ public class MainTest {
             DummyExecutor de = new DummyExecutor();
             instance.start(de, PID, nowTime, args);
             final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle()};
-            String asT = new File (System.getProperty("user.home"),Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
+            String asT = new File(System.getProperty("user.home"), Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
             assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);
@@ -385,7 +442,7 @@ public class MainTest {
             DummyExecutor de = new DummyExecutor();
             instance.start(de, PID, nowTime, args);
             final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle()};
-            String asT = new File (System.getProperty("user.home"),Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
+            String asT = new File(System.getProperty("user.home"), Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
             assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);
@@ -416,8 +473,39 @@ public class MainTest {
 
             DummyExecutor de = new DummyExecutor();
             instance.start(de, PID, nowTime, args);
-            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle(),System.getProperty("user.home")};
-            String asT = new File (System.getProperty("user.home"),Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
+            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle(), System.getProperty("user.home")};
+            String asT = new File(System.getProperty("user.home"), Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
+            LOG.info(asT);
+            assertTrue(ArrayUtils.contains(de.getParam(), asT));
+            assertEquals(de.getCmd(), Main.RECORDCOMMAND);
+            assertTrue(ArrayUtils.contains(de.getParam(), Main.STRIP_OPTION));
+            assertTrue(ArrayUtils.contains(de.getParam(), Main.B25_OPTION));
+            assertTrue(ArrayUtils.contains(de.getParam(), Integer.toString(TestData.CH5_CHNO)));
+            assertTrue(ArrayUtils.contains(de.getParam(), Long.toString(x)));
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
+    
+        /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart2_2_3() throws Throwable {
+        try {
+            LOG.info("start2_2_3");
+
+            Programme exP = this.getTestProgrammes().get(0);
+            LOG.info(ReflectionToStringBuilder.reflectionToString(exP));
+            long x = (exP.getStopDatetime().getTime() - exP.getStartDatetime().getTime()) / 1000;
+            String[] args = {"-i", TestData.CH5_ID, "-s", LONG_TO_STRING.format(new Object[]{x}),"-d",System.getProperty("user.dir")};
+            Main instance = new Main();
+
+            DummyExecutor de = new DummyExecutor();
+            instance.start(de, PID, nowTime, args);
+            final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle(), System.getProperty("user.home")};
+            String asT = new File(System.getProperty("user.dir"), Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
             assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);

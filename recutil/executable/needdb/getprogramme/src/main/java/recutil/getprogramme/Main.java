@@ -37,6 +37,8 @@ import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.entity.comparator.PrograammeListSorter;
 import recutil.dbaccessor.manager.EntityManagerMaker;
+import recutil.dbaccessor.manager.PERSISTENCE;
+import recutil.dbaccessor.manager.SelectedPersistenceName;
 import static recutil.dbaccessor.query.QueryString.Common.PARAMNAME_CHANNEL_ID;
 import static recutil.dbaccessor.query.QueryString.Programme.ALL_USEABLE_PROGRAMME;
 import static recutil.dbaccessor.query.QueryString.Programme.PARAMNAME_EVENT_ID;
@@ -68,6 +70,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
             new Main().start(args);
             System.exit(0);
         } catch (Throwable ex) {
@@ -107,8 +110,6 @@ public class Main {
         NONE, EVENT_ID, START_DATETIME;
     };
 
-
-
     protected static String printRes(List<Programme> target, OUTPUT_FORMAT_TYPE format, firstOnlyState firstOnly) {
         StringBuilder sb = new StringBuilder();
         final int records = target.size();
@@ -124,8 +125,9 @@ public class Main {
                     parameters = new Object[]{prg.getTitle()};
                     break;
                 default:
-                    parameters=null;
-            }sb.append(format.getFormat().format(parameters)).append(getSep());
+                    parameters = null;
+            }
+            sb.append(format.getFormat().format(parameters)).append(getSep());
             if (firstOnly == firstOnlyState.FIRST_ONLY && record == 1) {
                 break;
             }
@@ -181,7 +183,7 @@ public class Main {
                 .hasArg()
                 .type(Date.class)
                 .build();
-        
+
         OptionGroup searchOpts = new OptionGroup();
         searchOpts.setRequired(false);
         searchOpts.addOption(eventIdOption);
@@ -271,7 +273,7 @@ public class Main {
 
         final String PROP_ERROR = "適切なクエリを見つけられません。";
 
-        try (EntityManagerMaker mk = new EntityManagerMaker()) {
+        try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             EntityManager man = mk.getEntityManager();
 
             final TypedQuery<Programme> ql;

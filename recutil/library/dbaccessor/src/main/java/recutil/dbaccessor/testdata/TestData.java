@@ -30,6 +30,8 @@ import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
+import recutil.dbaccessor.manager.PERSISTENCE;
+import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -41,6 +43,10 @@ public final class TestData {
 
     private static final Logger LOG = LoggerConfigurator.getCallerLogger();
 
+    public static synchronized EntityManagerMaker getTestDbEm() {
+               return new EntityManagerMaker(SelectedPersistenceName.getInstance());
+    }
+    
     public static final String CH1_ID = "ID1";
     public static final String CH2_ID = "ID2";
     public static final String CH3_ID = "ID3";
@@ -94,6 +100,7 @@ public final class TestData {
     private List<Excludechannel> excludechannellList;
 
     public TestData() {
+        SelectedPersistenceName.selectPersistence(PERSISTENCE.TEST);
     }
 
     private Channel ch1 = null;
@@ -412,7 +419,7 @@ public final class TestData {
 
     public synchronized void reloadDB() {
         this.make();
-        EntityManager em = new EntityManagerMaker().getEntityManager();
+        EntityManager em = getTestDbEm().getEntityManager();
         LOG.info("DBの内容を初期化します。");
         EntityTransaction trans = em.getTransaction();
         trans.begin();
@@ -431,7 +438,7 @@ public final class TestData {
     }
 
     public static List<Channel> dumpChannelTable() {
-        try (EntityManagerMaker emm = new EntityManagerMaker()) {
+        try (EntityManagerMaker emm = getTestDbEm()) {
             final EntityManager em = emm.getEntityManager();
             final TypedQuery<Channel> ql = em.createNamedQuery("Channel.findAll", Channel.class);
             final List<Channel> res = ql.getResultList();
@@ -447,7 +454,7 @@ public final class TestData {
     }
 
     public static List<Programme> dumpProgrammeTable() {
-        try (EntityManagerMaker emm = new EntityManagerMaker()) {
+        try (EntityManagerMaker emm = getTestDbEm()) {
             final EntityManager em = emm.getEntityManager();
             final TypedQuery<Programme> ql = em.createNamedQuery("Programme.findAll", Programme.class);
             final List<Programme> res = ql.getResultList();
@@ -463,7 +470,7 @@ public final class TestData {
     }
 
     public static List<Excludechannel> dumpExcludechannelTable() {
-        try (EntityManagerMaker emm = new EntityManagerMaker()) {
+        try (EntityManagerMaker emm = getTestDbEm()) {
             final EntityManager em = emm.getEntityManager();
             final TypedQuery<Excludechannel> ql = em.createNamedQuery("Excludechannel.findAll", Excludechannel.class);
             final List<Excludechannel> res = ql.getResultList();

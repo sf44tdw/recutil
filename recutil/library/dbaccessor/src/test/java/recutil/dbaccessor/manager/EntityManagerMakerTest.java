@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import recutil.dbaccessor.entity.Channel;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.dbaccessor.testdata.TestData;
+import static recutil.dbaccessor.testdata.TestData.getTestDbEm;
 
 /**
  *
@@ -65,7 +66,7 @@ public class EntityManagerMakerTest {
     public void testGetEntityManager() throws ParseException {
         LOG.info("getEntityManager");
 
-        EntityManagerMaker instance = new EntityManagerMaker();
+        EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Channel> table = result
                 .createNamedQuery("Channel.findByChannelNo", Channel.class)

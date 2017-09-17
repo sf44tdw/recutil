@@ -45,6 +45,8 @@ import recutil.commandexecutor.Executor;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
+import recutil.dbaccessor.manager.PERSISTENCE;
+import recutil.dbaccessor.manager.SelectedPersistenceName;
 
 import recutil.loggerconfigurator.LoggerConfigurator;
 
@@ -115,7 +117,7 @@ public class Main {
         try {
             //ファイル名用に自身のプロセスIDを取得。
             final String PID = java.lang.management.ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-
+            SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
             //実行時刻(秒単位切り捨て)
             final Date nowTime;
             ZonedDateTime d = ZonedDateTime.now();
@@ -134,7 +136,9 @@ public class Main {
         if (cl.hasOption(option.getOpt())) {
             String val = cl.getOptionValue(option.getOpt());
             duration = Long.valueOf(val);
-            LOG.debug("オプション値{} -> 数値{}", val, duration);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("オプション値{} -> 数値{}", val, duration);
+            }
         } else {
             duration = null;
         }
@@ -191,11 +195,19 @@ public class Main {
                 .type(Long.class)
                 .build();
 
+        final Option destinationOption = Option.builder("d")
+                .longOpt("destinationdirectory")
+                .required(false)
+                .desc("ファイル出力先のディレクトリを指定する。省略された場合はホームディレクトリを使用する。")
+                .hasArg(true)
+                .type(String.class)
+                .build();
+
         Options opts = new Options();
         opts.addOption(ChannelIdOption);
         opts.addOptionGroup(durationOptionGroup);
         opts.addOption(rangenOption);
-        opts.addOption(ChannelIdOption);
+        opts.addOption(destinationOption);
 
         CommandLineParser parser = new DefaultParser();
 
@@ -206,7 +218,6 @@ public class Main {
             cl = parser.parse(opts, args);
         } catch (org.apache.commons.cli.ParseException ex) {
             help.printHelp("放送開始時刻とチャンネルIDから番組名、 チャンネルIDからチャンネル番号を確認し、 recpt1コマンドを実行する。" + getSep()
-                    + "ファイルはホームディレクトリ直下に作成する。" + getSep()
                     + "実行されてから指定の秒数以内に始まる番組のうち、最近のものをファイル名の番組名部分用に選択する。見つからない場合は空欄。" + getSep()
                     + "ファイル名=番組名(あれば)、チャンネルID、チャンネル番号、録画開始日時、このプロセスのPIDを連結したもの。" + getSep(), opts);
             System.out.println(ex);
@@ -267,11 +278,25 @@ public class Main {
             throw new IllegalArgumentException(s);
         }
 
+        final File destDirPath;
+        if (cl.hasOption(destinationOption.getOpt())) {
+            destDirPath = new File(cl.getOptionValue(destinationOption.getOpt()));
+        } else {
+            destDirPath = new File(System.getProperty("user.home"));
+        }
+        if (!destDirPath.isDirectory() || !destDirPath.canWrite()) {
+            final String s = "保存先ディレクトリが見つからないか、使用できません。パス = " + destDirPath.getAbsolutePath();
+            throw new IllegalArgumentException(s);
+        }
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("保存先ディレクトリ{}", destDirPath.getAbsolutePath());
+        }
+
         //放送開始日時範囲末尾
         final Date rangeDate = new Date(nowTime.getTime() + (range * 1000));
 
         final RecordParameter param;
-        try (EntityManagerMaker mk = new EntityManagerMaker()) {
+        try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             EntityManager man = mk.getEntityManager();
             final TypedQuery<Programme> ql_p;
             ql_p = man.createQuery(GET_PROGRAMME_QUERY, Programme.class);
@@ -335,14 +360,13 @@ public class Main {
                 throw new IllegalArgumentException("チャンネル情報、番組情報とも取得できませんでした。");
             }
 
-            final String userHome = System.getProperty("user.home");
             final Object[] params;
             if (p != null) {
                 params = new Object[]{p.getChannelId().getChannelId(), p.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), pid, p.getTitle()};
-                param = new RecordParameter(p.getChannelId().getChannelNo(), duration_second, new File(userHome, Main.FILENAME_FORMAT.format(params)).getAbsolutePath());
+                param = new RecordParameter(p.getChannelId().getChannelNo(), duration_second, new File(destDirPath, Main.FILENAME_FORMAT.format(params)).getAbsolutePath());
             } else if (c != null) {
                 params = new Object[]{c.getChannelId(), c.getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), pid, "",};
-                param = new RecordParameter(c.getChannelNo(), duration_second, new File(userHome, Main.FILENAME_FORMAT.format(params)).getAbsolutePath());
+                param = new RecordParameter(c.getChannelNo(), duration_second, new File(destDirPath, Main.FILENAME_FORMAT.format(params)).getAbsolutePath());
             } else {
                 param = null;
             }
