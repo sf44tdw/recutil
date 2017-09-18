@@ -127,7 +127,10 @@ public class Main {
             new Main().start(new Executor(), PID, nowTime, args);
             System.exit(0);
         } catch (Throwable ex) {
-            LOG.error("エラー。 引数 = " + dumpArgs(args), ex);
+            String s="エラー。 引数 = " + dumpArgs(args);
+            System.out.println(s);
+            System.out.println(ex);
+            LOG.error(s, ex);
             System.exit(1);
         }
     }
@@ -199,7 +202,7 @@ public class Main {
         final Option destinationOption = Option.builder("d")
                 .longOpt("destinationdirectory")
                 .required(false)
-                .desc("ファイル出力先のディレクトリを指定する。省略された場合はホームディレクトリを使用する。")
+                .desc("ファイル出力先のディレクトリを絶対パスで指定する。相対パスを指定した場合の結果は保証しない。省略された場合はホームディレクトリを使用する。")
                 .hasArg(true)
                 .type(String.class)
                 .build();
