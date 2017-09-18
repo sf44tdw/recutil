@@ -28,7 +28,8 @@ import recutil.loggerconfigurator.LoggerConfigurator;
  * @author normal
  */
 public final class Util {
-
+    private Util() {
+    }
     private static final Logger LOG = LoggerConfigurator.getCallerLogger();
 
     /**
@@ -49,8 +50,7 @@ public final class Util {
         return System.getProperty("line.separator");
     }
 
-    private Util() {
-    }
+
 
     /**
      * 渡されたリストをダンプする。

@@ -10,12 +10,16 @@
     <packaging>pom</packaging>
     <modules>
         <module>reserve</module>
-        <module>reservecommon</module>
     </modules>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>commandexecutor</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>reservecommon</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

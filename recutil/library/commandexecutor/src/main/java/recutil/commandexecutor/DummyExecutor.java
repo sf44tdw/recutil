@@ -26,13 +26,24 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public final class DummyExecutor extends CommandExecutor {
 
+    public static final String DUMMY_STDOUT_MESSAGE_FORMAT = "message = {0}, command = {1}, parameters = {2}";
+    public static final String DUMMY_STDERR_MESSAGE = "これはダミーです。何もしません。";
+
+    public static final String PARAMS_WERE_NULL = "引数なし。";
+
+    public static final int DUMMY_RETURN_CODE = 0;
+
+
+    public String paramsToString() {
+        return ArrayUtils.toString(this.getParam(), PARAMS_WERE_NULL);
+    }
 
     @Override
     public CommandResult _execCommand(String cmd, String... param) {
-         final String msg = "これはダミーです。何もしません。";
-        final String param_s = ArrayUtils.toString(param, "引数なし。");
+        final String msg = DUMMY_STDERR_MESSAGE;
+        final String param_s = this.paramsToString();
         Object[] p = {msg, cmd, param_s};
-        CommandResult returns = new CommandResult(new MessageFormat("message = {0}, command = {1}, parameters = {2}").format(p), msg, 0);
+        CommandResult returns = new CommandResult(new MessageFormat(DUMMY_STDOUT_MESSAGE_FORMAT).format(p), msg, DUMMY_RETURN_CODE);
         return returns;
     }
 

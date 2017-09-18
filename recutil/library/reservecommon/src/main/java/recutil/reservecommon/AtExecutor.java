@@ -50,8 +50,8 @@ public final class AtExecutor {
     /**
      * 日付フォーマット
      */
-    public static final String DATE_FORMAT="yyyyMMddHHmm";
-    
+    public static final String DATE_FORMAT = "yyyyMMddHHmm";
+
     /**
      * 現在時刻から何秒後から予約できるか。
      */
@@ -62,6 +62,9 @@ public final class AtExecutor {
 
     public AtExecutor(CommandExecutor executor) {
         this.executor = executor;
+        if (executor == null) {
+            throw new NullPointerException("コマンド実行用クラスがありません。");
+        }
     }
 
     private boolean stringCheck(String s) {
@@ -74,7 +77,7 @@ public final class AtExecutor {
 
     private boolean isFuture(Date dat) {
         if (dat == null) {
-            throw new IllegalArgumentException("コマンド実行の予約時刻がnullです。");
+            throw new NullPointerException("コマンド実行の予約時刻がnullです。");
         }
         long x = dat.getTime();
         long y = System.currentTimeMillis();
@@ -93,7 +96,7 @@ public final class AtExecutor {
             throw new IllegalArgumentException("予約までの時間が近すぎます。");
         }
         final Date t2 = new Date(reserveDateTime.getTime());
-        
+
         try {
             tempFile = File.createTempFile("myApp", ".tmp");
             tempFile.deleteOnExit();
@@ -102,7 +105,7 @@ public final class AtExecutor {
                     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile)));) {
                 if (stringCheck(sign)) {
                     if (LOG.isDebugEnabled()) {
-                        LOG.debug("at -cで確認したときに出てくる内容にテキストを含ませる。 = {}", sign);
+                        LOG.debug("at -cで確認したときに出てくる内容に含ませるテキスト = {}", sign);
                     }
                     bw.write(sign);
                     bw.newLine();

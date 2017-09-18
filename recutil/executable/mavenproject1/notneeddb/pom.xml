@@ -3,17 +3,20 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>recutil</groupId>
-        <artifactId>recutil</artifactId>
+        <artifactId>executable</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>library</artifactId>
+    <artifactId>notneeddb</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>commandexecutor</module>
-        <module>commmonutil</module>
-        <module>consolesnatcher</module>
-        <module>dbaccessor</module>
-        <module>loggerconfigurator</module>
-        <module>reservecommon</module>
+        <module>simpleatrunner</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>reservecommon</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

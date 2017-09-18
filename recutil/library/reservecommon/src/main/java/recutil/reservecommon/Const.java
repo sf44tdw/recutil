@@ -22,7 +22,10 @@ package recutil.reservecommon;
  */
 public class Const {
 
-    //秒数をカンマ区切りにはしないように。
+    /**
+     * recpt1のラッパーコマンド用フォーマット。
+     * 秒数をカンマ区切りにはしないようになっている。
+     */
     public static final String RECORD_COMMAND = "executerecordcommand -i {0} -s {1,number,#}";
     
 }

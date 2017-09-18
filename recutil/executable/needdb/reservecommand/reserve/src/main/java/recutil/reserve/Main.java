@@ -17,7 +17,6 @@
 package recutil.reserve;
 
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -33,7 +32,6 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import recutil.commandexecutor.CommandExecutor;
 import recutil.commandexecutor.CommandResult;
-import recutil.commandexecutor.DummyExecutor;
 import recutil.commandexecutor.Executor;
 import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import static recutil.commmonutil.Util.parseDateToString;
@@ -72,11 +70,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
-            if (true) {
-                new Main().start(new Executor(), args);
-            } else {
-                new Main().start(new DummyExecutor(), args);
-            }
+            new Main().start(new Executor(), args);
             System.exit(0);
         } catch (Throwable ex) {
             LOG.error("エラー。 引数 = " + dumpArgs(args), ex);
@@ -86,7 +80,9 @@ public class Main {
 
     protected void start(final CommandExecutor executor, final String[] args) throws ParseException, InterruptedException {
 
-        LOG.debug(dumpArgs(args));
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(dumpArgs(args));
+        }
 
         final Option ChannelIdOption = Option.builder("i")
                 .longOpt("channelid")
@@ -175,17 +171,16 @@ public class Main {
 
         //放送開始1分前
         Date t2 = new Date(p.getStartDatetime().getTime() - 60000);
-        String s2 = new SimpleDateFormat("yyyyMMddHHmm").format(t2);
 
         final AtExecutor exec = new AtExecutor(executor);
 
-        CommandResult res = exec.executeAt(t2, s1, s2);
+        CommandResult res = exec.executeAt(t2, s0, s1);
 
         if (res != null) {
             LOG.info(res.toString());
             //何故かatコマンドの出力はエラー出力のほうに出てくるので、そっちを表示する。
             System.out.println(res.getStandardError());
-            if (res.getReturnCode() > 0) {
+            if (res.getReturnCode() != 0) {
                 throw new IllegalArgumentException("予約に失敗した可能性があります。");
             } else {
                 System.out.println("予約が行われました。");
