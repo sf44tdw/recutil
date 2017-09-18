@@ -32,6 +32,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
+import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import static recutil.commmonutil.Util.parseDateToString;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Programme;
@@ -61,7 +62,7 @@ public class Main {
     protected static final String DATETIME_FORMAT = recutil.commmonutil.Util.getDbDatePattern();
 
     public static final String getSep() {
-        return System.getProperty("line.separator");
+         return getDefaultLineSeparator();
     }
 
     private static String dumpArgs(String[] args) {

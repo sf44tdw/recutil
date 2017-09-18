@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
+import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -87,7 +88,7 @@ public class Executor extends CommandExecutor {
     private synchronized String processMessage(InputStream in) {
         StringBuilder sB = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
-            String LINE_SEPA = System.getProperty("line.separator");
+            String LINE_SEPA = getDefaultLineSeparator();
             String line;
             while ((line = br.readLine()) != null) {
                 sB.append(line).append(LINE_SEPA);

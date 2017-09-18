@@ -33,6 +33,7 @@ import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
+import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.manager.EntityManagerMaker;
@@ -56,7 +57,7 @@ public class Main {
     private static final Logger LOG = LoggerConfigurator.getCallerLogger();
 
     public static final String getSep() {
-        return System.getProperty("line.separator");
+        return getDefaultLineSeparator();
     }
 
     private static String dumpArgs(String[] args) {

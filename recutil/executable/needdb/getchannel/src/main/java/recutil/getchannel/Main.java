@@ -30,6 +30,7 @@ import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
+import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.comparator.ChannelComparator_AscendingByChannelNo;
 import recutil.dbaccessor.manager.EntityManagerMaker;
@@ -60,7 +61,7 @@ public class Main {
     protected static final String OUTPUT_FORMAT = "{0,number,#}/{1,number,#} ,物理チャンネル番号 = {2,number,#}, チャンネルID = {3} ,局名 = {4}";
 
     public static final String getSep() {
-        return System.getProperty("line.separator");
+        return getDefaultLineSeparator();
     }
 
     private static String dumpArgs(String[] args) {

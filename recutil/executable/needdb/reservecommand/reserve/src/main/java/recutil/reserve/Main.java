@@ -16,13 +16,7 @@
  */
 package recutil.reserve;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -38,17 +32,16 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import recutil.commandexecutor.CommandExecutor;
 import recutil.commandexecutor.CommandResult;
-import recutil.commandexecutor.DummyExecutor;
 import recutil.commandexecutor.Executor;
+import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import static recutil.commmonutil.Util.parseDateToString;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.loggerconfigurator.LoggerConfigurator;
-import static recutil.reserve.Main.RESERVE_COMMAND_PARAMS.OPTION_FILE;
-import static recutil.reserve.Main.RESERVE_COMMAND_PARAMS.OPTION_TIME;
-import static recutil.reserve.Main.RESERVE_COMMAND_PARAMS.RESERVE_COMMAND;
+import recutil.reservecommon.AtExecutor;
+import static recutil.reservecommon.Const.RECORD_COMMAND;
 
 /**
  * チャンネルIDと番組IDに該当する番組を予約する。
@@ -61,23 +54,13 @@ public class Main {
 
     protected static final MessageFormat AT_FILE_HEADER = new MessageFormat("タイトル = {0} ,開始時刻 = {1} ,終了時刻 = {2}");
 
-    protected final class RESERVE_COMMAND_PARAMS {
-
-        private RESERVE_COMMAND_PARAMS() {
-        }
-
-        public static final String RESERVE_COMMAND = "at";
-        public static final String OPTION_TIME = "-t";
-        public static final String OPTION_FILE = "-f";
-    }
-
     //秒数をカンマ区切りにはしないように。
-    protected static final MessageFormat RECORD_COMMAND = new MessageFormat("executerecordcommand -i {0} -s {1,number,#}");
+    protected static final MessageFormat RECORD_COMMAND_FORMAT = new MessageFormat(RECORD_COMMAND);
 
     protected static final String DATETIME_FORMAT = recutil.commmonutil.Util.getDbDatePattern();
 
     protected static final String getSep() {
-        return System.getProperty("line.separator");
+        return getDefaultLineSeparator();
     }
 
     private static String dumpArgs(String[] args) {
@@ -87,11 +70,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
-            if (true) {
-                new Main().start(new Executor(), args);
-            } else {
-                new Main().start(new DummyExecutor(), args);
-            }
+            new Main().start(new Executor(), args);
             System.exit(0);
         } catch (Throwable ex) {
             LOG.error("エラー。 引数 = " + dumpArgs(args), ex);
@@ -101,7 +80,9 @@ public class Main {
 
     protected void start(final CommandExecutor executor, final String[] args) throws ParseException, InterruptedException {
 
-        LOG.debug(dumpArgs(args));
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(dumpArgs(args));
+        }
 
         final Option ChannelIdOption = Option.builder("i")
                 .longOpt("channelid")
@@ -180,46 +161,32 @@ public class Main {
             return;
         }
 
-        //自動削除されるテンポラリファイルを作成。
-        final File tempFile;
-        try {
-            tempFile = File.createTempFile("myApp", ".tmp");
-            tempFile.deleteOnExit();
+        Object[] header_parameters = {p.getTitle(), parseDateToString(p.getStartDatetime()), parseDateToString(p.getStopDatetime())};
+        String s0 = AT_FILE_HEADER.format(header_parameters);
 
-            try ( //テンポラリファイルに録画コマンドを書き込む。
-                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile)));) {
-                Object[] header_parameters = {p.getTitle(), parseDateToString(p.getStartDatetime()), parseDateToString(p.getStopDatetime())};
-                String s0 = AT_FILE_HEADER.format(header_parameters);
-                LOG.debug(s0);
-                bw.write(s0);
-                bw.newLine();
+        //放送時間に120秒足す。
+        long duration = this.getAirtimeBySecond(p) + 120;
+        Object[] command_parameters = {p.getChannelId().getChannelId(), duration};
+        String s1 = RECORD_COMMAND_FORMAT.format(command_parameters);
 
-                //放送時間に120秒足す。
-                long duration = this.getAirtimeBySecond(p) + 120;
-                Object[] command_parameters = {p.getChannelId().getChannelId(), duration};
-                String s1 = RECORD_COMMAND.format(command_parameters);
-                LOG.debug(s1);
-                bw.write(s1);
-                bw.newLine();
-            }
+        //放送開始1分前
+        Date t2 = new Date(p.getStartDatetime().getTime() - 60000);
 
-            //放送開始1分前
-            Date t2 = new Date(p.getStartDatetime().getTime() - 60000);
-            String s2 = new SimpleDateFormat("yyyyMMddHHmm").format(t2);
-            CommandResult res = executor.execCommand(RESERVE_COMMAND, OPTION_TIME, s2, OPTION_FILE, tempFile.getAbsolutePath());
-            if (res != null) {
-                System.out.println("予約が行われました。");
-                LOG.info(res.toString());
-                //何故かatコマンドの出力はエラー出力のほうに出てくるので、そっちを表示する。
-                System.out.println(res.getStandardError());
-                if (res.getReturnCode() > 0) {
-                    throw new IllegalArgumentException("予約に失敗した可能性があります。");
-                }
+        final AtExecutor exec = new AtExecutor(executor);
+
+        CommandResult res = exec.executeAt(t2, s0, s1);
+
+        if (res != null) {
+            LOG.info(res.toString());
+            //何故かatコマンドの出力はエラー出力のほうに出てくるので、そっちを表示する。
+            System.out.println(res.getStandardError());
+            if (res.getReturnCode() != 0) {
+                throw new IllegalArgumentException("予約に失敗した可能性があります。");
             } else {
-                throw new IllegalArgumentException("予約コマンドの実行中に何らかの問題が発生しました。予約の成功は保証されません。");
+                System.out.println("予約が行われました。");
             }
-        } catch (IOException ex) {
-            LOG.error("予約コマンドの生成に失敗しました。", ex);
+        } else {
+            throw new IllegalArgumentException("予約コマンドの実行中に何らかの問題が発生しました。予約の成功は保証されません。");
         }
 
     }

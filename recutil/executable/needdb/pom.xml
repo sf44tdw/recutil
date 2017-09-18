@@ -14,7 +14,7 @@
         <module>getchannel</module>
         <module>getprogramme</module>
         <module>updatedb</module>
-        <module>reserve</module>
+        <module>reservecommand</module>
     </modules>
     <dependencies>
         <dependency>

@@ -42,6 +42,7 @@ import org.slf4j.Logger;
 import recutil.commandexecutor.CommandExecutor;
 import recutil.commandexecutor.CommandResult;
 import recutil.commandexecutor.Executor;
+import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
@@ -106,7 +107,7 @@ public class Main {
     protected static final String B25_OPTION = "--b25";
 
     public static final String getSep() {
-        return System.getProperty("line.separator");
+        return getDefaultLineSeparator();
     }
 
     private static String dumpArgs(String[] args) {
