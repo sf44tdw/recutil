@@ -51,7 +51,9 @@ public class Main {
             new Main().start(new Executor(), args);
             System.exit(0);
         } catch (Throwable ex) {
-            LOG.error("エラー。 引数 = " + dumpArgs(args), ex);
+            String s="エラー。 引数 = " + dumpArgs(args);
+            System.out.println(s);
+            LOG.error(s, ex);
             System.exit(1);
         }
     }
