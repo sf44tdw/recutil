@@ -53,6 +53,7 @@ public class Main {
         } catch (Throwable ex) {
             String s="エラー。 引数 = " + dumpArgs(args);
             System.out.println(s);
+            System.out.println(ex);
             LOG.error(s, ex);
             System.exit(1);
         }
@@ -65,7 +66,7 @@ public class Main {
     protected void start(final CommandExecutor executor, final String[] args) throws ParseException, InterruptedException {
         final Option inputCsvFileOption = Option.builder("f")
                 .longOpt("csvfile")
-                .desc("実行予約日時とコマンドのペアを格納したCSVのパス。")
+                .desc("実行予約日時とコマンドのペアを格納したCSVの絶対パスを指定する。相対パスを指定した場合の結果は保証しない。")
                 .hasArg(true)
                 .required(true)
                 .type(File.class)
