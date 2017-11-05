@@ -52,7 +52,7 @@ public class Main {
     private static final Logger LOG = LoggerConfigurator.getCallerLogger();
 
     public static final String getSep() {
-         return getDefaultLineSeparator();
+        return getDefaultLineSeparator();
     }
 
     private static String dumpArgs(String[] args) {
@@ -162,7 +162,7 @@ public class Main {
         try (EntityManagerMaker emm = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             final EntityManager manager = emm.getEntityManager();
 
-            EntityTransaction trans = manager.getTransaction();
+            final EntityTransaction trans = manager.getTransaction();
             trans.begin();
             LOG.info("番組登録トランザクション開始。");
 

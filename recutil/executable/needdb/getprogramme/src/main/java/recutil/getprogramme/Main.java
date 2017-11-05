@@ -18,10 +18,17 @@ package recutil.getprogramme;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -35,40 +42,36 @@ import org.slf4j.Logger;
 import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import static recutil.commmonutil.Util.parseDateToString;
 import recutil.dbaccessor.entity.Channel;
+import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.entity.comparator.PrograammeListSorter;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
-import static recutil.dbaccessor.query.QueryString.Common.PARAMNAME_CHANNEL_ID;
-import static recutil.dbaccessor.query.QueryString.Programme.ALL_USEABLE_PROGRAMME;
-import static recutil.dbaccessor.query.QueryString.Programme.PARAMNAME_EVENT_ID;
-import static recutil.dbaccessor.query.QueryString.Programme.PARAMNAME_START_DATETIME;
-import static recutil.dbaccessor.query.QueryString.Programme.USEABLE_PROGRAMME_BY_CHANNEL_ID;
-import static recutil.dbaccessor.query.QueryString.Programme.USEABLE_PROGRAMME_BY_CHANNEL_ID_AND_EVENT_ID;
-import static recutil.dbaccessor.query.QueryString.Programme.USEABLE_PROGRAMME_BY_CHANNEL_ID_AND_START_DATETIME;
-import static recutil.dbaccessor.query.QueryString.Programme.USEABLE_PROGRAMME_BY_EVENT_ID;
-import static recutil.dbaccessor.query.QueryString.Programme.USEABLE_PROGRAMME_BY_START_DATETIME;
 import recutil.loggerconfigurator.LoggerConfigurator;
+import recutil.timeclioption.TimeCliOption;
+import recutil.timeclioption.TimeParseException;
 
 /**
  *
  * @author normal
  */
 public class Main {
-
+    
     private static final Logger LOG = LoggerConfigurator.getCallerLogger();
-
+    
     protected static final String DATETIME_FORMAT = recutil.commmonutil.Util.getDbDatePattern();
 
-    public static final String getSep() {
-         return getDefaultLineSeparator();
-    }
 
+    
+    public static final String getSep() {
+        return getDefaultLineSeparator();
+    }
+    
     private static String dumpArgs(String[] args) {
         return ArrayUtils.toString(args, "引数なし。");
     }
-
+    
     public static void main(String[] args) {
         try {
             SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
@@ -79,38 +82,38 @@ public class Main {
             System.exit(1);
         }
     }
-
+    
     protected static enum OUTPUT_FORMAT_TYPE {
         DEFAULT("{0}/{1} ,チャンネルID = {2} ,物理チャンネル番号 = {3,number,#} ,番組ID = {4,number,#} ,放送開始日時 = {5} ,放送終了日時 = {6} ,番組名 = {7}"),
         TITLE_ONLY("{0}");
-
+        
         private final String formatString;
-
+        
         private OUTPUT_FORMAT_TYPE(String formatString) {
             this.formatString = formatString;
         }
-
+        
         public String getFormatString() {
             return formatString;
         }
-
+        
         public MessageFormat getFormat() {
             return new MessageFormat(formatString);
         }
     }
-
+    
     protected static enum firstOnlyState {
         ALL, FIRST_ONLY;
     };
-
+    
     private static enum excludeState {
         ALL, USEABLE;
     };
-
+    
     private static enum paramState {
-        NONE, EVENT_ID, START_DATETIME;
+        NONE, EVENT_ID, START_DATETIME, START_DATETIME_BETWEEN;
     };
-
+    
     protected static String printRes(List<Programme> target, OUTPUT_FORMAT_TYPE format, firstOnlyState firstOnly) {
         StringBuilder sb = new StringBuilder();
         final int records = target.size();
@@ -136,30 +139,53 @@ public class Main {
         }
         return (sb.toString());
     }
-
+    
+    private Long getDuration(final CommandLine cl, Option option) {
+        final Long duration;
+        if (cl.hasOption(option.getOpt())) {
+            String val = cl.getOptionValue(option.getOpt());
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("オプション値{} -> ", val);
+            }
+            duration = Long.valueOf(val);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("-> 数値{}", duration);
+            }
+        } else {
+            duration = null;
+        }
+        return duration;
+    }
+    
     public void start(String[] args) throws org.apache.commons.cli.ParseException {
-
+        
+        final TimeCliOption timeOpts = new TimeCliOption(
+                "検索時間の範囲オプション。startdatetimeが指定されている場合のみ評価される。指定された放送開始日時の前後の検索範囲を秒単位で指定する。",
+                "検索時間の範囲オプション。startdatetimeが指定されている場合のみ評価される。指定された放送開始日時の前後の検索範囲を分単位で指定する。",
+                "検索時間の範囲オプション。startdatetimeが指定されている場合のみ評価される。指定された放送開始日時の前後の検索範囲を時間単位で指定する。"
+        );
+        
         final Option titleOnlyOption = Option.builder("t")
                 .required(false)
                 .longOpt("titleonly")
                 .desc("番組のタイトルだけを表示する。")
                 .hasArg(false)
                 .build();
-
+        
         final Option firstOnlyOption = Option.builder("f")
                 .required(false)
                 .longOpt("firstonly")
                 .desc("結果のうち、1件目だけを表示する。")
                 .hasArg(false)
                 .build();
-
+        
         final Option withExcludeChannelOption = Option.builder("e")
                 .required(false)
                 .longOpt("withoutexcludechannel")
                 .desc("除外設定されたチャンネルは無視する。省略すると、除外設定されたチャンネルも検索の対象とする。")
                 .hasArg(false)
                 .build();
-
+        
         final Option ChannelIdOption = Option.builder("i")
                 .longOpt("channelid")
                 .required(false)
@@ -167,7 +193,7 @@ public class Main {
                 .hasArg(true)
                 .type(String.class)
                 .build();
-
+        
         final Option eventIdOption = Option.builder("v")
                 .longOpt("eventid")
                 .required(true)
@@ -175,8 +201,8 @@ public class Main {
                 .hasArg()
                 .type(Integer.class)
                 .build();
-
-        final Option startDateTimeOption = Option.builder("s")
+        
+        final Option startDateTimeOption = Option.builder("d")
                 .longOpt("startdatetime")
                 .required(true)
                 .desc("検索条件オプション。ほかの検索条件オプションと同時には使用できない。指定された放送開始日時の番組を検索する。このオプションが無い場合は、全ての放送開始日時を指定したことになる。" + getSep()
@@ -184,33 +210,37 @@ public class Main {
                 .hasArg()
                 .type(Date.class)
                 .build();
-
+        
         OptionGroup searchOpts = new OptionGroup();
         searchOpts.setRequired(false);
         searchOpts.addOption(eventIdOption);
         searchOpts.addOption(startDateTimeOption);
-
+        
+        OptionGroup searchRangeOpts = timeOpts.getTimeOptionGroup(false);
+        
         Options opts = new Options();
         opts.addOption(titleOnlyOption);
         opts.addOption(firstOnlyOption);
         opts.addOption(withExcludeChannelOption);
         opts.addOption(ChannelIdOption);
         opts.addOptionGroup(searchOpts);
+        opts.addOptionGroup(searchRangeOpts);
+        
         CommandLineParser parser = new DefaultParser();
-
+        
         HelpFormatter help = new HelpFormatter();
-
+        
         String[] args_;
         if (args == null || args.length < 0) {
             args_ = new String[]{};
         } else {
             args_ = args;
         }
-
+        
         CommandLine cl;
         try {
             cl = parser.parse(opts, args_);
-
+            
         } catch (org.apache.commons.cli.ParseException ex) {
             help.printHelp("番組情報を検索する。番組情報は、 番組ID昇順、チャンネルID昇順、放送開始日時昇順でソートして表示する。", opts);
             LOG.warn("解釈不能なオプション。 {}", ReflectionToStringBuilder.toString(args), ex);
@@ -222,28 +252,28 @@ public class Main {
         } else {
             format = OUTPUT_FORMAT_TYPE.DEFAULT;
         }
-
+        
         final firstOnlyState firstOnly;
         if (cl.hasOption(firstOnlyOption.getOpt())) {
             firstOnly = firstOnlyState.FIRST_ONLY;
         } else {
             firstOnly = firstOnlyState.ALL;
         }
-
+        
         final excludeState exclude;
         if (cl.hasOption(withExcludeChannelOption.getOpt())) {
             exclude = excludeState.USEABLE;
         } else {
             exclude = excludeState.ALL;
         }
-
+        
         final String channelId;
         if (cl.hasOption(ChannelIdOption.getOpt())) {
             channelId = cl.getOptionValue(ChannelIdOption.getOpt());
         } else {
             channelId = null;
         }
-
+        
         final Integer eventId;
         if (cl.hasOption(eventIdOption.getOpt())) {
             eventId = Integer.valueOf(cl.getOptionValue(eventIdOption.getOpt()));
@@ -254,7 +284,8 @@ public class Main {
         if (cl.hasOption(startDateTimeOption.getOpt())) {
             SimpleDateFormat sdf = new SimpleDateFormat(DATETIME_FORMAT);
             try {
-                startDateTime = sdf.parse(cl.getOptionValue(startDateTimeOption.getOpt()));
+                String s = cl.getOptionValue(startDateTimeOption.getOpt());
+                startDateTime = sdf.parse(s);
             } catch (java.text.ParseException ex) {
                 final String s = "放送開始日時を取得できませんでした。";
                 throw new IllegalArgumentException(s, ex);
@@ -262,121 +293,99 @@ public class Main {
         } else {
             startDateTime = null;
         }
-
+        
+        final Date startDateTimeRange_s;
+        final Date startDateTimeRange_e;
+        if (startDateTime == null) {
+            startDateTimeRange_s = null;
+            startDateTimeRange_e = null;
+        } else {
+            Date t_startDateTimeRange_s;
+            Date t_startDateTimeRange_e;
+            try {
+                final Long rangeValue = timeOpts.getValueBySecond(cl);
+                t_startDateTimeRange_s = new Date(startDateTime.getTime() - (rangeValue*1000));
+                t_startDateTimeRange_e = new Date(startDateTime.getTime() + (rangeValue*1000));
+            } catch (TimeParseException e) {
+                t_startDateTimeRange_s = null;
+                t_startDateTimeRange_e = null;
+                LOG.warn("", e);
+            }
+            startDateTimeRange_s = t_startDateTimeRange_s;
+            startDateTimeRange_e = t_startDateTimeRange_e;
+        }
+        
         final paramState pState;
         if (eventId != null) {
             pState = paramState.EVENT_ID;
         } else if (startDateTime != null) {
-            pState = paramState.START_DATETIME;
+            if (startDateTimeRange_s == null && startDateTimeRange_e == null) {
+                pState = paramState.START_DATETIME;
+            } else {
+                pState = paramState.START_DATETIME_BETWEEN;
+            }
         } else {
             pState = paramState.NONE;
         }
-
-        final String PROP_ERROR = "適切なクエリを見つけられません。";
-
+        
         try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             EntityManager man = mk.getEntityManager();
-
+            //除外チャンネルテーブルをサブクエリで取る方法が不明なので、別々に持ってきて突合せる。
+            final EntityTransaction trans = man.getTransaction();
+            trans.begin();
+            
+            final CriteriaBuilder builder = man.getCriteriaBuilder();
+            final CriteriaQuery<Programme> query = builder.createQuery(Programme.class);
+            final Root<Programme> root = query.from(Programme.class);
+            
+            final List<Predicate> where = new ArrayList<>();
+            
             final TypedQuery<Programme> ql;
 
-            switch (exclude) {
-                case USEABLE:
-                    if (channelId != null) {
-                        switch (pState) {
-                            case EVENT_ID:
-                                ql = man.createQuery(USEABLE_PROGRAMME_BY_CHANNEL_ID_AND_EVENT_ID, Programme.class);
-                                ql.setParameter(PARAMNAME_EVENT_ID, eventId);
-                                break;
-                            case START_DATETIME:
-                                ql = man.createQuery(USEABLE_PROGRAMME_BY_CHANNEL_ID_AND_START_DATETIME, Programme.class);
-                                ql.setParameter(PARAMNAME_START_DATETIME, startDateTime);
-                                break;
-                            case NONE:
-                                ql = man.createQuery(USEABLE_PROGRAMME_BY_CHANNEL_ID, Programme.class);
-                                break;
-                            default:
-                                ql = null;
-                                LOG.error(PROP_ERROR, ReflectionToStringBuilder.toString(args));
+            //除外チャンネルテーブルをサブクエリで取る方法が不明なので、別々に持ってきて突合せる。
+            if (exclude == excludeState.USEABLE) {
+                //除外チャンネルテーブルの内容をとってくる。
+                final CriteriaQuery<String> query_ex = builder.createQuery(String.class);
+                final Root<Excludechannel> root_ex = query_ex.from(Excludechannel.class);
+                query_ex.select(root_ex.get("channelId")).distinct(true);
+                final TypedQuery<String> ql_ex;
+                ql_ex = man.createQuery(query_ex);
+                List<String> table_ex;
+                table_ex = ql_ex.getResultList();
 
-                        }
-                        if (ql != null) {
-                            ql.setParameter(PARAMNAME_CHANNEL_ID, channelId);
-                        }
-                    } else {
-                        switch (pState) {
-                            case EVENT_ID:
-                                ql = man.createQuery(USEABLE_PROGRAMME_BY_EVENT_ID, Programme.class);
-                                ql.setParameter(PARAMNAME_EVENT_ID, eventId);
-                                break;
-                            case START_DATETIME:
-                                ql = man.createQuery(USEABLE_PROGRAMME_BY_START_DATETIME, Programme.class);
-                                ql.setParameter(PARAMNAME_START_DATETIME, startDateTime);
-                                break;
-                            case NONE:
-                                ql = man.createQuery(ALL_USEABLE_PROGRAMME, Programme.class);
-                                break;
-                            default:
-                                ql = null;
-                                LOG.error(PROP_ERROR, ReflectionToStringBuilder.toString(args));
-
-                        }
-                    }
-                    break;
-                case ALL:
-                    if (channelId != null) {
-                        switch (pState) {
-                            case EVENT_ID:
-                                ql = man.createNamedQuery("Programme.findByChannelIdAndEventId", Programme.class);
-                                ql.setParameter(PARAMNAME_EVENT_ID, eventId);
-                                break;
-                            case START_DATETIME:
-                                ql = man.createNamedQuery("Programme.findByChannelIdAndStartDatetime", Programme.class);
-                                ql.setParameter(PARAMNAME_START_DATETIME, startDateTime);
-                                break;
-                            case NONE:
-                                ql = man.createNamedQuery("Programme.findByChannelId", Programme.class);
-                                break;
-                            default:
-                                ql = null;
-                                LOG.error(PROP_ERROR, ReflectionToStringBuilder.toString(args));
-                        }
-                        if (ql != null) {
-                            ql.setParameter(PARAMNAME_CHANNEL_ID, channelId);
-                        }
-                    } else {
-                        switch (pState) {
-                            case EVENT_ID:
-                                ql = man.createNamedQuery("Programme.findByEventId", Programme.class);
-                                ql.setParameter(PARAMNAME_EVENT_ID, eventId);
-                                break;
-                            case START_DATETIME:
-                                ql = man.createNamedQuery("Programme.findByStartDatetime", Programme.class);
-                                ql.setParameter(PARAMNAME_START_DATETIME, startDateTime);
-                                break;
-                            case NONE:
-                                ql = man.createNamedQuery("Programme.findAll", Programme.class);
-                                break;
-                            default:
-                                ql = null;
-                                LOG.error(PROP_ERROR, ReflectionToStringBuilder.toString(args));
-                        }
-                    }
-                    break;
-                default:
-                    ql = null;
-                    LOG.error(PROP_ERROR, ReflectionToStringBuilder.toString(args));
+                //突合せ条件に加える。
+                Expression<String> exp = root.get("channelId");
+                Predicate predicate_ex = exp.in(table_ex).not();
+                where.add(predicate_ex);
             }
-
-            if (ql != null) {
-                final List<Programme> table = ql.getResultList();
-
-                PrograammeListSorter.sortRes(table);
-
-                System.out.print(Main.printRes(table, format, firstOnly));
-
+            
+            if (channelId != null) {
+                where.add(builder.equal(root.get("channelId").get("channelId"), channelId));
             }
+            
+            switch (pState) {
+                case EVENT_ID:
+                    where.add(builder.equal(root.get("eventId"), eventId));
+                    break;
+                case START_DATETIME:
+                    where.add(builder.equal(root.get("startDatetime"), startDateTime));
+                    break;
+                case START_DATETIME_BETWEEN:
+                     where.add(builder.between(root.<Date>get("startDatetime"), startDateTimeRange_s, startDateTimeRange_e));
+                    break;
+            }
+            query.where(where.toArray(new Predicate[where.size()]));
+            ql = man.createQuery(query);
+            
+            final List<Programme> table = ql.getResultList();
+            
+            PrograammeListSorter.sortRes(table);
+            
+            System.out.print(Main.printRes(table, format, firstOnly));
+            
             man.close();
+            trans.commit();
         }
-
+        
     }
 }

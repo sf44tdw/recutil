@@ -16,6 +16,8 @@
  */
 package recutil.dbaccessor.testdata;
 
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -44,9 +46,9 @@ public final class TestData {
     private static final Logger LOG = LoggerConfigurator.getCallerLogger();
 
     public static synchronized EntityManagerMaker getTestDbEm() {
-               return new EntityManagerMaker(SelectedPersistenceName.getInstance());
+        return new EntityManagerMaker(SelectedPersistenceName.getInstance());
     }
-    
+
     public static final String CH1_ID = "ID1";
     public static final String CH2_ID = "ID2";
     public static final String CH3_ID = "ID3";
@@ -356,6 +358,247 @@ public final class TestData {
         this.make();
         this.sealList();
         return excludechannellList;
+    }
+
+    public static final String PG_AFTER_60 = "AFTER_60_SECOND";
+    public static final String PG_AFTER_120 = "AFTER_120_SECOND";
+    public static final String PG_AFTER_180 = "AFTER_180_SECOND";
+    public static final String PG_AFTER_240 = "AFTER_240_SECOND";
+    public static final String PG_AFTER_300 = "AFTER_300_SECOND";
+    public static final String PG_AFTER_360 = "AFTER_360_SECOND";
+    public static final long ONE_MINUTE_IN_MILLIS = (60L * 1000L);
+    public static final String PG_AFTER_600 = "AFTER_600_SECOND";
+    public static final String PG_AFTER_1200 = "AFTER_1200_SECOND";
+    public static final String PG_AFTER_1800 = "AFTER_1800_SECOND";
+    public static final String PG_AFTER_2400 = "AFTER_2400_SECOND";
+    public static final String PG_AFTER_3000 = "AFTER_3000_SECOND";
+    public static final String PG_AFTER_3600 = "AFTER_3600_SECOND";
+    public static final long TEN_MINUTE_IN_MILLIS = ONE_MINUTE_IN_MILLIS * 10L;
+    public static final String PG_AFTER_7200 = "AFTER_7200_SECOND";
+    public static final String PG_AFTER_10800 = "AFTER_10800_SECOND";
+    public static final String PG_AFTER_14400 = "AFTER_14400_SECOND";
+    public static final String PG_AFTER_18000 = "AFTER_18000_SECOND";
+    public static final String PG_AFTER_21600 = "AFTER_21600_SECOND";
+    public static final String PG_AFTER_25200 = "AFTER_25200_SECOND";
+    public static final long ONE_HOUR_IN_MILLIS = ONE_MINUTE_IN_MILLIS * 60L;
+    private  Programme p60;
+    private  Programme p120;
+    private  Programme p180;
+    private  Programme p240;
+    private  Programme p300;
+    private  Programme p360;
+    private  Programme p600;
+    private  Programme p1200;
+    private  Programme p1800;
+    private  Programme p2400;
+    private  Programme p3000;
+    private  Programme p3600;
+    private  Programme p7200;
+    private  Programme p10800;
+    private  Programme p14400;
+    private  Programme p18000;
+    private  Programme p21600;
+    private  Programme p25200;
+
+    private ZonedDateTime d = ZonedDateTime.now();
+    private ZonedDateTime d2 = d.truncatedTo(ChronoUnit.MINUTES);
+
+    public Date getNowTime() {
+        return new Date(nowTime.getTime());
+    }
+    private Date nowTime = Date.from(d2.toInstant());
+
+    public List<Programme> getTestProgrammes() {
+        make();
+        List<Programme> _t = new ArrayList<>();
+
+        ZonedDateTime d = ZonedDateTime.now();
+        ZonedDateTime d2 = d.truncatedTo(ChronoUnit.MINUTES);
+        nowTime = Date.from(d2.toInstant());
+
+        final long pp = (30L * 1000L);
+
+        int id = 1000000;
+
+//今から1分後に始まる番組。
+        final Date after60sec = new Date((nowTime.getTime() + ONE_MINUTE_IN_MILLIS));
+         p60 = getPg(getCh5(), id++, PG_AFTER_60, after60sec, new Date(after60sec.getTime() + pp));
+        _t.add(p60);
+
+//同、2分後。
+        final Date after120sec = new Date((after60sec.getTime() + ONE_MINUTE_IN_MILLIS));
+         p120 = getPg(getCh5(), id++, PG_AFTER_120, after120sec, new Date(after120sec.getTime() + pp));
+        _t.add(p120);
+
+        //同、3分後。
+        final Date after180sec = new Date((after120sec.getTime() + ONE_MINUTE_IN_MILLIS));
+         p180 = getPg(getCh5(), id++, PG_AFTER_180, after180sec, new Date(after180sec.getTime() + pp));
+        _t.add(p180);
+
+        //同、4分後。
+        final Date after240sec = new Date((after180sec.getTime() + ONE_MINUTE_IN_MILLIS));
+         p240 = getPg(getCh5(), id++, PG_AFTER_240, after240sec, new Date(after240sec.getTime() + pp));
+        _t.add(p240);
+
+        //同、5分後。
+        final Date after300sec = new Date((after240sec.getTime() + ONE_MINUTE_IN_MILLIS));
+         p300 = getPg(getCh5(), id++, PG_AFTER_300, after300sec, new Date(after300sec.getTime() + pp));
+        _t.add(p300);
+
+        //同、6分後。
+        final Date after360sec = new Date((after300sec.getTime() + ONE_MINUTE_IN_MILLIS));
+         p360 = getPg(getCh5(), id++, PG_AFTER_360, after360sec, new Date(after360sec.getTime() + pp));
+        _t.add(p360);
+
+        //同、10分後。
+        final Date after10min = new Date((after360sec.getTime() + TEN_MINUTE_IN_MILLIS));
+         p600 = getPg(getCh5(), id++, PG_AFTER_600, after10min, new Date(after10min.getTime() + pp));
+        _t.add(p600);
+
+        //同、20分後。
+        final Date after20min = new Date((after10min.getTime() + TEN_MINUTE_IN_MILLIS));
+         p1200 = getPg(getCh5(), id++, PG_AFTER_1200, after20min, new Date(after20min.getTime() + pp));
+        _t.add(p1200);
+
+        //同、30分後。
+        final Date after30min = new Date((after20min.getTime() + TEN_MINUTE_IN_MILLIS));
+         p1800 = getPg(getCh5(), id++, PG_AFTER_1800, after30min, new Date(after30min.getTime() + pp));
+        _t.add(p1800);
+
+        //同、40分後。
+        final Date after40min = new Date((after30min.getTime() + TEN_MINUTE_IN_MILLIS));
+         p2400 = getPg(getCh5(), id++, PG_AFTER_2400, after40min, new Date(after40min.getTime() + pp));
+        _t.add(p2400);
+
+        //同、50分後。
+        final Date after50min = new Date((after40min.getTime() + TEN_MINUTE_IN_MILLIS));
+         p3000 = getPg(getCh5(), id++, PG_AFTER_3000, after50min, new Date(after50min.getTime() + pp));
+        _t.add(p3000);
+
+        //同、60分後。
+        final Date after60min = new Date((after50min.getTime() + TEN_MINUTE_IN_MILLIS));
+         p3600 = getPg(getCh5(), id++, PG_AFTER_3600, after60min, new Date(after60min.getTime() + pp));
+        _t.add(p3600);
+
+        //2時間
+        final Date after2hour = new Date((after60min.getTime() + ONE_HOUR_IN_MILLIS));
+         p7200 = getPg(getCh5(), id++, PG_AFTER_7200, after2hour, new Date(after2hour.getTime() + pp));
+        _t.add(p7200);
+
+//3時間
+        final Date after3hour = new Date((after2hour.getTime() + ONE_HOUR_IN_MILLIS));
+         p10800 = getPg(getCh5(), id++, PG_AFTER_10800, after3hour, new Date(after3hour.getTime() + pp));
+        _t.add(p10800);
+
+//4時間
+        final Date after4hour = new Date((after3hour.getTime() + ONE_HOUR_IN_MILLIS));
+         p14400 = getPg(getCh5(), id++, PG_AFTER_14400, after4hour, new Date(after4hour.getTime() + pp));
+        _t.add(p14400);
+
+//5時間
+        final Date after5hour = new Date((after4hour.getTime() + ONE_HOUR_IN_MILLIS));
+         p18000 = getPg(getCh5(), id++, PG_AFTER_18000, after5hour, new Date(after5hour.getTime() + pp));
+        _t.add(p18000);
+
+//6時間
+        final Date after6hour = new Date((after5hour.getTime() + ONE_HOUR_IN_MILLIS));
+         p21600 = getPg(getCh5(), id++, PG_AFTER_21600, after6hour, new Date(after6hour.getTime() + pp));
+        _t.add(p21600);
+
+//7時間
+        final Date after7hour = new Date((after6hour.getTime() + ONE_HOUR_IN_MILLIS));
+         p25200 = getPg(getCh5(), id++, PG_AFTER_25200, after7hour, new Date(after7hour.getTime() + pp));
+        _t.add(p25200);
+        return _t;
+    }
+
+    public Programme getP120() {
+        return p120;
+    }
+
+    public Programme getP180() {
+        return p180;
+    }
+
+    public Programme getP240() {
+        return p240;
+    }
+
+    public Programme getP300() {
+        return p300;
+    }
+
+    public Programme getP360() {
+        return p360;
+    }
+
+    public Programme getP600() {
+        return p600;
+    }
+
+    public Programme getP1200() {
+        return p1200;
+    }
+
+    public Programme getP1800() {
+        return p1800;
+    }
+
+    public Programme getP2400() {
+        return p2400;
+    }
+
+    public Programme getP3000() {
+        return p3000;
+    }
+
+    public Programme getP3600() {
+        return p3600;
+    }
+
+    public Programme getP7200() {
+        return p7200;
+    }
+
+    public Programme getP10800() {
+        return p10800;
+    }
+
+    public Programme getP14400() {
+        return p14400;
+    }
+
+    public Programme getP18000() {
+        return p18000;
+    }
+
+    public Programme getP21600() {
+        return p21600;
+    }
+
+    public Programme getP25200() {
+        return p25200;
+    }
+    
+    
+    
+    
+    /**
+     * 現在時刻から60-25200秒後までに始まる番組情報を作成し、データベースに追加する。
+     *
+     * @return
+     */
+    public void insertRecentStartProgrammes() {
+        try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
+            EntityManager man = mk.getEntityManager();
+            EntityTransaction trans = man.getTransaction();
+            trans.begin();
+            LOG.info("番組登録トランザクション開始。");
+            insertPgs(man, this.getTestProgrammes());
+            trans.commit();
+            LOG.info("除外チャンネル登録トランザクションコミット。");
+            man.close();
+        }
     }
 
     private synchronized void deleteAll(EntityManager em) {

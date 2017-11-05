@@ -51,11 +51,15 @@ import static recutil.dbaccessor.testdata.TestData.getTestDbEm;
  */
 public class QueryStringTest {
 
+    private static final boolean EXECUTE_FLAG = true;
+
     private static final Logger LOG = LoggerConfigurator.getCallerLogger();
     final TestData dat;
 
     public QueryStringTest() {
+
         dat = new TestData();
+
     }
 
     @BeforeClass
@@ -68,7 +72,6 @@ public class QueryStringTest {
 
     @Before
     public void setUp() {
-        dat.reloadDB();
     }
 
     @After
@@ -80,39 +83,52 @@ public class QueryStringTest {
      */
     @Test
     public void useableChannelById() throws ParseException {
-        LOG.info("UseableChannelById");
+        if (!EXECUTE_FLAG) {
+            return;
+        }
+        final boolean METHOD_EXECUTE_FLAG = true;
+        if (!METHOD_EXECUTE_FLAG) {
+            return;
+        }
+        try {
+            dat.reloadDB();
+            LOG.info("UseableChannelById");
 
-        String qlString = USEABLE_CHANNEL_BY_CHANNEL_ID;
-        LOG.info(qlString);
+            String qlString = USEABLE_CHANNEL_BY_CHANNEL_ID;
+            LOG.info(qlString);
 
-        List<String> expChannelId = new ArrayList<>();
-        expChannelId.add(TestData.CH4_1_ID);
+            List<String> expChannelId = new ArrayList<>();
+            expChannelId.add(TestData.CH4_1_ID);
 
-        int expSize = expChannelId.size();
+            int expSize = expChannelId.size();
 
-        EntityManagerMaker instance = getTestDbEm();
-        EntityManager result = instance.getEntityManager();
-        List<Channel> table;
-        TypedQuery<Channel> ql = result.createQuery(qlString, Channel.class);
-        ql.setParameter("channelId", TestData.CH4_1_ID);
-        table = ql.getResultList();
-        assertEquals(table.size(), expSize);
+            EntityManagerMaker instance = getTestDbEm();
+            EntityManager result = instance.getEntityManager();
+            List<Channel> table;
+            TypedQuery<Channel> ql = result.createQuery(qlString, Channel.class);
+            ql.setParameter("channelId", TestData.CH4_1_ID);
+            table = ql.getResultList();
+            assertEquals(table.size(), expSize);
 
-        String xx = recutil.commmonutil.Util.dumpList(table);
-        LOG.info(xx);
+            String xx = recutil.commmonutil.Util.dumpList(table);
+            LOG.info(xx);
 
-        int x = 0;
-        for (String i : expChannelId) {
-            for (Channel c : table) {
-                if (c.getChannelId() == null ? i == null : c.getChannelId().equals(i)) {
-                    x++;
+            int x = 0;
+            for (String i : expChannelId) {
+                for (Channel c : table) {
+                    if (c.getChannelId() == null ? i == null : c.getChannelId().equals(i)) {
+                        x++;
+                    }
                 }
             }
-        }
-        assertEquals(table.size(), x);
+            assertEquals(table.size(), x);
 
-        result.close();
-        instance.close();
+            result.close();
+            instance.close();
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
     }
 
     /**
@@ -120,39 +136,52 @@ public class QueryStringTest {
      */
     @Test
     public void useableChannelByNo() throws ParseException {
-        LOG.info("UseableChannelByNo");
+        if (!EXECUTE_FLAG) {
+            return;
+        }
+        final boolean METHOD_EXECUTE_FLAG = true;
+        if (!METHOD_EXECUTE_FLAG) {
+            return;
+        }
+        try {
+            dat.reloadDB();
+            LOG.info("UseableChannelByNo");
 
-        String qlString = USEABLE_CHANNEL_BY_CHANNEL_NO;
-        LOG.info(qlString);
+            String qlString = USEABLE_CHANNEL_BY_CHANNEL_NO;
+            LOG.info(qlString);
 
-        List<Integer> expChannelNo = new ArrayList<>();
-        expChannelNo.add(TestData.CH4_CHNO);
+            List<Integer> expChannelNo = new ArrayList<>();
+            expChannelNo.add(TestData.CH4_CHNO);
 
-        int expSize = expChannelNo.size();
+            int expSize = expChannelNo.size();
 
-        EntityManagerMaker instance = getTestDbEm();
-        EntityManager result = instance.getEntityManager();
-        List<Channel> table;
-        TypedQuery<Channel> ql = result.createQuery(qlString, Channel.class);
-        ql.setParameter("channelNo", TestData.CH4_CHNO);
-        table = ql.getResultList();
-        assertEquals(table.size(), expSize);
+            EntityManagerMaker instance = getTestDbEm();
+            EntityManager result = instance.getEntityManager();
+            List<Channel> table;
+            TypedQuery<Channel> ql = result.createQuery(qlString, Channel.class);
+            ql.setParameter("channelNo", TestData.CH4_CHNO);
+            table = ql.getResultList();
+            assertEquals(table.size(), expSize);
 
-        String xx = recutil.commmonutil.Util.dumpList(table);
-        LOG.info(xx);
+            String xx = recutil.commmonutil.Util.dumpList(table);
+            LOG.info(xx);
 
-        int x = 0;
-        for (Integer i : expChannelNo) {
-            for (Channel c : table) {
-                if (c.getChannelNo() == i) {
-                    x++;
+            int x = 0;
+            for (Integer i : expChannelNo) {
+                for (Channel c : table) {
+                    if (c.getChannelNo() == i) {
+                        x++;
+                    }
                 }
             }
-        }
-        assertEquals(table.size(), x);
+            assertEquals(table.size(), x);
 
-        result.close();
-        instance.close();
+            result.close();
+            instance.close();
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
     }
 
     /**
@@ -160,37 +189,50 @@ public class QueryStringTest {
      */
     @Test
     public void allUseableChannel() throws ParseException {
-        LOG.info("AllUseableChannel");
+        if (!EXECUTE_FLAG) {
+            return;
+        }
+        final boolean METHOD_EXECUTE_FLAG = true;
+        if (!METHOD_EXECUTE_FLAG) {
+            return;
+        }
+        try {
+            dat.reloadDB();
+            LOG.info("AllUseableChannel");
 
-        String qlString = ALL_USEABLE_CHANNEL;
-        LOG.info(qlString);
+            String qlString = ALL_USEABLE_CHANNEL;
+            LOG.info(qlString);
 
-        List<String> expChannelId = dat.getAllUseableChannslIdList();
+            List<String> expChannelId = dat.getAllUseableChannslIdList();
 
-        int expSize = expChannelId.size();
+            int expSize = expChannelId.size();
 
-        EntityManagerMaker instance = getTestDbEm();
-        EntityManager result = instance.getEntityManager();
-        List<Channel> table;
-        TypedQuery<Channel> ql = result.createQuery(qlString, Channel.class);
-        table = ql.getResultList();
-        assertEquals(table.size(), expSize);
+            EntityManagerMaker instance = getTestDbEm();
+            EntityManager result = instance.getEntityManager();
+            List<Channel> table;
+            TypedQuery<Channel> ql = result.createQuery(qlString, Channel.class);
+            table = ql.getResultList();
+            assertEquals(table.size(), expSize);
 
-        String xx = recutil.commmonutil.Util.dumpList(table);
-        LOG.info(xx);
+            String xx = recutil.commmonutil.Util.dumpList(table);
+            LOG.info(xx);
 
-        int x = 0;
-        for (String i : expChannelId) {
-            for (Channel c : table) {
-                if (c.getChannelId() == null ? i == null : c.getChannelId().equals(i)) {
-                    x++;
+            int x = 0;
+            for (String i : expChannelId) {
+                for (Channel c : table) {
+                    if (c.getChannelId() == null ? i == null : c.getChannelId().equals(i)) {
+                        x++;
+                    }
                 }
             }
-        }
-        assertEquals(table.size(), x);
+            assertEquals(table.size(), x);
 
-        result.close();
-        instance.close();
+            result.close();
+            instance.close();
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
     }
 
     /**
@@ -198,40 +240,53 @@ public class QueryStringTest {
      */
     @Test
     public void useableProgrammeByEventId() throws ParseException {
-        LOG.info("UseableProgrammeByEventId");
+        if (!EXECUTE_FLAG) {
+            return;
+        }
+        final boolean METHOD_EXECUTE_FLAG = true;
+        if (!METHOD_EXECUTE_FLAG) {
+            return;
+        }
+        try {
+            dat.reloadDB();
+            LOG.info("UseableProgrammeByEventId");
 
-        String qlString = USEABLE_PROGRAMME_BY_EVENT_ID;
-        LOG.info(qlString);
+            String qlString = USEABLE_PROGRAMME_BY_EVENT_ID;
+            LOG.info(qlString);
 
-        List<Integer> expEventId = new ArrayList<>();
-        expEventId.add(TestData.PG1_EVENTID);
+            List<Integer> expEventId = new ArrayList<>();
+            expEventId.add(TestData.PG1_EVENTID);
 
-        int expSize = expEventId.size();
+            int expSize = expEventId.size();
 
-        EntityManagerMaker instance = getTestDbEm();
-        EntityManager result = instance.getEntityManager();
-        List<Programme> table;
-        TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
-        ql.setParameter("eventId", TestData.PG1_EVENTID);
-        table = ql.getResultList();
+            EntityManagerMaker instance = getTestDbEm();
+            EntityManager result = instance.getEntityManager();
+            List<Programme> table;
+            TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
+            ql.setParameter("eventId", TestData.PG1_EVENTID);
+            table = ql.getResultList();
 
-        assertEquals(table.size(), expSize);
+            assertEquals(table.size(), expSize);
 
-        String xx = recutil.commmonutil.Util.dumpList(table);
-        int x = 0;
-        for (Integer i : expEventId) {
-            for (Programme p : table) {
-                if (p.getEventId() == i) {
-                    x++;
+            String xx = recutil.commmonutil.Util.dumpList(table);
+            int x = 0;
+            for (Integer i : expEventId) {
+                for (Programme p : table) {
+                    if (p.getEventId() == i) {
+                        x++;
+                    }
                 }
             }
+            assertEquals(table.size(), x);
+
+            LOG.info(xx);
+
+            result.close();
+            instance.close();
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
         }
-        assertEquals(table.size(), x);
-
-        LOG.info(xx);
-
-        result.close();
-        instance.close();
     }
 
     /**
@@ -239,40 +294,53 @@ public class QueryStringTest {
      */
     @Test
     public void useableProgrammeByChannelId() throws ParseException {
-        LOG.info("UseableProgrammeByChannelId");
+        if (!EXECUTE_FLAG) {
+            return;
+        }
+        final boolean METHOD_EXECUTE_FLAG = true;
+        if (!METHOD_EXECUTE_FLAG) {
+            return;
+        }
+        try {
+            dat.reloadDB();
+            LOG.info("UseableProgrammeByChannelId");
 
-        String qlString = USEABLE_PROGRAMME_BY_CHANNEL_ID;
-        LOG.info(qlString);
+            String qlString = USEABLE_PROGRAMME_BY_CHANNEL_ID;
+            LOG.info(qlString);
 
-        List<Integer> expEventId = new ArrayList<>();
-        expEventId.add(TestData.PG2_EVENTID);
+            List<Integer> expEventId = new ArrayList<>();
+            expEventId.add(TestData.PG2_EVENTID);
 
-        int expSize = expEventId.size();
+            int expSize = expEventId.size();
 
-        EntityManagerMaker instance = getTestDbEm();
-        EntityManager result = instance.getEntityManager();
-        List<Programme> table;
-        TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
-        ql.setParameter("channelId", TestData.CH3_ID);
-        table = ql.getResultList();
+            EntityManagerMaker instance = getTestDbEm();
+            EntityManager result = instance.getEntityManager();
+            List<Programme> table;
+            TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
+            ql.setParameter("channelId", TestData.CH3_ID);
+            table = ql.getResultList();
 
-        assertEquals(table.size(), expSize);
+            assertEquals(table.size(), expSize);
 
-        String xx = recutil.commmonutil.Util.dumpList(table);
-        int x = 0;
-        for (Integer i : expEventId) {
-            for (Programme p : table) {
-                if (p.getEventId() == i) {
-                    x++;
+            String xx = recutil.commmonutil.Util.dumpList(table);
+            int x = 0;
+            for (Integer i : expEventId) {
+                for (Programme p : table) {
+                    if (p.getEventId() == i) {
+                        x++;
+                    }
                 }
             }
+            assertEquals(table.size(), x);
+
+            LOG.info(xx);
+
+            result.close();
+            instance.close();
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
         }
-        assertEquals(table.size(), x);
-
-        LOG.info(xx);
-
-        result.close();
-        instance.close();
     }
 
     /**
@@ -280,41 +348,54 @@ public class QueryStringTest {
      */
     @Test
     public void useableProgrammeByChannelIdAndEventId() throws ParseException {
-        LOG.info("UseableProgrammeByChannelIdAndEventId");
+        if (!EXECUTE_FLAG) {
+            return;
+        }
+        final boolean METHOD_EXECUTE_FLAG = true;
+        if (!METHOD_EXECUTE_FLAG) {
+            return;
+        }
+        try {
+            dat.reloadDB();
+            LOG.info("UseableProgrammeByChannelIdAndEventId");
 
-        String qlString = USEABLE_PROGRAMME_BY_CHANNEL_ID_AND_EVENT_ID;
-        LOG.info(qlString);
+            String qlString = USEABLE_PROGRAMME_BY_CHANNEL_ID_AND_EVENT_ID;
+            LOG.info(qlString);
 
-        List<Integer> expEventId = new ArrayList<>();
-        expEventId.add(TestData.PG2_EVENTID);
+            List<Integer> expEventId = new ArrayList<>();
+            expEventId.add(TestData.PG2_EVENTID);
 
-        int expSize = expEventId.size();
+            int expSize = expEventId.size();
 
-        EntityManagerMaker instance = getTestDbEm();
-        EntityManager result = instance.getEntityManager();
-        List<Programme> table;
-        TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
-        ql.setParameter("channelId", TestData.CH3_ID);
-        ql.setParameter("eventId", TestData.PG2_EVENTID);
-        table = ql.getResultList();
+            EntityManagerMaker instance = getTestDbEm();
+            EntityManager result = instance.getEntityManager();
+            List<Programme> table;
+            TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
+            ql.setParameter("channelId", TestData.CH3_ID);
+            ql.setParameter("eventId", TestData.PG2_EVENTID);
+            table = ql.getResultList();
 
-        assertEquals(table.size(), expSize);
+            assertEquals(table.size(), expSize);
 
-        String xx = recutil.commmonutil.Util.dumpList(table);
-        int x = 0;
-        for (Integer i : expEventId) {
-            for (Programme p : table) {
-                if (p.getEventId() == i) {
-                    x++;
+            String xx = recutil.commmonutil.Util.dumpList(table);
+            int x = 0;
+            for (Integer i : expEventId) {
+                for (Programme p : table) {
+                    if (p.getEventId() == i) {
+                        x++;
+                    }
                 }
             }
+            assertEquals(table.size(), x);
+
+            LOG.info(xx);
+
+            result.close();
+            instance.close();
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
         }
-        assertEquals(table.size(), x);
-
-        LOG.info(xx);
-
-        result.close();
-        instance.close();
     }
 
     /**
@@ -322,40 +403,53 @@ public class QueryStringTest {
      */
     @Test
     public void useableProgrammeByStartDateTime() throws ParseException {
-        LOG.info("UseableProgrammeByStartDateTime");
+        if (!EXECUTE_FLAG) {
+            return;
+        }
+        final boolean METHOD_EXECUTE_FLAG = true;
+        if (!METHOD_EXECUTE_FLAG) {
+            return;
+        }
+        try {
+            dat.reloadDB();
+            LOG.info("UseableProgrammeByStartDateTime");
 
-        String qlString = USEABLE_PROGRAMME_BY_START_DATETIME;
-        LOG.info(qlString);
+            String qlString = USEABLE_PROGRAMME_BY_START_DATETIME;
+            LOG.info(qlString);
 
-        List<Integer> expEventId = new ArrayList<>();
-        expEventId.add(TestData.PG2_EVENTID);
+            List<Integer> expEventId = new ArrayList<>();
+            expEventId.add(TestData.PG2_EVENTID);
 
-        int expSize = expEventId.size();
+            int expSize = expEventId.size();
 
-        EntityManagerMaker instance = getTestDbEm();
-        EntityManager result = instance.getEntityManager();
-        List<Programme> table;
-        TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
-        ql.setParameter("startDatetime", new Date(TestData.PG2_START_TIME));
-        table = ql.getResultList();
+            EntityManagerMaker instance = getTestDbEm();
+            EntityManager result = instance.getEntityManager();
+            List<Programme> table;
+            TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
+            ql.setParameter("startDatetime", new Date(TestData.PG2_START_TIME));
+            table = ql.getResultList();
 
-        assertEquals(table.size(), expSize);
+            assertEquals(table.size(), expSize);
 
-        String xx = recutil.commmonutil.Util.dumpList(table);
-        int x = 0;
-        for (Integer i : expEventId) {
-            for (Programme p : table) {
-                if (p.getEventId() == i) {
-                    x++;
+            String xx = recutil.commmonutil.Util.dumpList(table);
+            int x = 0;
+            for (Integer i : expEventId) {
+                for (Programme p : table) {
+                    if (p.getEventId() == i) {
+                        x++;
+                    }
                 }
             }
+            assertEquals(table.size(), x);
+
+            LOG.info(xx);
+
+            result.close();
+            instance.close();
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
         }
-        assertEquals(table.size(), x);
-
-        LOG.info(xx);
-
-        result.close();
-        instance.close();
     }
 
     /**
@@ -363,41 +457,54 @@ public class QueryStringTest {
      */
     @Test
     public void useableProgrammeByChannelIdAndStartDateTime() throws ParseException {
-        LOG.info("UseableProgrammeByChannelIdAndStartDateTime");
+        if (!EXECUTE_FLAG) {
+            return;
+        }
+        final boolean METHOD_EXECUTE_FLAG = true;
+        if (!METHOD_EXECUTE_FLAG) {
+            return;
+        }
+        try {
+            dat.reloadDB();
+            LOG.info("UseableProgrammeByChannelIdAndStartDateTime");
 
-        String qlString = USEABLE_PROGRAMME_BY_CHANNEL_ID_AND_START_DATETIME;
-        LOG.info(qlString);
+            String qlString = USEABLE_PROGRAMME_BY_CHANNEL_ID_AND_START_DATETIME;
+            LOG.info(qlString);
 
-        List<Integer> expEventId = new ArrayList<>();
-        expEventId.add(TestData.PG2_EVENTID);
+            List<Integer> expEventId = new ArrayList<>();
+            expEventId.add(TestData.PG2_EVENTID);
 
-        int expSize = expEventId.size();
+            int expSize = expEventId.size();
 
-        EntityManagerMaker instance = getTestDbEm();
-        EntityManager result = instance.getEntityManager();
-        List<Programme> table;
-        TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
-        ql.setParameter("channelId", TestData.CH3_ID);
-        ql.setParameter("startDatetime", new Date(TestData.PG2_START_TIME));
-        table = ql.getResultList();
+            EntityManagerMaker instance = getTestDbEm();
+            EntityManager result = instance.getEntityManager();
+            List<Programme> table;
+            TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
+            ql.setParameter("channelId", TestData.CH3_ID);
+            ql.setParameter("startDatetime", new Date(TestData.PG2_START_TIME));
+            table = ql.getResultList();
 
-        assertEquals(table.size(), expSize);
+            assertEquals(table.size(), expSize);
 
-        String xx = recutil.commmonutil.Util.dumpList(table);
-        int x = 0;
-        for (Integer i : expEventId) {
-            for (Programme p : table) {
-                if (p.getEventId() == i) {
-                    x++;
+            String xx = recutil.commmonutil.Util.dumpList(table);
+            int x = 0;
+            for (Integer i : expEventId) {
+                for (Programme p : table) {
+                    if (p.getEventId() == i) {
+                        x++;
+                    }
                 }
             }
+            assertEquals(table.size(), x);
+
+            LOG.info(xx);
+
+            result.close();
+            instance.close();
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
         }
-        assertEquals(table.size(), x);
-
-        LOG.info(xx);
-
-        result.close();
-        instance.close();
     }
 
     /**
@@ -405,38 +512,51 @@ public class QueryStringTest {
      */
     @Test
     public void allUseableProgramme() throws ParseException {
-        LOG.info("AllUseableProgramme");
+        if (!EXECUTE_FLAG) {
+            return;
+        }
+        final boolean METHOD_EXECUTE_FLAG = true;
+        if (!METHOD_EXECUTE_FLAG) {
+            return;
+        }
+        try {
+            dat.reloadDB();
+            LOG.info("AllUseableProgramme");
 
-        String qlString = ALL_USEABLE_PROGRAMME;
-        LOG.info(qlString);
+            String qlString = ALL_USEABLE_PROGRAMME;
+            LOG.info(qlString);
 
-        List<Integer> expEventId = dat.getAllUseableEventIdList();
+            List<Integer> expEventId = dat.getAllUseableEventIdList();
 
-        int expSize = expEventId.size();
+            int expSize = expEventId.size();
 
-        EntityManagerMaker instance = getTestDbEm();
-        EntityManager result = instance.getEntityManager();
-        List<Programme> table;
-        TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
-        table = ql.getResultList();
+            EntityManagerMaker instance = getTestDbEm();
+            EntityManager result = instance.getEntityManager();
+            List<Programme> table;
+            TypedQuery<Programme> ql = result.createQuery(qlString, Programme.class);
+            table = ql.getResultList();
 
-        assertEquals(table.size(), expSize);
+            assertEquals(table.size(), expSize);
 
-        String xx = recutil.commmonutil.Util.dumpList(table);
-        int x = 0;
-        for (Integer i : expEventId) {
-            for (Programme p : table) {
-                if (p.getEventId() == i) {
-                    x++;
+            String xx = recutil.commmonutil.Util.dumpList(table);
+            int x = 0;
+            for (Integer i : expEventId) {
+                for (Programme p : table) {
+                    if (p.getEventId() == i) {
+                        x++;
+                    }
                 }
             }
+            assertEquals(table.size(), x);
+
+            LOG.info(xx);
+
+            result.close();
+            instance.close();
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
         }
-        assertEquals(table.size(), x);
-
-        LOG.info(xx);
-
-        result.close();
-        instance.close();
     }
 
 }

@@ -61,7 +61,7 @@ public final class Util {
     public static String dumpList(List<?> x) {
         final String DEFAULT_LINE_SEPARATOR = getDefaultLineSeparator();
         StringBuilder s = new StringBuilder();
-        s.append(DEFAULT_LINE_SEPARATOR).append(DEFAULT_LINE_SEPARATOR);
+        s.append(DEFAULT_LINE_SEPARATOR).append("件数 = ").append(x.size()).append(DEFAULT_LINE_SEPARATOR);
         for (Object obj : x) {
             s.append(ReflectionToStringBuilder.toString(obj)).append(DEFAULT_LINE_SEPARATOR);
         }

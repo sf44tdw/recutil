@@ -7,13 +7,7 @@ package recutil.executerecordcommand;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.After;
@@ -27,9 +21,6 @@ import org.slf4j.Logger;
 import recutil.commandexecutor.DummyExecutor;
 import recutil.consolesnatcher.ConsoleSnatcher;
 import recutil.dbaccessor.entity.Programme;
-import recutil.dbaccessor.manager.EntityManagerMaker;
-import recutil.dbaccessor.manager.PERSISTENCE;
-import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.dbaccessor.testdata.TestData;
 import static recutil.executerecordcommand.Main.DATE_PATTERN;
 import static recutil.executerecordcommand.Main.LONG_TO_STRING;
@@ -58,63 +49,16 @@ public class MainTest {
     public static void tearDownClass() {
     }
 
-    private static final String PG_AFTER_60 = "AFTER_60_SECOND";
-    private static final String PG_AFTER_120 = "AFTER_120_SECOND";
-    private static final String PG_AFTER_180 = "AFTER_180_SECOND";
-
-    private static final long ONE_MINUTE_IN_MILLIS = (60L * 1000L);
-
-    private Date nowTime = null;
-
     //ファイル名用に自身のプロセスIDを取得。
     private final String PID = java.lang.management.ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
 
-    private List<Programme> getTestProgrammes() {
-        dat.make();
-        List<Programme> programmeList = new ArrayList<>();
-
-        ZonedDateTime d = ZonedDateTime.now();
-        ZonedDateTime d2 = d.truncatedTo(ChronoUnit.MINUTES);
-        nowTime = Date.from(d2.toInstant());
-
-        final long pp = (30L * 1000L);
-
-        int id = 1000000;
-
-//今から1分後に始まる番組。
-        final Date after60sec = new Date((nowTime.getTime() + ONE_MINUTE_IN_MILLIS));
-        final Programme p60 = dat.getPg(dat.getCh5(), id++, PG_AFTER_60, after60sec, new Date(after60sec.getTime() + pp));
-        programmeList.add(p60);
-
-//同、2分後。
-        final Date after120sec = new Date((after60sec.getTime() + ONE_MINUTE_IN_MILLIS));
-        final Programme p120 = dat.getPg(dat.getCh5(), id++, PG_AFTER_120, after120sec, new Date(after120sec.getTime() + pp));
-        programmeList.add(p120);
-
-        //同、3分後。
-        final Date after180sec = new Date((after120sec.getTime() + ONE_MINUTE_IN_MILLIS));
-        final Programme p180 = dat.getPg(dat.getCh5(), id++, PG_AFTER_180, after180sec, new Date(after180sec.getTime() + pp));
-        programmeList.add(p180);
-
-        return programmeList;
-    }
+    private Date nowTime = null;
 
     @Before
     public void setUp() {
         dat.reloadDB();
-
-        SelectedPersistenceName.selectPersistence(PERSISTENCE.PRODUCT);
-        try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
-            EntityManager man = mk.getEntityManager();
-            EntityTransaction trans = man.getTransaction();
-            trans.begin();
-            LOG.info("番組登録トランザクション開始。");
-            dat.insertPgs(man, this.getTestProgrammes());
-            trans.commit();
-            LOG.info("除外チャンネル登録トランザクションコミット。");
-            man.close();
-        }
-
+        dat.insertRecentStartProgrammes();
+        nowTime = dat.getNowTime();
         //標準出力・標準エラー出力先を変更
         stdout.snatch();
     }
@@ -342,8 +286,7 @@ public class MainTest {
     }
 
     /**
-     * Test of start method, of class Main.
-     * パースで例外が起きる。
+     * Test of start method, of class Main. パースで例外が起きる。
      */
     @Test(expected = NullPointerException.class)
     public void testStart1_7_1() throws Throwable {
@@ -393,7 +336,6 @@ public class MainTest {
         }
     }
 
-   
     /**
      * Test of start method, of class Main.
      */
@@ -402,7 +344,7 @@ public class MainTest {
         try {
             LOG.info("start2_1_1");
 
-            Programme exP = this.getTestProgrammes().get(0);
+            Programme exP = dat.getTestProgrammes().get(0);
             LOG.info(ReflectionToStringBuilder.reflectionToString(exP));
             long x = (exP.getStopDatetime().getTime() - exP.getStartDatetime().getTime()) / 1000;
             String[] args = {"-i", TestData.CH5_ID, "-s", LONG_TO_STRING.format(new Object[]{x}), "-r", "60"};
@@ -433,7 +375,7 @@ public class MainTest {
         try {
             LOG.info("start2_1_2");
 
-            Programme exP = this.getTestProgrammes().get(0);
+            Programme exP = dat.getTestProgrammes().get(0);
             LOG.info(ReflectionToStringBuilder.reflectionToString(exP));
             long x = (exP.getStopDatetime().getTime() - exP.getStartDatetime().getTime()) / 1000;
             String[] args = {"-i", TestData.CH5_ID, "-s", LONG_TO_STRING.format(new Object[]{x}), "-r", "120"};
@@ -465,7 +407,7 @@ public class MainTest {
         try {
             LOG.info("start2_2_2");
 
-            Programme exP = this.getTestProgrammes().get(0);
+            Programme exP = dat.getTestProgrammes().get(0);
             LOG.info(ReflectionToStringBuilder.reflectionToString(exP));
             long x = (exP.getStopDatetime().getTime() - exP.getStartDatetime().getTime()) / 1000;
             String[] args = {"-i", TestData.CH5_ID, "-s", LONG_TO_STRING.format(new Object[]{x})};
@@ -487,8 +429,8 @@ public class MainTest {
             throw ex;
         }
     }
-    
-        /**
+
+    /**
      * Test of start method, of class Main.
      */
     @Test
@@ -496,10 +438,10 @@ public class MainTest {
         try {
             LOG.info("start2_2_3");
 
-            Programme exP = this.getTestProgrammes().get(0);
+            Programme exP = dat.getTestProgrammes().get(0);
             LOG.info(ReflectionToStringBuilder.reflectionToString(exP));
             long x = (exP.getStopDatetime().getTime() - exP.getStartDatetime().getTime()) / 1000;
-            String[] args = {"-i", TestData.CH5_ID, "-s", LONG_TO_STRING.format(new Object[]{x}),"-d",System.getProperty("user.dir")};
+            String[] args = {"-i", TestData.CH5_ID, "-s", LONG_TO_STRING.format(new Object[]{x}), "-d", System.getProperty("user.dir")};
             Main instance = new Main();
 
             DummyExecutor de = new DummyExecutor();

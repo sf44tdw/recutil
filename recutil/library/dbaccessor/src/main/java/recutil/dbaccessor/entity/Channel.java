@@ -22,6 +22,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Lob;
@@ -72,6 +73,9 @@ public class Channel implements Serializable {
     @Column(name = "DISPLAY_NAME", length = 65535)
     private String displayName;
 
+    /**
+     * 番組情報との紐付けを遅延モードで行うと例外が発生するので、しないでおく。
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "channelId")
     private Collection<Programme> programmeCollection;
 

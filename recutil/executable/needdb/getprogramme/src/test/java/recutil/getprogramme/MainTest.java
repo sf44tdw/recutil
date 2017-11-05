@@ -5,10 +5,10 @@
  */
 package recutil.getprogramme;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.cli.ParseException;
+import org.apache.commons.lang3.ArrayUtils;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -94,34 +94,50 @@ public class MainTest {
     /**
      * Test of start method, of class Main.
      */
-    @Test(expected = org.apache.commons.cli.ParseException.class)
+    @Test(expected = org.apache.commons.cli.AlreadySelectedException.class)
     public void testStart1_1_1() throws Exception {
         LOG.info("start1_1_1");
-        String[] args = {"-e", "-i", TestData.CH3_ID, "-v", Integer.toString(TestData.PG2_EVENTID), "-s", parseLongToString(TestData.PG2_START_TIME)};
-        Main instance = new Main();
-        instance.start(args);
+        String[] args = {"-e", "-i", TestData.CH3_ID, "-v", Integer.toString(TestData.PG2_EVENTID), "-d", parseLongToString(TestData.PG2_START_TIME)};
+        try {
+            Main instance = new Main();
+            instance.start(args);
+        } catch (Throwable ex) {
+            LOG.error("エラー。 引数 = " + ArrayUtils.toString(args, "引数なし。"), ex);
+            throw ex;
+        }
     }
 
     /**
      * Test of start method, of class Main.
      */
-    @Test(expected = org.apache.commons.cli.ParseException.class)
+    @Test(expected = org.apache.commons.cli.AlreadySelectedException.class)
     public void testStart1_1_2() throws Exception {
         LOG.info("start1_1_2");
-        String[] args = {"-i", TestData.CH3_ID, "-v", Integer.toString(TestData.PG2_EVENTID), "-s", parseLongToString(TestData.PG2_START_TIME)};
-        Main instance = new Main();
-        instance.start(args);
+
+        String[] args = new String[]{"-i", TestData.CH3_ID, "-v", Integer.toString(TestData.PG2_EVENTID), "-d", parseLongToString(TestData.PG2_START_TIME)};
+        try {
+            Main instance = new Main();
+            instance.start(args);
+        } catch (Throwable ex) {
+            LOG.error("エラー。 引数 = " + ArrayUtils.toString(args, "引数なし。"), ex);
+            throw ex;
+        }
     }
 
     /**
      * Test of start method, of class Main.
      */
-    @Test(expected = org.apache.commons.cli.ParseException.class)
+    @Test(expected = org.apache.commons.cli.AlreadySelectedException.class)
     public void testStart1_1_3() throws Exception {
         LOG.info("start1_1_3");
-        String[] args = {"-v", Integer.toString(TestData.PG2_EVENTID), "-s", parseLongToString(TestData.PG2_START_TIME)};
-        Main instance = new Main();
-        instance.start(args);
+        String[] args = {"-v", Integer.toString(TestData.PG2_EVENTID), "-d", parseLongToString(TestData.PG2_START_TIME)};
+        try {
+            Main instance = new Main();
+            instance.start(args);
+        } catch (Throwable ex) {
+            LOG.error("エラー。 引数 = " + ArrayUtils.toString(args, "引数なし。"), ex);
+            throw ex;
+        }
     }
 
     /**
@@ -131,8 +147,13 @@ public class MainTest {
     public void testStart1_2_1() throws Exception {
         LOG.info("start1_2_1");
         String[] args = {"-v", "aa"};
-        Main instance = new Main();
-        instance.start(args);
+        try {
+            Main instance = new Main();
+            instance.start(args);
+        } catch (Throwable ex) {
+            LOG.error("エラー。 引数 = " + ArrayUtils.toString(args, "引数なし。"), ex);
+            throw ex;
+        }
     }
 
     /**
@@ -141,9 +162,14 @@ public class MainTest {
     @Test(expected = IllegalArgumentException.class)
     public void testStart1_2_2() throws Exception {
         LOG.info("start1_2_2");
-        String[] args = {"-s", "sdf3we"};
-        Main instance = new Main();
-        instance.start(args);
+        String[] args = {"-d", "sdf3we"};
+        try {
+            Main instance = new Main();
+            instance.start(args);
+        } catch (Throwable ex) {
+            LOG.error("エラー。 引数 = " + ArrayUtils.toString(args, "引数なし。"), ex);
+            throw ex;
+        }
     }
 
     private String getExpRes_NotOnlyTitle_NotFirstOnly(List<Programme> expProg) {
@@ -214,13 +240,13 @@ public class MainTest {
 
     }
 
-        /**
+    /**
      * Test of start method, of class Main.
      */
     @Test
     public void testStart2_3() throws Exception {
         LOG.info("start2_3");
-        String[] args = {"-t","-f"};
+        String[] args = {"-t", "-f"};
         Main instance = new Main();
         instance.start(args);
         String std = stdout.getOutput();
@@ -240,7 +266,7 @@ public class MainTest {
         assertThat(std_err.length(), is(0));
 
     }
-    
+
     private String getNotExcludedPG() {
         List<Programme> exp = dat.getUseableProgrammeList();
         return getExpRes_NotOnlyTitle_NotFirstOnly(exp);
@@ -258,7 +284,8 @@ public class MainTest {
         String std = stdout.getOutput();
         String std_err = stdout.getErrorOutput();
         String exp = getNotExcludedPG();
-
+        LOG.info("std={}", std);
+        LOG.info("exp={}", exp);
         assertEquals(std, exp);
         assertThat(std_err.length(), is(0));
     }
@@ -282,7 +309,8 @@ public class MainTest {
         String std = stdout.getOutput();
         String std_err = stdout.getErrorOutput();
         String exp = getPG1_4();
-
+        LOG.info("std={}", std);
+        LOG.info("exp={}", exp);
         assertEquals(std, exp);
         assertThat(std_err.length(), is(0));
     }
@@ -305,7 +333,8 @@ public class MainTest {
         String std = stdout.getOutput();
         String std_err = stdout.getErrorOutput();
         String exp = getPG4();
-
+        LOG.info("std={}", std);
+        LOG.info("exp={}", exp);
         assertEquals(std, exp);
         assertThat(std_err.length(), is(0));
     }
@@ -316,16 +345,103 @@ public class MainTest {
     @Test
     public void testStart5_2_1() throws ParseException {
         LOG.info("start5_2_1");
-        String[] args = {"-s", parseLongToString(TestData.PG4_START_TIME)};
+        String[] args = {"-d", parseLongToString(TestData.PG4_START_TIME)};
+        try {
+            Main instance = new Main();
+            instance.start(args);
+            String std = stdout.getOutput();
+            String std_err = stdout.getErrorOutput();
+            String exp = getPG4();
+            LOG.info("std={}", std);
+            LOG.info("exp={}", exp);
+            assertEquals(std, exp);
+            assertThat(std_err.length(), is(0));
+        } catch (Throwable ex) {
+            LOG.error("エラー。 引数 = " + ArrayUtils.toString(args, "引数なし。"), ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart5_3_1() throws Exception {
+        LOG.info("start5_3_1");
+        
+        dat.insertRecentStartProgrammes();
+        
+        String[] args = {"-d", parseLongToString(dat.getP180().getStartDatetime().getTime()), "-s", "60"};
         Main instance = new Main();
         instance.start(args);
         String std = stdout.getOutput();
         String std_err = stdout.getErrorOutput();
-        String exp = getPG4();
 
+        List<Programme> expl = new ArrayList<>();
+        expl.add(dat.getP120());
+        expl.add(dat.getP180());
+        expl.add(dat.getP240());
+        String exp = getExpRes_NotOnlyTitle_NotFirstOnly(expl);
+        
+        
+        LOG.info("std={}", std);
+        LOG.info("exp={}", exp);
         assertEquals(std, exp);
         assertThat(std_err.length(), is(0));
     }
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart5_3_2() throws Exception {
+        LOG.info("start5_3_2");
+        
+        dat.insertRecentStartProgrammes();
+        
+        String[] args = {"-d", parseLongToString(dat.getP1800().getStartDatetime().getTime()), "-m", "10"};
+        Main instance = new Main();
+        instance.start(args);
+        String std = stdout.getOutput();
+        String std_err = stdout.getErrorOutput();
 
+        List<Programme> expl = new ArrayList<>();
+        expl.add(dat.getP1200());
+        expl.add(dat.getP1800());
+        expl.add(dat.getP2400());
+        String exp = getExpRes_NotOnlyTitle_NotFirstOnly(expl);
+        
+        
+        LOG.info("std={}", std);
+        LOG.info("exp={}", exp);
+        assertEquals(std, exp);
+        assertThat(std_err.length(), is(0));
+    }
+    
+        /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart5_3_3() throws Exception {
+        LOG.info("start5_3_3");
+        
+        dat.insertRecentStartProgrammes();
+        
+        String[] args = {"-d", parseLongToString(dat.getP18000().getStartDatetime().getTime()), "-h", "1"};
+        Main instance = new Main();
+        instance.start(args);
+        String std = stdout.getOutput();
+        String std_err = stdout.getErrorOutput();
 
+        List<Programme> expl = new ArrayList<>();
+        expl.add(dat.getP14400());
+        expl.add(dat.getP18000());
+        expl.add(dat.getP21600());
+        String exp = getExpRes_NotOnlyTitle_NotFirstOnly(expl);
+        
+        
+        LOG.info("std={}", std);
+        LOG.info("exp={}", exp);
+        assertEquals(std, exp);
+        assertThat(std_err.length(), is(0));
+    }
 }
