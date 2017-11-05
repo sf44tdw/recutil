@@ -50,6 +50,8 @@ import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
 
 import recutil.loggerconfigurator.LoggerConfigurator;
+import recutil.timeclioption.TimeCliOption;
+import recutil.timeclioption.TimeParseException;
 
 /**
  * 番組名自動入力機能付きのrecpt1ラッパー。
@@ -78,13 +80,8 @@ public class Main {
     protected static final MessageFormat LONG_TO_STRING = new MessageFormat("{0,number,#}");
 
     //Date型の値は内部ではlongにより保持されているが、recpt1の録画時間はint型のため、制限をかける。
-    private static final long MAX_SECOND = Integer.MAX_VALUE;
-    private static final long MAX_MINUTE = MAX_SECOND / 60;
-    private static final long MAX_HOUR = MAX_MINUTE / 60;
-
-    private static final Range<Long> SECOND_DURATION_LIMIT = Range.between(0L, MAX_SECOND);
-    private static final Range<Long> MINUTE_DURATION_LIMIT = Range.between(0L, MAX_MINUTE);
-    private static final Range<Long> HOUR_DURATION_LIMIT = Range.between(0L, MAX_HOUR);
+    private static final long MAX_INTEGER = Integer.MAX_VALUE;
+    public static final Range<Long> MAX_INTEGER_RANGE = Range.between(0L, MAX_INTEGER);
 
     protected static final String DATE_PATTERN = "yyyyMMddHHmmss";
 
@@ -127,7 +124,7 @@ public class Main {
             new Main().start(new Executor(), PID, nowTime, args);
             System.exit(0);
         } catch (Throwable ex) {
-            String s="エラー。 引数 = " + dumpArgs(args);
+            String s = "エラー。 引数 = " + dumpArgs(args);
             System.out.println(s);
             System.out.println(ex);
             LOG.error(s, ex);
@@ -135,23 +132,14 @@ public class Main {
         }
     }
 
-    private Long getDuration(final CommandLine cl, Option option) {
-        final Long duration;
-        if (cl.hasOption(option.getOpt())) {
-            String val = cl.getOptionValue(option.getOpt());
-            duration = Long.valueOf(val);
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("オプション値{} -> 数値{}", val, duration);
-            }
-        } else {
-            duration = null;
-        }
-        return duration;
-    }
-
-    public void start(final CommandExecutor exec, final String pid, final Date nowTime, final String[] args) throws ParseException, IOException, InterruptedException {
+    public void start(final CommandExecutor exec, final String pid, final Date nowTime, final String[] args) throws ParseException, IOException, InterruptedException, TimeParseException {
 
         LOG.debug("引数 = " + dumpArgs(args));
+
+        final TimeCliOption timeOpt = new TimeCliOption(
+                "録画時間オプション。ほかの録画時間オプションとは同時に使用できない。録画時間を秒単位で指定する。",
+                "録画時間オプション。ほかの録画時間オプションとは同時に使用できない。録画時間を分単位で指定する。",
+                "録画時間オプション。ほかの録画時間オプションとは同時に使用できない。録画時間を時間単位で指定する。");
 
         final Option ChannelIdOption = Option.builder("i")
                 .longOpt("channelid")
@@ -161,35 +149,7 @@ public class Main {
                 .type(String.class)
                 .build();
 
-        final Option secondDurationOption = Option.builder("s")
-                .longOpt("secondduration")
-                .required(true)
-                .desc("録画時間オプション。ほかの録画時間オプションとは同時に使用できない。録画時間を秒単位で指定する。")
-                .hasArg(true)
-                .type(Long.class)
-                .build();
-
-        final Option minuteDurationOption = Option.builder("m")
-                .longOpt("minuteduration")
-                .required(true)
-                .desc("録画時間オプション。ほかの録画時間オプションとは同時に使用できない。録画時間を分単位で指定する。")
-                .hasArg(true)
-                .type(Long.class)
-                .build();
-
-        final Option hourDurationOption = Option.builder("h")
-                .longOpt("hourduration")
-                .required(true)
-                .desc("録画時間オプション。ほかの録画時間オプションとは同時に使用できない。録画時間を時間単位で指定する。")
-                .hasArg(true)
-                .type(Long.class)
-                .build();
-
-        final OptionGroup durationOptionGroup = new OptionGroup();
-        durationOptionGroup.setRequired(true);
-        durationOptionGroup.addOption(secondDurationOption);
-        durationOptionGroup.addOption(minuteDurationOption);
-        durationOptionGroup.addOption(hourDurationOption);
+        final OptionGroup durationOptionGroup = timeOpt.getTimeOptionGroup(true);
 
         final Option rangenOption = Option.builder("r")
                 .longOpt("range")
@@ -239,34 +199,12 @@ public class Main {
             final String s = "チャンネルIDが設定されていません。";
             throw new IllegalArgumentException(s);
         }
-        final Long secondDuration = this.getDuration(cl, secondDurationOption);
-        final Long minuteDuration = this.getDuration(cl, minuteDurationOption);
-        final Long hourDuration = this.getDuration(cl, hourDurationOption);
-
-        final MessageFormat mf = new MessageFormat("録画時間が範囲外です。0より小さいか、上限を超えています。単位 = {0} 値 = {1}");
-        final Object[] message;
 
         final long duration_second;
-        if (hourDuration != null) {
-            if (!Main.HOUR_DURATION_LIMIT.contains(hourDuration)) {
-                message = new Object[]{"hour", hourDuration};
-                throw new IllegalArgumentException(mf.format(message));
-            }
-            duration_second = hourDuration * 60 ^ 2;
-        } else if (minuteDuration != null) {
-            if (!Main.MINUTE_DURATION_LIMIT.contains(minuteDuration)) {
-                message = new Object[]{"minute", minuteDuration};
-                throw new IllegalArgumentException(mf.format(message));
-            }
-            duration_second = minuteDuration * 60;
-        } else if (secondDuration != null) {
-            if (!Main.SECOND_DURATION_LIMIT.contains(secondDuration)) {
-                message = new Object[]{"second", secondDuration};
-                throw new IllegalArgumentException(mf.format(message));
-            }
-            duration_second = secondDuration;
-        } else {
-            throw new IllegalArgumentException("録画時間を秒数に変換できませんでした。" + " 時 = " + hourDuration + " 分 = " + minuteDuration + " 秒 = " + secondDuration);
+
+        duration_second = timeOpt.getValueBySecond(cl);
+        if (!MAX_INTEGER_RANGE.contains(duration_second)) {
+            throw new IllegalArgumentException("録画時間が大きすぎます。 下限:0 上限:" + Integer.MAX_VALUE);
         }
 
         final Long range;

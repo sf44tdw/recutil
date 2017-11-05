@@ -16,10 +16,13 @@
  */
 package recutil.commmonutil;
 
+import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.slf4j.Logger;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
@@ -50,5 +53,20 @@ public class UtilTest {
     public void tearDown() {
     }
 
+    @Test
+    public void testParseLongToDate() {
+        LOG.info("testParseLongToDate");
+        long x = 7997762100000L;
+        assertEquals(x, Util.parseLongToDate(x).getTime());
+    }
+
+    @Test
+    public void testParseDateToString() {
+        LOG.info("testParseDateToString");
+        String ex = "2223/06/11_01:35:00";
+        Date x = new Date(7997762100000L);
+        assertEquals(ex, Util.parseDateToString(x));
+
+    }
 
 }

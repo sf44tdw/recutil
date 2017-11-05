@@ -43,5 +43,11 @@
             <artifactId>commandexecutor</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>recutil</groupId>
+            <artifactId>timeclioption</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>
