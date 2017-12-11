@@ -29,6 +29,7 @@ import static recutil.timeclioption.TimeCliOption.OPTION_NAME.SECOND;
 
 /**
  * 時間、分、秒を指定するオプションを生成する。 オプションのdesc欄はコンストラクタで指定できる。
+ * 
  *
  *
  * @author normal
@@ -37,7 +38,7 @@ public final class TimeCliOption {
 
     private static final Logger LOG = LoggerConfigurator.getCallerLogger();
 
-    private static final long SIXTY = 60;
+    private static final long SIXTY = 60L;
 
     /**
      * 秒数の最大。
@@ -124,7 +125,7 @@ public final class TimeCliOption {
     /**
      * 秒数オプションを作成する。
      *
-     * @return
+     * @return 秒数オプション
      */
     public Option getSecondRangeOption() {
         return makeTimeOption(SECOND, secondDesc);
@@ -133,7 +134,7 @@ public final class TimeCliOption {
     /**
      * 分数オプションを作成する。
      *
-     * @return
+     * @return 分数オプション
      */
     public Option getMinuteRangeOption() {
         return makeTimeOption(MINUTE, minuteDesc);
@@ -142,7 +143,7 @@ public final class TimeCliOption {
     /**
      * 時間数オプションを作成する。
      *
-     * @return
+     * @return 時間数オプション
      */
     public Option getHourRangeOption() {
         return makeTimeOption(HOUR, hourDesc);
@@ -152,7 +153,7 @@ public final class TimeCliOption {
      * 秒、分、時間を排他で受け取るオプショングループを作成する。
      *
      * @param required グループ内のオプションが存在していなければならない場合はtrue。
-     * @return
+     * @return 秒、分、時間を排他で受け取るオプショングループ
      */
     public OptionGroup getTimeOptionGroup(boolean required) {
         OptionGroup opts = new OptionGroup();
@@ -181,9 +182,10 @@ public final class TimeCliOption {
     }
 
     /**
-     * このクラスが作成したオプショングループで取得した時間の数値をチェックし、秒数で返す。
+     * このクラスが作成したオプショングループで取得した時間の数値をチェックし、秒数で返す。 * @param cl
+     * このクラスが作成したオプショングループを使用したコマンドライン
      *
-     * @param cl このクラスが作成したオプショングループを使用したコマンドライン
+     * @param cl getTimeOptionGroup()で取得したオプショングループを使用したコマンドライン
      * @return 取得した秒数。
      * @throws recutil.timeclioption.TimeParseException 秒への変換ができなかった場合。
      * @see TimeCliOption#getTimeOptionGroup
