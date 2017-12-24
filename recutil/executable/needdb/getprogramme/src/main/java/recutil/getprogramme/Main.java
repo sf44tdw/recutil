@@ -381,9 +381,10 @@ public class Main {
             PrograammeListSorter.sortRes(table);
 
             System.out.print(Main.printRes(table, format, firstOnly));
-
-            man.close();
+            
             trans.commit();
+            man.close();
+            
         }
 
     }

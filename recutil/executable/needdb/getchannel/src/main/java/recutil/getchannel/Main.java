@@ -209,6 +209,7 @@ public class Main {
                     System.out.println(format.format(parameters));
                 }
             }
+            trans.commit();
             man.close();
         }
     }
