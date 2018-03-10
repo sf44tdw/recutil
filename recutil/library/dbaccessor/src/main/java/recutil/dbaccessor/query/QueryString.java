@@ -16,6 +16,7 @@
  */
 package recutil.dbaccessor.query;
 
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -23,7 +24,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import recutil.dbaccessor.entity.Excludechannel;
-import static recutil.dbaccessor.query.QueryString.Channel.PARAMNAME_CHANNEL_NO;
 import static recutil.dbaccessor.query.QueryString.Common.PARAMNAME_CHANNEL_ID;
 
 /**
@@ -47,9 +47,7 @@ public final class QueryString {
         query_ex.select(root_ex.get(PARAMNAME_CHANNEL_ID)).distinct(true);
         final TypedQuery<String> ql_ex;
         ql_ex = man.createQuery(query_ex);
-        List<String> table_ex;
-        table_ex = ql_ex.getResultList();
-        return table_ex;
+        return Collections.unmodifiableList(ql_ex.getResultList());
     }
 
     private QueryString() {
@@ -78,7 +76,6 @@ public final class QueryString {
         public static final String PARAMNAME_EVENT_ID = "eventId";
         public static final String PARAMNAME_START_DATETIME = "startDatetime";
 
-       
         private Programme() {
         }
 
