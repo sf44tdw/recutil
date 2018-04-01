@@ -96,38 +96,7 @@ public class TimeCliOptionTest {
         return new TimeCliOption(DESC_SECOND, DESC_MINUTE, DESC_HOUR);
     }
 
-    /**
-     * Test of getSecondRangeOption method, of class TimeCliOption.
-     */
-    @Test
-    public void testGetSecondRangeOption() {
-        LOG.info("getSecondRangeOption");
-        TimeCliOption instance = getTestClass();
-        Option result = instance.getSecondRangeOption();
-        assertEquals(true, this.CheckSecondOption(result));
-    }
-
-    /**
-     * Test of getMinuteRangeOption method, of class TimeCliOption.
-     */
-    @Test
-    public void testGetMinuteRangeOption() {
-        LOG.info("getMinuteRangeOption");
-        TimeCliOption instance = getTestClass();
-        Option result = instance.getMinuteRangeOption();
-        assertEquals(true, this.CheckMinuteOption(result));
-    }
-
-    /**
-     * Test of getHourRangeOption method, of class TimeCliOption.
-     */
-    @Test
-    public void testGetHourRangeOption() {
-        LOG.info("getHourRangeOption");
-        TimeCliOption instance = getTestClass();
-        Option result = instance.getHourRangeOption();
-        assertEquals(true, this.CheckHourOption(result));
-    }
+    
 
     /**
      * Test of getTimeOptionGroup method, of class TimeCliOption.

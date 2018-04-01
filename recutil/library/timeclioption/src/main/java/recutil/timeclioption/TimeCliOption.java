@@ -127,7 +127,7 @@ public final class TimeCliOption {
      *
      * @return 秒数オプション
      */
-    public Option getSecondRangeOption() {
+    private Option getSecondRangeOption() {
         return makeTimeOption(SECOND, secondDesc);
     }
 
@@ -136,7 +136,7 @@ public final class TimeCliOption {
      *
      * @return 分数オプション
      */
-    public Option getMinuteRangeOption() {
+    private Option getMinuteRangeOption() {
         return makeTimeOption(MINUTE, minuteDesc);
     }
 
@@ -145,7 +145,7 @@ public final class TimeCliOption {
      *
      * @return 時間数オプション
      */
-    public Option getHourRangeOption() {
+    private Option getHourRangeOption() {
         return makeTimeOption(HOUR, hourDesc);
     }
 
