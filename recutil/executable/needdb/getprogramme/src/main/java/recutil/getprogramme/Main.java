@@ -47,10 +47,10 @@ import recutil.dbaccessor.entity.comparator.PrograammeListSorter;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
+import recutil.dbaccessor.query.QueryString;
 import static recutil.dbaccessor.query.QueryString.Common.PARAMNAME_CHANNEL_ID;
 import static recutil.dbaccessor.query.QueryString.Programme.PARAMNAME_EVENT_ID;
 import static recutil.dbaccessor.query.QueryString.Programme.PARAMNAME_START_DATETIME;
-import static recutil.dbaccessor.query.QueryString.getExcludeChannelList;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.timeclioption.TimeCliOption;
 import recutil.timeclioption.TimeParseException;
@@ -348,7 +348,7 @@ public class Main {
                 //除外チャンネルテーブルの内容をとってくる。
 
                 List<String> table_ex;
-                table_ex = getExcludeChannelList(man);
+                table_ex = new QueryString(man).getExcludeChannelList();
 
                 //突合せ条件に加える。
                 Expression<String> exp = root.get(PARAMNAME_CHANNEL_ID);

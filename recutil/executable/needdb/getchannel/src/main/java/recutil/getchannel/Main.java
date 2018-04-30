@@ -43,9 +43,9 @@ import recutil.dbaccessor.entity.comparator.ChannelComparator_AscendingByChannel
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
+import recutil.dbaccessor.query.QueryString;
 import static recutil.dbaccessor.query.QueryString.Channel.PARAMNAME_CHANNEL_NO;
 import static recutil.dbaccessor.query.QueryString.Common.PARAMNAME_CHANNEL_ID;
-import static recutil.dbaccessor.query.QueryString.getExcludeChannelList;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -174,7 +174,7 @@ public class Main {
                 //除外チャンネルテーブルの内容をとってくる。
 
                 List<String> table_ex;
-                table_ex = getExcludeChannelList(man);
+                table_ex = new QueryString(man).getExcludeChannelList();
 
                 //突合せ条件に加える。
                 Expression<String> exp = root.get(PARAMNAME_CHANNEL_ID);

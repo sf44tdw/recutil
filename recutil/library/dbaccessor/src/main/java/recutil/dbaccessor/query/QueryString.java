@@ -22,6 +22,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import recutil.dbaccessor.entity.Excludechannel;
 import static recutil.dbaccessor.query.QueryString.Common.PARAMNAME_CHANNEL_ID;
@@ -33,13 +35,14 @@ import static recutil.dbaccessor.query.QueryString.Common.PARAMNAME_CHANNEL_ID;
  */
 public final class QueryString {
 
+    private final EntityManager man;
+
     /**
-     * 除外チャンネルテーブルの内容をリストにして取ってくる。
+     * 除外チャンネルテーブルの内容をString型リストにして取ってくる。
      *
-     * @param man マネージャー
      * @return 除外チャンネルテーブルの内容
      */
-    public static List<String> getExcludeChannelList(final EntityManager man) {
+    public List<String> getExcludeChannelList() {
         //除外チャンネルテーブルの内容をとってくる。
         final CriteriaBuilder builder = man.getCriteriaBuilder();
         final CriteriaQuery<String> query_ex = builder.createQuery(String.class);
@@ -50,7 +53,12 @@ public final class QueryString {
         return Collections.unmodifiableList(ql_ex.getResultList());
     }
 
-    private QueryString() {
+
+    /**
+     * @param man このクラス内で使用するマネージャー
+     */
+    public QueryString(EntityManager man) {
+        this.man = man;
     }
 
     public final class Common {
