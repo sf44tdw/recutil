@@ -27,8 +27,8 @@ public class ChannelComparator_AscendingByChannelNo implements Comparator<Channe
 
     @Override
     public int compare(Channel o1, Channel o2) {
-        int no1 = o1.getChannelNo();
-        int no2 = o2.getChannelNo();
+        long no1 = o1.getChannelNo();
+        long no2 = o2.getChannelNo();
         if (no1 > no2) {
             return 1;
         } else if (no1 == no2) {

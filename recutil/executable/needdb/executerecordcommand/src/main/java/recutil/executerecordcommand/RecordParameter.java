@@ -32,8 +32,7 @@ public final class RecordParameter {
     private static final Logger log = LoggerConfigurator.getCallerLogger();
 
     //物理チャンネル番号
-    private final int physicalChannelNumber;
-
+    private final long physicalChannelNumber;
 
     //終了時刻
     private final long duration;
@@ -48,13 +47,13 @@ public final class RecordParameter {
      * @param duration 録画時間(秒)
      * @param fileName 録画ファイル名
      */
-    public RecordParameter(int physicalChannelNumber, long duration, String fileName) {
+    public RecordParameter(long physicalChannelNumber, long duration, String fileName) {
         this.physicalChannelNumber = physicalChannelNumber;
         this.duration = duration;
         this.fileName = fileName;
     }
 
-    public synchronized int getPhysicalChannelNumber() {
+    public synchronized long getPhysicalChannelNumber() {
         return physicalChannelNumber;
     }
 
@@ -73,7 +72,7 @@ public final class RecordParameter {
 
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(7, 43, this);
+        return HashCodeBuilder.reflectionHashCode(3, 1489, this);
     }
 
     /**

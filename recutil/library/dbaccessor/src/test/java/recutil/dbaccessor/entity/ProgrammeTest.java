@@ -77,7 +77,7 @@ public class ProgrammeTest {
         Programme instance = new Programme();
         int expResult = 0;
         instance.setEventId(expResult);
-        int result = instance.getEventId();
+        long result = instance.getEventId();
         assertEquals(expResult, result);
     }
 

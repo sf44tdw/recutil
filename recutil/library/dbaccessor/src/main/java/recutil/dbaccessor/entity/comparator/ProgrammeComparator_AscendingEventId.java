@@ -26,10 +26,17 @@ import recutil.dbaccessor.entity.Programme;
 public class ProgrammeComparator_AscendingEventId implements Comparator<Programme> {
 
 //    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
-
     @Override
     public int compare(Programme o1, Programme o2) {
-        return o1.getEventId()-o2.getEventId();
+        long no1 = o1.getEventId();
+        long no2 = o2.getEventId();
+        if (no1 > no2) {
+            return 1;
+        } else if (no1 == no2) {
+            return 0;
+        } else {
+            return -1;
+        }
     }
 
 }

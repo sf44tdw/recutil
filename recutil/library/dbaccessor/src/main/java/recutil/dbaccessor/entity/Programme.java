@@ -25,7 +25,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -42,37 +41,30 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+/*
+複合主キーの取り扱いが複雑なので、代理キーを設定し、元の複合主キーには一意性制約を設定する。
+
+Tableアノテーションのcatalog,schemaについては、MariaDBのCREATEINDEX時にSCHEMA.INDEXNAMEや、SCHEMA.TABLENAMEのようにしてSQLを発行すると不具合が出るので指定しない。
+(@Indexでインデックスを設定してもテーブル生成時に無視される。)
+
+紐付けを遅延モードで行うと例外が発生するので、しない。
+ */
 /**
- * Tableアノテーションのcatalog,schemaについては、MariaDBのCREATE
- * INDEX時にSCHEMA.INDEXNAMEや、SCHEMA.TABLENAMEのようにしてSQLを発行すると不具合が出るので指定しない。
  *
  * @author normal
  */
 @Entity
-@Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"CHANNEL_ID", "EVENT_ID"})},
-        indexes = {
-            @Index(name = "CHANNEL_ID_I", columnList = "CHANNEL_ID")
-            , 
-            @Index(name = "EVENT_ID_I", columnList = "EVENT_ID")
-            ,            
-            @Index(name = "START_DATETIME_I", columnList = "START_DATETIME")
-            ,         
-            @Index(name = "STOP_DATETIME_I", columnList = "STOP_DATETIME")
-        })
+@Table(catalog = "EPG_TEST", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"CHANNEL_ID", "EVENT_ID"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Programme.findAll", query = "SELECT p FROM Programme p")
-    ,    @NamedQuery(name = "Programme.findById", query = "SELECT p FROM Programme p WHERE p.id = :id")
-    ,    @NamedQuery(name = "Programme.findByEventId", query = "SELECT p FROM Programme p WHERE p.eventId = :eventId")
-    ,    @NamedQuery(name = "Programme.findByStartDatetime", query = "SELECT p FROM Programme p WHERE p.startDatetime = :startDatetime")
-    ,    @NamedQuery(name = "Programme.findByStopDatetime", query = "SELECT p FROM Programme p WHERE p.stopDatetime = :stopDatetime")
-    ,    @NamedQuery(name = "Programme.findByChannelId", query = "SELECT p FROM Programme p WHERE p.channelId.channelId = :channelId")
-    ,    @NamedQuery(name = "Programme.findByChannelIdAndEventId", query = "SELECT p FROM Programme p WHERE p.eventId = :eventId and p.channelId.channelId = :channelId")
-    ,    @NamedQuery(name = "Programme.findByChannelIdAndEventIdAndStartDatetime", query = "SELECT p FROM Programme p WHERE p.eventId = :eventId and p.channelId.channelId = :channelId and p.startDatetime = :startDatetime")
-    ,    @NamedQuery(name = "Programme.findByChannelIdAndStartDatetime", query = "SELECT p FROM Programme p WHERE p.startDatetime = :startDatetime and p.channelId.channelId = :channelId")
-    ,    @NamedQuery(name = "Programme.findByAllParams", query = "SELECT p FROM Programme p WHERE p.eventId = :eventId AND p.title = :title AND p.startDatetime = :startDatetime AND p.stopDatetime = :stopDatetime AND p.channelId.channelId = :channelId")
-    ,    @NamedQuery(name = "Programme.deleteAll", query = "DELETE FROM Programme")})
+    , @NamedQuery(name = "Programme.findById", query = "SELECT p FROM Programme p WHERE p.id = :id")
+    , @NamedQuery(name = "Programme.findByEventId", query = "SELECT p FROM Programme p WHERE p.eventId = :eventId")
+    , @NamedQuery(name = "Programme.findByStartDatetime", query = "SELECT p FROM Programme p WHERE p.startDatetime = :startDatetime")
+    , @NamedQuery(name = "Programme.findByStopDatetime", query = "SELECT p FROM Programme p WHERE p.stopDatetime = :stopDatetime")
+    , @NamedQuery(name = "Programme.findByAllParams", query = "SELECT p FROM Programme p WHERE p.eventId = :eventId AND p.title = :title AND p.startDatetime = :startDatetime AND p.stopDatetime = :stopDatetime AND p.channelId.channelId = :channelId")
+    , @NamedQuery(name = "Programme.deleteAll", query = "DELETE FROM Programme")})
 public class Programme implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -83,11 +75,7 @@ public class Programme implements Serializable {
     private Long id;
     @Basic(optional = false)
     @Column(name = "EVENT_ID", nullable = false)
-    private int eventId;
-    @Basic(optional = false)
-    @Lob
-    @Column(nullable = false, length = 65535)
-    private String title;
+    private long eventId;
     @Basic(optional = false)
     @Column(name = "START_DATETIME", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -96,10 +84,35 @@ public class Programme implements Serializable {
     @Column(name = "STOP_DATETIME", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date stopDatetime;
-
+    @Basic(optional = false)
+    @Lob
+    @Column(nullable = false, length = 2147483647)
+    private String title;
     @JoinColumn(name = "CHANNEL_ID", referencedColumnName = "CHANNEL_ID", nullable = false)
     @ManyToOne(optional = false)
     private Channel channelId;
+
+    public Programme() {
+    }
+
+    public Programme(Long id) {
+        this.id = id;
+    }
+
+    public Programme(Long id, long eventId, Date startDatetime, Date stopDatetime, String title) {
+        this.id = id;
+        this.eventId = eventId;
+        this.startDatetime = getCopyDate(startDatetime);
+        this.stopDatetime = getCopyDate(stopDatetime);
+        this.title = title;
+    }
+
+    private Date getCopyDate(Date d) {
+        if (d == null) {
+            return null;
+        }
+        return new Date(d.getTime());
+    }
 
     /**
      * 放送開始時刻が放送終了時刻以前になっていたら、例外を発生させる。<br>
@@ -130,21 +143,6 @@ public class Programme implements Serializable {
         }
     }
 
-    public Programme() {
-    }
-
-    public Programme(Long id) {
-        this.id = id;
-    }
-
-    public Programme(Long id, int eventId, String title, Date startDatetime, Date stopDatetime) {
-        this.id = id;
-        this.eventId = eventId;
-        this.title = title;
-        this.startDatetime = getCopyDate(startDatetime);
-        this.stopDatetime = getCopyDate(stopDatetime);
-    }
-
     public Long getId() {
         return id;
     }
@@ -153,27 +151,12 @@ public class Programme implements Serializable {
         this.id = id;
     }
 
-    public int getEventId() {
+    public long getEventId() {
         return eventId;
     }
 
-    public void setEventId(int eventId) {
+    public void setEventId(long eventId) {
         this.eventId = eventId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    private Date getCopyDate(Date d) {
-        if (d == null) {
-            return null;
-        }
-        return new Date(d.getTime());
     }
 
     public Date getStartDatetime() {
@@ -194,6 +177,14 @@ public class Programme implements Serializable {
         this.stopDatetime = getCopyDate(stopDatetime);
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Channel getChannelId() {
         return channelId;
     }
@@ -204,12 +195,9 @@ public class Programme implements Serializable {
 
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(7, 43, this);
+        return HashCodeBuilder.reflectionHashCode(17, 31, this);
     }
 
-    /**
-     * 保持している値がすべて等しければtrue
-     */
     @Override
     public boolean equals(Object obj) {
         return EqualsBuilder.reflectionEquals(this, obj);

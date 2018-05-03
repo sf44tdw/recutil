@@ -16,7 +16,9 @@
  */
 package recutil.dbaccessor.entity;
 
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -72,15 +74,29 @@ public class ExcludechannelTest {
         assertEquals(expResult, result);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    //INSERTできないことが確認できればよい。
+    @Test
     public void testDummyId() {
         LOG.info("dummyId");
         dat.reloadDB();
+
+        final String DUMMY_ID = "DUMMY_1234@@@";
+
         Excludechannel instance = new Excludechannel();
-        instance.setChannelId("DUMMY_1234@@@");
+        instance.setChannelId(DUMMY_ID);
+
         try (EntityManagerMaker mk = getTestDbEm()) {
             EntityManager man = mk.getEntityManager();
             man.persist(instance);
+        }
+
+        try (EntityManagerMaker mk = getTestDbEm()) {
+            EntityManager man = mk.getEntityManager();
+            List<Excludechannel> table;
+            TypedQuery<Excludechannel> ql = man.createQuery("SELECT e FROM Excludechannel e WHERE e.channelId = :channelId", Excludechannel.class);
+            ql.setParameter(recutil.dbaccessor.query.QueryString.Common.PARAMNAME_CHANNEL_ID, DUMMY_ID);
+            table = ql.getResultList();
+            assertEquals(table.size(), 0);
         }
     }
 

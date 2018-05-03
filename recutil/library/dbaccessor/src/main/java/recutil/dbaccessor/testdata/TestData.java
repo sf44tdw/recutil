@@ -286,9 +286,9 @@ public final class TestData {
         return res;
     }
 
-    public synchronized List<Integer> getAllUseableEventIdList() {
+    public synchronized List<Long> getAllUseableEventIdList() {
         this.make();
-        List<Integer> res = new ArrayList<>();
+        List<Long> res = new ArrayList<>();
         for (Programme pg : this.getUseableProgrammeList()) {
             res.add(pg.getEventId());
         }

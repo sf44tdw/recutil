@@ -22,43 +22,41 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Index;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+/*
+Tableアノテーションのcatalog,schemaについては、MariaDBのCREATEINDEX時にSCHEMA.INDEXNAMEや、SCHEMA.TABLENAMEのようにしてSQLを発行すると不具合が出るので指定しない。
+(@Indexでインデックスを設定してもテーブル生成時に無視される。)
+
+紐付けを遅延モードで行うと例外が発生するので、しない。
+ */
 /**
- * Tableアノテーションのcatalog,schemaについては、MariaDBのCREATE
- * INDEX時にSCHEMA.INDEXNAMEや、SCHEMA.TABLENAMEのようにしてSQLを発行すると不具合が出るので指定しない。
+ *
  * @author normal
  */
 @Entity
-@Table( uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"CHANNEL_ID", "CHANNEL_NO"})}, indexes = {
-    @Index(name = "CHANNEL_NO_I", columnList = "CHANNEL_NO")})
+@Table(catalog = "EPG_TEST", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"CHANNEL_ID", "CHANNEL_NO"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Channel.findAll", query = "SELECT c FROM Channel c")
-    ,
-    @NamedQuery(name = "Channel.findByChannelId", query = "SELECT c FROM Channel c WHERE c.channelId = :channelId")
-    ,
-    @NamedQuery(name = "Channel.findByChannelNo", query = "SELECT c FROM Channel c WHERE c.channelNo = :channelNo")
-    ,
-    @NamedQuery(name = "Channel.findByAllParams", query = "SELECT c FROM Channel c WHERE c.channelId = :channelId AND c.channelNo = :channelNo AND c.displayName = :displayName")
-    ,
-    @NamedQuery(name = "Channel.deleteAll", query = "DELETE FROM Channel")
-})
+    , @NamedQuery(name = "Channel.findByChannelId", query = "SELECT c FROM Channel c WHERE c.channelId = :channelId")
+    , @NamedQuery(name = "Channel.findByChannelNo", query = "SELECT c FROM Channel c WHERE c.channelNo = :channelNo")
+    , @NamedQuery(name = "Channel.findByVersion", query = "SELECT c FROM Channel c WHERE c.version = :version")
+    , @NamedQuery(name = "Channel.findByAllParams", query = "SELECT c FROM Channel c WHERE c.channelId = :channelId AND c.channelNo = :channelNo AND c.displayName = :displayName")
+    , @NamedQuery(name = "Channel.deleteAll", query = "DELETE FROM Channel")})
 public class Channel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -68,14 +66,13 @@ public class Channel implements Serializable {
     private String channelId;
     @Basic(optional = false)
     @Column(name = "CHANNEL_NO", nullable = false)
-    private int channelNo;
+    private long channelNo;
     @Lob
-    @Column(name = "DISPLAY_NAME", length = 65535)
+    @Column(name = "DISPLAY_NAME", length = 2147483647)
     private String displayName;
-
-    /**
-     * 番組情報との紐付けを遅延モードで行うと例外が発生するので、しないでおく。
-     */
+    private Integer version;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "channel")
+    private Excludechannel excludechannel;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "channelId")
     private Collection<Programme> programmeCollection;
 
@@ -86,16 +83,24 @@ public class Channel implements Serializable {
         this.channelId = channelId;
     }
 
-    public Channel(String channelId, int channelNo) {
+    public Channel(String channelId, long channelNo) {
         this.channelId = channelId;
         this.channelNo = channelNo;
     }
 
-    public int getChannelNo() {
+    public String getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
+    }
+
+    public long getChannelNo() {
         return channelNo;
     }
 
-    public void setChannelNo(int channelNo) {
+    public void setChannelNo(long channelNo) {
         this.channelNo = channelNo;
     }
 
@@ -107,12 +112,20 @@ public class Channel implements Serializable {
         this.displayName = displayName;
     }
 
-    public String getChannelId() {
-        return channelId;
+    public Integer getVersion() {
+        return version;
     }
 
-    public void setChannelId(String channelId) {
-        this.channelId = channelId;
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public Excludechannel getExcludechannel() {
+        return excludechannel;
+    }
+
+    public void setExcludechannel(Excludechannel excludechannel) {
+        this.excludechannel = excludechannel;
     }
 
     @XmlTransient
@@ -124,17 +137,11 @@ public class Channel implements Serializable {
         this.programmeCollection = programmeCollection;
     }
 
-    @Version
-    private int version;
-
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(7, 43, this);
     }
 
-    /**
-     * 保持している値がすべて等しければtrue
-     */
     @Override
     public boolean equals(Object obj) {
         return EqualsBuilder.reflectionEquals(this, obj);

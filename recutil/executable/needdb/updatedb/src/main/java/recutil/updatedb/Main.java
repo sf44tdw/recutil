@@ -72,6 +72,12 @@ public class Main {
 
     protected void deleteAll(EntityManager manager) {
 
+        LOG.info("現在の除外チャンネル登録を全て削除します。");
+        final Query ex_del;
+        ex_del = manager.createNamedQuery("Excludechannel.deleteAll", recutil.dbaccessor.entity.Programme.class);
+        ex_del.executeUpdate();
+        LOG.info("現在の除外チャンネル登録を全て削除しました。");
+
         LOG.info("現在の番組登録を全て削除します。");
         final Query pg_del;
         pg_del = manager.createNamedQuery("Programme.deleteAll", recutil.dbaccessor.entity.Programme.class);

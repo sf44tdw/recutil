@@ -114,7 +114,7 @@ public class ChannelTest {
         EntityManagerMaker instance = getTestDbEm();
         EntityManager result = instance.getEntityManager();
         List<Channel> table;
-        TypedQuery<Channel> ql = result.createNamedQuery("Channel.findByAllParams", Channel.class);
+        TypedQuery<Channel> ql = result.createQuery("SELECT c FROM Channel c WHERE c.channelId = :channelId AND c.channelNo = :channelNo AND c.displayName = :displayName", Channel.class);
         ql.setParameter(recutil.dbaccessor.query.QueryString.Common.PARAMNAME_CHANNEL_ID, TestData.CH1_ID);
         ql.setParameter(recutil.dbaccessor.query.QueryString.Channel.PARAMNAME_CHANNEL_NO, TestData.CH1_CHNO);
         ql.setParameter(recutil.dbaccessor.query.QueryString.Channel.PARAMNAME_DISPLAY_NAME, TestData.CH1_DN);

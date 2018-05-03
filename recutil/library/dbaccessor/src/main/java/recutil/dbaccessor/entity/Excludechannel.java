@@ -17,72 +17,49 @@
 package recutil.dbaccessor.entity;
 
 import java.io.Serializable;
-import java.text.MessageFormat;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.TypedQuery;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import recutil.dbaccessor.manager.EntityManagerMaker;
-import recutil.dbaccessor.manager.SelectedPersistenceName;
 
+/*
+Tableアノテーションのcatalog,schemaについては、MariaDBのCREATEINDEX時にSCHEMA.INDEXNAMEや、SCHEMA.TABLENAMEのようにしてSQLを発行すると不具合が出るので指定しない。
+(@Indexでインデックスを設定してもテーブル生成時に無視される。)
+
+紐付けを遅延モードで行うと例外が発生するので、しない。
+ */
 /**
- * Tableアノテーションのcatalog,schemaについては、MariaDBのCREATE
- * INDEX時にSCHEMA.INDEXNAMEや、SCHEMA.TABLENAMEのようにしてSQLを発行すると不具合が出るので指定しない。
  *
  * @author normal
  */
 @Entity
-@Table()
+@Table(catalog = "EPG_TEST", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"CHANNEL_ID"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Excludechannel.findAll", query = "SELECT e FROM Excludechannel e")
-    ,
-    @NamedQuery(name = "Excludechannel.deleteAll", query = "DELETE FROM Excludechannel")})
+    , @NamedQuery(name = "Excludechannel.findByChannelId", query = "SELECT e FROM Excludechannel e WHERE e.channelId = :channelId")
+    , @NamedQuery(name = "Excludechannel.deleteAll", query = "DELETE FROM Excludechannel")})
 public class Excludechannel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "CHANNEL_ID", nullable = false, length = 20, unique = true)
+    @Column(name = "CHANNEL_ID", nullable = false, length = 20)
     private String channelId;
-
-    /**
-     * チャンネルテーブルにないチャンネルIDの追加、更新を禁止する。
-     * このテーブルへの登録後に、チャンネルテーブルからチャンネルIDが削除されるケースは関知しない。
-     * レコードの追加、更新の際に、チャンネルテーブルにないチャンネルIDが送られてきたら、例外を発生させる。
-     *
-     * @throws IllegalArgumentException
-     */
-    @PrePersist
-    @PreUpdate
-    protected void isExistChannelId() {
-        try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
-            if (this.channelId == null) {
-                return;
-            }
-            EntityManager man = mk.getEntityManager();
-            final TypedQuery<Channel> ql = man.createNamedQuery("Channel.findByChannelId", Channel.class);
-            ql.setParameter("channelId", channelId);
-            List<Channel> res = ql.getResultList();
-            if (res.isEmpty()) {
-                MessageFormat msg = new MessageFormat("チャンネルテーブルに登録のないチャンネルID {0}");
-                Object[] parameters = {this.channelId};
-                throw new IllegalArgumentException(msg.format(parameters));
-            }
-        }
-    }
+    @JoinColumn(name = "CHANNEL_ID", referencedColumnName = "CHANNEL_ID", nullable = false, insertable = false, updatable = false)
+    @OneToOne(optional = false)
+    private Channel channel;
 
     public Excludechannel() {
     }
@@ -99,14 +76,19 @@ public class Excludechannel implements Serializable {
         this.channelId = channelId;
     }
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(7, 43, this);
+    public Channel getChannel() {
+        return channel;
     }
 
-    /**
-     * 保持している値がすべて等しければtrue
-     */
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(29, 149, this);
+    }
+
     @Override
     public boolean equals(Object obj) {
         return EqualsBuilder.reflectionEquals(this, obj);
