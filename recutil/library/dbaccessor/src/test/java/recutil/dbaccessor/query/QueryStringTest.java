@@ -64,8 +64,6 @@ public class QueryStringTest {
     public void tearDown() {
     }
 
-
-
     /**
      * Test of getEntityManager method, of class EntityManagerMaker.
      */
@@ -85,10 +83,10 @@ public class QueryStringTest {
             int expSize = expRes.size();
             String xx1 = recutil.commmonutil.Util.dumpList(expRes);
             LOG.info(xx1);
-            
+
             EntityManagerMaker instance = getTestDbEm();
             EntityManager result = instance.getEntityManager();
-            List<String> table = QueryString.getExcludeChannelList(result);
+            List<String> table = new QueryString(result).getExcludeChannelList();
 
             assertEquals(table.size(), expSize);
             String xx2 = recutil.commmonutil.Util.dumpList(table);
