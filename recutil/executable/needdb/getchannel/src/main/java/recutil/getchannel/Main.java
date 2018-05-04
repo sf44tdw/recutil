@@ -25,9 +25,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -39,11 +39,11 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.dbaccessor.entity.Channel;
+import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.entity.comparator.ChannelComparator_AscendingByChannelNo;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
-import recutil.dbaccessor.query.QueryString;
 import static recutil.dbaccessor.query.QueryString.Channel.PARAMNAME_CHANNEL_NO;
 import static recutil.dbaccessor.query.QueryString.Common.PARAMNAME_CHANNEL_ID;
 import recutil.loggerconfigurator.LoggerConfigurator;
@@ -98,7 +98,7 @@ public class Main {
                 .required(true)
                 .desc("チャンネル番号。省略すると、登録されている全てのチャンネル情報を表示する。チャンネルIDとは併用不可。")
                 .hasArg()
-                .type(Integer.class)
+                .type(Long.class)
                 .build();
 
         final Option channelIdOption = Option.builder("i")
@@ -135,9 +135,9 @@ public class Main {
             exclude = excludeState.ALL;
         }
 
-        final Integer channelNo;
+        final Long channelNo;
         if (cl.hasOption(channelNumberOption.getOpt())) {
-            channelNo = Integer.valueOf(cl.getOptionValue(channelNumberOption.getOpt()));
+            channelNo = Long.parseLong(cl.getOptionValue(channelNumberOption.getOpt()));
         } else {
             channelNo = null;
         }
@@ -165,28 +165,26 @@ public class Main {
 
             final CriteriaBuilder builder = man.getCriteriaBuilder();
             final CriteriaQuery<Channel> query = builder.createQuery(Channel.class);
-            final Root<Channel> root = query.from(Channel.class);
+            final Root<Channel> root_Channel = query.from(Channel.class);
             final List<Predicate> where = new ArrayList<>();
             final TypedQuery<Channel> ql;
 
-            //除外チャンネルテーブルをサブクエリで取る方法が不明なので、別々に持ってきて突合せる。
             if (exclude == excludeState.USEABLE) {
-                //除外チャンネルテーブルの内容をとってくる。
-
-                List<String> table_ex;
-                table_ex = new QueryString(man).getExcludeChannelList();
-
-                //突合せ条件に加える。
-                Expression<String> exp = root.get(PARAMNAME_CHANNEL_ID);
-                Predicate predicate_ex = exp.in(table_ex).not();
-                where.add(predicate_ex);
+                //除外チャンネルテーブルの内容を含めない条件を追加する。
+                final Subquery<Excludechannel> subquery = query.subquery(Excludechannel.class);
+                final Root root_Excludechannel = subquery.from(Excludechannel.class);
+                final List<Predicate> subQueryPredicates = new ArrayList<>();
+                subquery.select(root_Excludechannel.get(PARAMNAME_CHANNEL_ID));
+                subQueryPredicates.add(builder.equal(root_Channel.get(PARAMNAME_CHANNEL_ID), root_Excludechannel.get(PARAMNAME_CHANNEL_ID)));
+                subquery.where(subQueryPredicates.toArray(new Predicate[]{}));
+                where.add(builder.not(builder.exists(subquery)));
             }
             switch (chState) {
                 case BY_NO:
-                    where.add(builder.equal(root.get(PARAMNAME_CHANNEL_NO), channelNo));
+                    where.add(builder.equal(root_Channel.get(PARAMNAME_CHANNEL_NO), channelNo));
                     break;
                 case BY_ID:
-                    where.add(builder.equal(root.get(PARAMNAME_CHANNEL_ID), channelId));
+                    where.add(builder.equal(root_Channel.get(PARAMNAME_CHANNEL_ID), channelId));
                     break;
                 case ALL:
                     break;

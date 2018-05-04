@@ -22,6 +22,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -32,6 +33,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import static recutil.commmonutil.Util.getDefaultLineSeparator;
+import recutil.dbaccessor.entity.Excludechannel;
+import recutil.dbaccessor.entity.TempExcludechannel;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
@@ -187,7 +190,14 @@ public class Main {
                 LOG.info("番組登録 = {}", ToStringBuilder.reflectionToString(pg));
             }
             LOG.info("番組登録完了。");
-
+            LOG.info("除外チャンネル登録転記開始。");
+            final TypedQuery<TempExcludechannel> ql = manager.createNamedQuery("TempExcludechannel.findAll", TempExcludechannel.class);
+            final List<TempExcludechannel> res = ql.getResultList();
+            for (TempExcludechannel tech : res) {
+                manager.persist(new Excludechannel(tech.getChannelId()));
+                LOG.info("転記した除外登録チャンネルID = {}", tech.getChannelId());
+            }
+            LOG.info("除外チャンネル登録転記完了。");
             trans.commit();
             LOG.info("番組登録トランザクションコミット。");
             manager.close();
@@ -195,5 +205,4 @@ public class Main {
         }
 
     }
-
 }

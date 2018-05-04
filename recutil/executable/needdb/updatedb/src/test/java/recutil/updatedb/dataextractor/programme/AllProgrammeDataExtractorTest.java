@@ -33,7 +33,6 @@ import static recutil.commmonutil.Util.dumpList;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.common.Const;
 import recutil.updatedb.common.TestData;
-import recutil.updatedb.dataextractor.channel.ChannelData;
 import recutil.updatedb.listmaker.XmlLoader;
 
 /**
@@ -64,7 +63,7 @@ public class AllProgrammeDataExtractorTest {
 
     private void sortRersult(List<ProgrammeData> dataList) {
         dataList.sort((a, b) -> a.getStartDatetime().compareTo(b.getStartDatetime()));
-        dataList.sort((a, b) -> a.getEventId() - b.getEventId());
+        dataList.sort((a, b) -> Long.compare(a.getEventId(), b.getEventId()));
         dataList.sort((a, b) -> a.getId().compareTo(b.getId()));
     }
 

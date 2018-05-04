@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.entity.Programme;
+import recutil.dbaccessor.entity.TempExcludechannel;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
@@ -100,6 +101,7 @@ public final class TestData {
     private List<Programme> programmeList;
 
     private List<Excludechannel> excludechannellList;
+    private List<TempExcludechannel> tempExcludechannellList;
 
     public TestData() {
         SelectedPersistenceName.selectPersistence(PERSISTENCE.TEST);
@@ -188,11 +190,11 @@ public final class TestData {
         return this.getPg(this.getCh6(), PG9_EVENTID, PG9_TITLE, new Date(PG9_START_TIME), new Date(PG9_STOP_TIME));
     }
 
-    public Excludechannel getEc1() {
+    public TempExcludechannel getTempEc1() {
         return this.getEc(CH1_ID);
     }
 
-    public Excludechannel getEc2() {
+    public TempExcludechannel getTempEc2() {
         return this.getEc(CH4_2_ID);
     }
 
@@ -219,10 +221,14 @@ public final class TestData {
         programmeList.add(this.getPg4());
         programmeList.add(this.getPg9());
 
-        excludechannellList = new ArrayList<>();
-        excludechannellList.add(this.getEc1());
-        excludechannellList.add(this.getEc2());
+        tempExcludechannellList = new ArrayList<>();
+        tempExcludechannellList.add(this.getTempEc1());
+        tempExcludechannellList.add(this.getTempEc2());
 
+        excludechannellList = new ArrayList<>();
+        for (TempExcludechannel tec : this.tempExcludechannellList) {
+            excludechannellList.add(new Excludechannel(tec.getChannelId()));
+        }
     }
 
     private synchronized void sealList() {
@@ -253,8 +259,8 @@ public final class TestData {
         return p;
     }
 
-    private Excludechannel getEc(String ChannelId) {
-        final Excludechannel ec = new Excludechannel();
+    private TempExcludechannel getEc(String ChannelId) {
+        final TempExcludechannel ec = new TempExcludechannel();
         ec.setChannelId(ChannelId);
         return ec;
     }
@@ -350,14 +356,25 @@ public final class TestData {
     }
 
     /**
-     * 新規作成した除外チャンネルのエンティティリストを取得する。
+     * 新規作成した除外チャンネルのエンティティリストを取得する。(転記元)
+     *
+     * @return
+     */
+    public synchronized List<TempExcludechannel> getTempExcludechannellList() {
+        this.make();
+        this.sealList();
+        return this.tempExcludechannellList;
+    }
+
+    /**
+     * 新規作成した除外チャンネルのエンティティリストを取得する。(転記先)
      *
      * @return
      */
     public synchronized List<Excludechannel> getExcludechannellList() {
         this.make();
         this.sealList();
-        return excludechannellList;
+        return this.excludechannellList;
     }
 
     public static final String PG_AFTER_60 = "AFTER_60_SECOND";
@@ -381,24 +398,24 @@ public final class TestData {
     public static final String PG_AFTER_21600 = "AFTER_21600_SECOND";
     public static final String PG_AFTER_25200 = "AFTER_25200_SECOND";
     public static final long ONE_HOUR_IN_MILLIS = ONE_MINUTE_IN_MILLIS * 60L;
-    private  Programme p60;
-    private  Programme p120;
-    private  Programme p180;
-    private  Programme p240;
-    private  Programme p300;
-    private  Programme p360;
-    private  Programme p600;
-    private  Programme p1200;
-    private  Programme p1800;
-    private  Programme p2400;
-    private  Programme p3000;
-    private  Programme p3600;
-    private  Programme p7200;
-    private  Programme p10800;
-    private  Programme p14400;
-    private  Programme p18000;
-    private  Programme p21600;
-    private  Programme p25200;
+    private Programme p60;
+    private Programme p120;
+    private Programme p180;
+    private Programme p240;
+    private Programme p300;
+    private Programme p360;
+    private Programme p600;
+    private Programme p1200;
+    private Programme p1800;
+    private Programme p2400;
+    private Programme p3000;
+    private Programme p3600;
+    private Programme p7200;
+    private Programme p10800;
+    private Programme p14400;
+    private Programme p18000;
+    private Programme p21600;
+    private Programme p25200;
 
     private ZonedDateTime d = ZonedDateTime.now();
     private ZonedDateTime d2 = d.truncatedTo(ChronoUnit.MINUTES);
@@ -422,92 +439,92 @@ public final class TestData {
 
 //今から1分後に始まる番組。
         final Date after60sec = new Date((nowTime.getTime() + ONE_MINUTE_IN_MILLIS));
-         p60 = getPg(getCh5(), id++, PG_AFTER_60, after60sec, new Date(after60sec.getTime() + pp));
+        p60 = getPg(getCh5(), id++, PG_AFTER_60, after60sec, new Date(after60sec.getTime() + pp));
         _t.add(p60);
 
 //同、2分後。
         final Date after120sec = new Date((after60sec.getTime() + ONE_MINUTE_IN_MILLIS));
-         p120 = getPg(getCh5(), id++, PG_AFTER_120, after120sec, new Date(after120sec.getTime() + pp));
+        p120 = getPg(getCh5(), id++, PG_AFTER_120, after120sec, new Date(after120sec.getTime() + pp));
         _t.add(p120);
 
         //同、3分後。
         final Date after180sec = new Date((after120sec.getTime() + ONE_MINUTE_IN_MILLIS));
-         p180 = getPg(getCh5(), id++, PG_AFTER_180, after180sec, new Date(after180sec.getTime() + pp));
+        p180 = getPg(getCh5(), id++, PG_AFTER_180, after180sec, new Date(after180sec.getTime() + pp));
         _t.add(p180);
 
         //同、4分後。
         final Date after240sec = new Date((after180sec.getTime() + ONE_MINUTE_IN_MILLIS));
-         p240 = getPg(getCh5(), id++, PG_AFTER_240, after240sec, new Date(after240sec.getTime() + pp));
+        p240 = getPg(getCh5(), id++, PG_AFTER_240, after240sec, new Date(after240sec.getTime() + pp));
         _t.add(p240);
 
         //同、5分後。
         final Date after300sec = new Date((after240sec.getTime() + ONE_MINUTE_IN_MILLIS));
-         p300 = getPg(getCh5(), id++, PG_AFTER_300, after300sec, new Date(after300sec.getTime() + pp));
+        p300 = getPg(getCh5(), id++, PG_AFTER_300, after300sec, new Date(after300sec.getTime() + pp));
         _t.add(p300);
 
         //同、6分後。
         final Date after360sec = new Date((after300sec.getTime() + ONE_MINUTE_IN_MILLIS));
-         p360 = getPg(getCh5(), id++, PG_AFTER_360, after360sec, new Date(after360sec.getTime() + pp));
+        p360 = getPg(getCh5(), id++, PG_AFTER_360, after360sec, new Date(after360sec.getTime() + pp));
         _t.add(p360);
 
         //同、10分後。
         final Date after10min = new Date((after360sec.getTime() + TEN_MINUTE_IN_MILLIS));
-         p600 = getPg(getCh5(), id++, PG_AFTER_600, after10min, new Date(after10min.getTime() + pp));
+        p600 = getPg(getCh5(), id++, PG_AFTER_600, after10min, new Date(after10min.getTime() + pp));
         _t.add(p600);
 
         //同、20分後。
         final Date after20min = new Date((after10min.getTime() + TEN_MINUTE_IN_MILLIS));
-         p1200 = getPg(getCh5(), id++, PG_AFTER_1200, after20min, new Date(after20min.getTime() + pp));
+        p1200 = getPg(getCh5(), id++, PG_AFTER_1200, after20min, new Date(after20min.getTime() + pp));
         _t.add(p1200);
 
         //同、30分後。
         final Date after30min = new Date((after20min.getTime() + TEN_MINUTE_IN_MILLIS));
-         p1800 = getPg(getCh5(), id++, PG_AFTER_1800, after30min, new Date(after30min.getTime() + pp));
+        p1800 = getPg(getCh5(), id++, PG_AFTER_1800, after30min, new Date(after30min.getTime() + pp));
         _t.add(p1800);
 
         //同、40分後。
         final Date after40min = new Date((after30min.getTime() + TEN_MINUTE_IN_MILLIS));
-         p2400 = getPg(getCh5(), id++, PG_AFTER_2400, after40min, new Date(after40min.getTime() + pp));
+        p2400 = getPg(getCh5(), id++, PG_AFTER_2400, after40min, new Date(after40min.getTime() + pp));
         _t.add(p2400);
 
         //同、50分後。
         final Date after50min = new Date((after40min.getTime() + TEN_MINUTE_IN_MILLIS));
-         p3000 = getPg(getCh5(), id++, PG_AFTER_3000, after50min, new Date(after50min.getTime() + pp));
+        p3000 = getPg(getCh5(), id++, PG_AFTER_3000, after50min, new Date(after50min.getTime() + pp));
         _t.add(p3000);
 
         //同、60分後。
         final Date after60min = new Date((after50min.getTime() + TEN_MINUTE_IN_MILLIS));
-         p3600 = getPg(getCh5(), id++, PG_AFTER_3600, after60min, new Date(after60min.getTime() + pp));
+        p3600 = getPg(getCh5(), id++, PG_AFTER_3600, after60min, new Date(after60min.getTime() + pp));
         _t.add(p3600);
 
         //2時間
         final Date after2hour = new Date((after60min.getTime() + ONE_HOUR_IN_MILLIS));
-         p7200 = getPg(getCh5(), id++, PG_AFTER_7200, after2hour, new Date(after2hour.getTime() + pp));
+        p7200 = getPg(getCh5(), id++, PG_AFTER_7200, after2hour, new Date(after2hour.getTime() + pp));
         _t.add(p7200);
 
 //3時間
         final Date after3hour = new Date((after2hour.getTime() + ONE_HOUR_IN_MILLIS));
-         p10800 = getPg(getCh5(), id++, PG_AFTER_10800, after3hour, new Date(after3hour.getTime() + pp));
+        p10800 = getPg(getCh5(), id++, PG_AFTER_10800, after3hour, new Date(after3hour.getTime() + pp));
         _t.add(p10800);
 
 //4時間
         final Date after4hour = new Date((after3hour.getTime() + ONE_HOUR_IN_MILLIS));
-         p14400 = getPg(getCh5(), id++, PG_AFTER_14400, after4hour, new Date(after4hour.getTime() + pp));
+        p14400 = getPg(getCh5(), id++, PG_AFTER_14400, after4hour, new Date(after4hour.getTime() + pp));
         _t.add(p14400);
 
 //5時間
         final Date after5hour = new Date((after4hour.getTime() + ONE_HOUR_IN_MILLIS));
-         p18000 = getPg(getCh5(), id++, PG_AFTER_18000, after5hour, new Date(after5hour.getTime() + pp));
+        p18000 = getPg(getCh5(), id++, PG_AFTER_18000, after5hour, new Date(after5hour.getTime() + pp));
         _t.add(p18000);
 
 //6時間
         final Date after6hour = new Date((after5hour.getTime() + ONE_HOUR_IN_MILLIS));
-         p21600 = getPg(getCh5(), id++, PG_AFTER_21600, after6hour, new Date(after6hour.getTime() + pp));
+        p21600 = getPg(getCh5(), id++, PG_AFTER_21600, after6hour, new Date(after6hour.getTime() + pp));
         _t.add(p21600);
 
 //7時間
         final Date after7hour = new Date((after6hour.getTime() + ONE_HOUR_IN_MILLIS));
-         p25200 = getPg(getCh5(), id++, PG_AFTER_25200, after7hour, new Date(after7hour.getTime() + pp));
+        p25200 = getPg(getCh5(), id++, PG_AFTER_25200, after7hour, new Date(after7hour.getTime() + pp));
         _t.add(p25200);
         return _t;
     }
@@ -579,10 +596,7 @@ public final class TestData {
     public Programme getP25200() {
         return p25200;
     }
-    
-    
-    
-    
+
     /**
      * 現在時刻から60-25200秒後までに始まる番組情報を作成し、データベースに追加する。
      *
@@ -601,7 +615,7 @@ public final class TestData {
         }
     }
 
-    private synchronized void deleteAll(EntityManager em) {
+    public synchronized void deleteAll(EntityManager em) {
         LOG.info("DB登録内容を全て削除します。");
 
         LOG.info("現在の番組登録を全て削除します。");
@@ -610,17 +624,23 @@ public final class TestData {
         pg_del.executeUpdate();
         LOG.info("現在の番組登録を全て削除しました。");
 
-        LOG.info("現在の除外登録を全て削除します。");
+        LOG.info("現在の除外登録(転記先)を全て削除します。");
         final TypedQuery<Excludechannel> ex_del;
         ex_del = em.createNamedQuery("Excludechannel.deleteAll", Excludechannel.class);
         ex_del.executeUpdate();
-        LOG.info("現在の除外登録を全て削除しました。");
+        LOG.info("現在の除外登録(転記先)を全て削除しました。");
 
         LOG.info("現在のチャンネル登録を全て削除します。");
         final TypedQuery<Channel> ch_del;
         ch_del = em.createNamedQuery("Channel.deleteAll", Channel.class);
         ch_del.executeUpdate();
         LOG.info("現在のチャンネル登録を全て削除しました。");
+
+        LOG.info("現在の除外登録(転記元)を全て削除します。");
+        final TypedQuery<TempExcludechannel> tex_del;
+        tex_del = em.createNamedQuery("TempExcludechannel.deleteAll", TempExcludechannel.class);
+        tex_del.executeUpdate();
+        LOG.info("現在の除外登録(転記元)を全て削除しました。");
 
         LOG.info("DB登録内容を全て削除しました。");
 
@@ -653,10 +673,18 @@ public final class TestData {
 
     private synchronized void updateDB02(EntityManager em) {
         LOG.info("除外チャンネル登録開始。");
+        LOG.info("除外チャンネル(転記元)登録開始。");
+        for (TempExcludechannel tech : tempExcludechannellList) {
+            em.persist(tech);
+            LOG.info("チャンネルIDを除外登録 = " + ToStringBuilder.reflectionToString(tech));
+        }
+        LOG.info("除外チャンネル(転記元)登録完了。");
+        LOG.info("除外チャンネル(転記先)登録開始。");
         for (Excludechannel ech : excludechannellList) {
             em.persist(ech);
             LOG.info("チャンネルIDを除外登録 = " + ToStringBuilder.reflectionToString(ech));
         }
+        LOG.info("除外チャンネル(転記先)登録完了。");
         LOG.info("除外チャンネル登録完了。");
     }
 
@@ -711,7 +739,21 @@ public final class TestData {
         }
         return new ArrayList<>();
     }
-
+    public static List<TempExcludechannel> dumpTempExcludechannelTable() {
+        try (EntityManagerMaker emm = getTestDbEm()) {
+            final EntityManager em = emm.getEntityManager();
+            final TypedQuery<TempExcludechannel> ql = em.createNamedQuery("TempExcludechannel.findAll", TempExcludechannel.class);
+            final List<TempExcludechannel> res = ql.getResultList();
+            for (TempExcludechannel ech : res) {
+                LOG.info(ToStringBuilder.reflectionToString(ech));
+            }
+            em.close();
+            return res;
+        } catch (Exception ex) {
+            LOG.error("{}", ex);
+        }
+        return new ArrayList<>();
+    }
     public static List<Excludechannel> dumpExcludechannelTable() {
         try (EntityManagerMaker emm = getTestDbEm()) {
             final EntityManager em = emm.getEntityManager();

@@ -23,8 +23,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import recutil.updatedb.dataextractor.EpgData;
 
-
-
 /**
  * 番組情報の保持を行うクラス
  *
@@ -40,7 +38,7 @@ public final class ProgrammeData implements EpgData {
     //チャンネルid
     private final String id;
     //番組id
-    private final int eventId;
+    private final long eventId;
 
     //最終的に取り出したい情報。
     //番組名
@@ -58,7 +56,7 @@ public final class ProgrammeData implements EpgData {
      * @param startDatetime:放送開始時刻
      * @param stopDatetime :放送終了時刻
      */
-    public ProgrammeData(String id, int eventId, String title, Date startDatetime, Date stopDatetime) throws IllegalArgumentException {
+    public ProgrammeData(String id, long eventId, String title, Date startDatetime, Date stopDatetime) throws IllegalArgumentException {
 
         if (id != null && !"".equals(id)) {
             this.id = id;
@@ -96,7 +94,7 @@ public final class ProgrammeData implements EpgData {
         return id;
     }
 
-    public synchronized int getEventId() {
+    public synchronized long getEventId() {
         return eventId;
     }
 

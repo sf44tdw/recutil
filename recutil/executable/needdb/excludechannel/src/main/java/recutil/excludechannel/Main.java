@@ -35,7 +35,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.dbaccessor.entity.Channel;
-import recutil.dbaccessor.entity.Excludechannel;
+import recutil.dbaccessor.entity.TempExcludechannel;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
@@ -46,7 +46,7 @@ import recutil.loggerconfigurator.LoggerConfigurator;
  * BS_238 BS_241 BS_242 BS_243 BS_244 BS_245 BS_251 BS_252 BS_255 BS_256
  */
 /**
- * 除外チャンネルの登録、削除を行う。
+ * 転記元テーブルに除外チャンネルの登録、削除を行う。転記元テーブルの内容は番組情報更新時に転記先テーブルに転記される。
  *
  * @author normal
  */
@@ -78,19 +78,19 @@ public class Main {
     public void start(String[] args) throws org.apache.commons.cli.ParseException {
         final Option printAllOption = Option.builder("p")
                 .longOpt("printall")
-                .desc("除外チャンネルの情報をすべて表示する。他のオプションとは同時に指定できない。")
+                .desc("転記元テーブルに記録された除外チャンネルの情報をすべて表示する。他のオプションとは同時に指定できない。")
                 .hasArg(false)
                 .build();
 
         final Option deleteAllOption = Option.builder("d")
                 .longOpt("deleteall")
-                .desc("除外チャンネルの登録をすべて削除する。他のオプションとは同時に指定できない。")
+                .desc("転記元テーブルに除外チャンネルの登録をすべて削除する。他のオプションとは同時に指定できない。")
                 .hasArg(false)
                 .build();
 
         final Option updateAllOption = Option.builder("u")
                 .longOpt("updateall")
-                .desc("除外するチャンネルの一覧を更新する。除外するチャンネルのチャンネルIDを全て指定する。既存の登録内容はすべて削除される。チャンネルテーブルに登録済みのチャンネルID以外は登録できない。他のオプションとは同時に指定できない。")
+                .desc("転記元テーブルの除外するチャンネルの一覧を更新する。除外するチャンネルのチャンネルIDを全て指定する。既存の登録内容はすべて削除される。チャンネルテーブルに登録済みのチャンネルID以外は登録できない。他のオプションとは同時に指定できない。")
                 .hasArgs()
                 .type(String.class)
                 .build();
@@ -137,7 +137,7 @@ public class Main {
             final EntityManager em = emm.getEntityManager();
 
             if (printAll == true) {
-                List<Channel> chs = em.createQuery("select t1 from Channel t1, Excludechannel t2 where t1.channelId = t2.channelId", Channel.class).getResultList();
+                List<Channel> chs = em.createQuery("select t1 from Channel t1, TempExcludechannel t2 where t1.channelId = t2.channelId", Channel.class).getResultList();
                 MessageFormat format = new MessageFormat(CHANNELS_TEMP);
                 for (Channel ch : chs) {
                     Object[] parameters = {ch.getChannelNo(), ch.getChannelId(), ch.getDisplayName()};
@@ -154,9 +154,9 @@ public class Main {
 
                 TRANSACTION:
                 {
-                    final TypedQuery<Excludechannel> ql_del;
+                    final TypedQuery<TempExcludechannel> ql_del;
                     LOG.info("現在の除外登録を全て削除します。");
-                    ql_del = em.createNamedQuery("Excludechannel.deleteAll", Excludechannel.class);
+                    ql_del = em.createNamedQuery("TempExcludechannel.deleteAll", TempExcludechannel.class);
                     ql_del.executeUpdate();
                     LOG.info("現在の除外登録を全て削除しました。");
                     if (deleteAll == true) {
@@ -166,7 +166,7 @@ public class Main {
                     if (channelIds.size() > 0) {
                         LOG.info("除外チャンネル登録開始。");
                         for (String s : channelIds) {
-                            final Excludechannel ech = new Excludechannel(s);
+                            final TempExcludechannel ech = new TempExcludechannel(s);
                             em.persist(ech);
                             LOG.info("チャンネルID = " + ech.getChannelId() + "を除外登録しました。");
                         }

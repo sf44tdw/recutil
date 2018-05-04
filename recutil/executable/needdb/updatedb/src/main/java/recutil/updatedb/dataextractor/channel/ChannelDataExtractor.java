@@ -82,9 +82,9 @@ public class ChannelDataExtractor extends AbstractEpgFileExtractor<ChannelData> 
 
    
     
-    private synchronized int getChannelNumber(String ch_S, String tp_S) throws IllegalArgumentException {
+    private synchronized long getChannelNumber(String ch_S, String tp_S) throws IllegalArgumentException {
 //チャンネルidの頭2文字を取り出す。
-        int r;
+        long r;
         String pref = ch_S.substring(0, 2);
         LOG.debug("チャンネルid:{} その頭2文字:{}", ch_S, pref);
         switch (pref) {
@@ -96,7 +96,7 @@ public class ChannelDataExtractor extends AbstractEpgFileExtractor<ChannelData> 
             case ChannelDataExtractor.PREFIX_CS:
                 //BSかCSの場合(CSについては憶測)
                 //チャンネルidの頭3文字以外を数字に変換して物理チャンネル番号とする。
-                r = Integer.parseInt(ch_S.substring(3));
+                r = Long.parseLong(ch_S.substring(3));
                 break;
             default:
                 //想定外のケース。

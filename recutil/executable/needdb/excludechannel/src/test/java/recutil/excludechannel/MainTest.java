@@ -30,9 +30,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import recutil.consolesnatcher.ConsoleSnatcher;
-import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.testdata.TestData;
 import static recutil.commmonutil.Util.getDefaultLineSeparator;
+import recutil.dbaccessor.entity.TempExcludechannel;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -95,13 +95,13 @@ public class MainTest {
         LOG.info("start_01");
         String[] args = {"-d"};
         LOG.info("before");
-        final List<Excludechannel> res0 = TestData.dumpExcludechannelTable();
-        assertEquals(res0.size(), 2);
+        final List<TempExcludechannel> res0 = TestData.dumpTempExcludechannelTable();
+        assertEquals(res0.size(), dat.getTempExcludechannellList().size());
         Main instance = new Main();
         instance.start(args);
         LOG.info("after");
-        final List<Excludechannel> res = TestData.dumpExcludechannelTable();
-        assertEquals(res.size(), 0);
+        final List<TempExcludechannel> res = TestData.dumpTempExcludechannelTable();
+        assertTrue(res.isEmpty());
 
     }
 
@@ -119,20 +119,20 @@ public class MainTest {
         TestData.dumpChannelTable();
         LOG.info("before");
 
-        List<Excludechannel> res0 = TestData.dumpExcludechannelTable();
-        assertEquals(res0.size(), dat.getExcludechannellList().size());
+        List<TempExcludechannel> res0 = TestData.dumpTempExcludechannelTable();
+        assertEquals(res0.size(), dat.getTempExcludechannellList().size());
         res0 = null;
 
         Main instance = new Main();
         instance.start(args);
         LOG.info("after");
-        final List<Excludechannel> res = TestData.dumpExcludechannelTable();
+        final List<TempExcludechannel> res = TestData.dumpTempExcludechannelTable();
 
         final int expSize = vals.size();
 
         assertEquals(res.size(), expSize);
 
-        for (Excludechannel exc : res) {
+        for (TempExcludechannel exc : res) {
             assertTrue(vals.contains(exc.getChannelId()));
         }
 

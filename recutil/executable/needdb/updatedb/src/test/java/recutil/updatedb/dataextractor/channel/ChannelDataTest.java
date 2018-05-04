@@ -55,7 +55,7 @@ public class ChannelDataTest {
     public void tearDown() {
     }
     private static final String DUMMY_ID = "DUMMY_ID";
-    private static final int DUMMY_CH = 100;
+    private static final long DUMMY_CH = 100;
     private static final String DUMMY_NAME = "DUMMY_NAME";
 
     private ChannelData getInstance() {
@@ -133,8 +133,8 @@ public class ChannelDataTest {
     public void testGetPhysicalChannelNumber() {
         LOG.info("getPhysicalChannelNumber");
         ChannelData instance = this.getInstance();
-        int expResult = DUMMY_CH;
-        int result = instance.getPhysicalChannelNumber();
+        long expResult = DUMMY_CH;
+        long result = instance.getPhysicalChannelNumber();
         assertEquals(expResult, result);
     }
 

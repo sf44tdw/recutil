@@ -141,7 +141,7 @@ public class Main {
         try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             EntityManager man = mk.getEntityManager();
             final TypedQuery<Programme> ql;
-            ql = man.createNamedQuery("Programme.findByChannelIdAndEventId", Programme.class);
+            ql = man.createQuery("SELECT p FROM Programme p WHERE p.eventId = :eventId and p.channelId.channelId = :channelId", Programme.class);
 
             ql.setParameter("channelId", channelId);
             ql.setParameter("eventId", eventId);

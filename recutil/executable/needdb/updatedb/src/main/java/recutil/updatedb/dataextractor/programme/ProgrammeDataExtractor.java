@@ -80,10 +80,10 @@ public class ProgrammeDataExtractor extends AbstractEpgFileExtractor<ProgrammeDa
 
     @Override
     protected final synchronized ProgrammeData dump(Node N) throws IllegalArgumentException {
-        String event_id_s = "";
-        String start_time_s = "";
-        String stop_time_s = "";
-        String channel_id_s = "";
+        String event_id_s;
+        String start_time_s;
+        String stop_time_s;
+        String channel_id_s;
         String title_s = "";
 
         NamedNodeMap programme_attrs = N.getAttributes();  // NamedNodeMapの取得
@@ -111,7 +111,7 @@ public class ProgrammeDataExtractor extends AbstractEpgFileExtractor<ProgrammeDa
         }
         ProgrammeData p = new ProgrammeData(
                 channel_id_s,
-                Integer.parseInt(event_id_s),
+                Long.parseLong(event_id_s),
                 title_s,
                 Converter.stringToDate(start_time_s, ProgrammeDataExtractor.C_DATE_PATTERN),
                 Converter.stringToDate(stop_time_s, ProgrammeDataExtractor.C_DATE_PATTERN)

@@ -20,6 +20,7 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -28,9 +29,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
+import recutil.dbaccessor.entity.Channel;
+import recutil.dbaccessor.entity.TempExcludechannel;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
+import recutil.dbaccessor.testdata.TestData;
+import static recutil.dbaccessor.testdata.TestData.getTestDbEm;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.common.Const;
 import recutil.updatedb.dataextractor.channel.AllChannelDataExtractor;
@@ -219,6 +224,32 @@ public class MainTest {
     public void testStart04_02() throws Throwable {
         try {
             LOG.info("start04_02");
+            //XMLファイル上の適当なチャンネルIDを、既存の内容を削除した転記元の除外テーブルに入れておく。
+            LOG.info("準備開始。");
+            final String DUMMY_ID = "GR_1048";
+            try (EntityManagerMaker emm = getTestDbEm()) {
+                final EntityManager em = emm.getEntityManager();
+                final EntityTransaction trans = em.getTransaction();
+                trans.begin();
+                final TypedQuery<TempExcludechannel> tex_del;
+
+                TestData x = new TestData();
+                x.deleteAll(em);
+
+                Channel ch_d = new Channel(DUMMY_ID, 111L);
+                ch_d.setDisplayName("DUMMY");
+                em.persist(ch_d);
+                trans.commit();
+            }
+            try (EntityManagerMaker emm = getTestDbEm()) {
+                final EntityManager em = emm.getEntityManager();
+                final EntityTransaction trans = em.getTransaction();
+                trans.begin();
+                em.persist(new TempExcludechannel(DUMMY_ID));
+                trans.commit();
+            }
+            LOG.info("準備完了。");
+
             String[] args = {"-d", Const.getXMLTESTDATADIR().getAbsolutePath(), "-c", "UTF-8"};
             Main instance = new Main();
             instance.start(args);

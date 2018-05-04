@@ -43,7 +43,7 @@ Tableアノテーションのcatalog,schemaについては、MariaDBのCREATEIND
  * @author normal
  */
 @Entity
-@Table(catalog = "EPG_TEST", schema = "", uniqueConstraints = {
+@Table(name = "EXCLUDECHANNEL", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"CHANNEL_ID"})})
 @XmlRootElement
 @NamedQueries({

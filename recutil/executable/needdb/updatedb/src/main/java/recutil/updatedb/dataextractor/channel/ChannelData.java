@@ -32,7 +32,7 @@ public final class ChannelData implements EpgData {
     private final String id;
 
 // 物理チャンネル番号
-    private final int physicalChannelNumber;
+    private final long physicalChannelNumber;
 
 // 放送局名
     private final String broadcastingStationName;
@@ -43,7 +43,7 @@ public final class ChannelData implements EpgData {
      * @param physicalChannelNumber 物理チャンネル番号
      * @param broadcastingStationName 放送局名
      */
-    public ChannelData(String id, int physicalChannelNumber, String broadcastingStationName) throws IllegalArgumentException {
+    public ChannelData(String id, long physicalChannelNumber, String broadcastingStationName) throws IllegalArgumentException {
         if (id != null && !"".equals(id)) {
             this.id = id;
         } else {
@@ -73,7 +73,7 @@ public final class ChannelData implements EpgData {
     /**
      * @return 物理チャンネル番号
      */
-    public synchronized int getPhysicalChannelNumber() {
+    public synchronized long getPhysicalChannelNumber() {
         return physicalChannelNumber;
     }
 

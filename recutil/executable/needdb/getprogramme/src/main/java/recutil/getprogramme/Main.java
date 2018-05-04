@@ -200,7 +200,7 @@ public class Main {
                 .required(true)
                 .desc("検索条件オプション。ほかの検索条件オプションと同時には使用できない。指定された番組IDの番組を検索する。このオプションが無い場合は、全ての番組IDを指定したことになる。")
                 .hasArg()
-                .type(Integer.class)
+                .type(Long.class)
                 .build();
 
         final Option startDateTimeOption = Option.builder("d")
@@ -275,9 +275,9 @@ public class Main {
             channelId = null;
         }
 
-        final Integer eventId;
+        final Long eventId;
         if (cl.hasOption(eventIdOption.getOpt())) {
-            eventId = Integer.valueOf(cl.getOptionValue(eventIdOption.getOpt()));
+            eventId = Long.parseLong(cl.getOptionValue(eventIdOption.getOpt()));
         } else {
             eventId = null;
         }
@@ -344,6 +344,8 @@ public class Main {
             final TypedQuery<Programme> ql;
 
             //除外チャンネルテーブルをサブクエリで取る方法が不明なので、別々に持ってきて突合せる。
+            //一応方法はあるが、チャンネルテーブルの時と同様に除外テーブルのサブクエリと突き合せようとしたところ、生成されたSQLに問題があった。(番組テーブルのチャンネルIDをチャンネルテーブル経由で参照しようとしている。)
+            //SELECT t0.ID, t0.EVENT_ID, t0.START_DATETIME, t0.STOP_DATETIME, t0.TITLE, t0.CHANNEL_ID FROM EPG_TEST.PROGRAMME t0 WHERE NOT EXISTS (SELECT t1.CHANNEL_ID FROM EPG_TEST.EXCLUDECHANNEL t1 WHERE (t0.CHANNEL_ID = t1.CHANNEL_ID.CHANNEL.CHANNEL_ID)) 
             if (exclude == excludeState.USEABLE) {
                 //除外チャンネルテーブルの内容をとってくる。
 
@@ -379,10 +381,10 @@ public class Main {
             PrograammeListSorter.sortRes(table);
 
             System.out.print(Main.printRes(table, format, firstOnly));
-            
+
             trans.commit();
             man.close();
-            
+
         }
 
     }

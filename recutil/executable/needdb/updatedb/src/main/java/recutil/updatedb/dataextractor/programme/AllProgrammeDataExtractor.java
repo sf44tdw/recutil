@@ -16,7 +16,6 @@
  */
 package recutil.updatedb.dataextractor.programme;
 
-
 import java.util.List;
 import org.w3c.dom.Document;
 import recutil.updatedb.dataextractor.AbstractAllEpgFileExtractor;
@@ -35,15 +34,16 @@ public class AllProgrammeDataExtractor extends AbstractAllEpgFileExtractor<Progr
     protected synchronized ProgrammeDataExtractor getExtractor(Document doc) {
         return new ProgrammeDataExtractor(doc);
     }
+
     /**
      * チャンネルID昇順ソート,番組ID昇順ソート,放送開始時刻昇順ソート
      * @inheritDoc
      */
     @Override
     protected void sortRersult(List<ProgrammeData> dataList) {
-        dataList.sort((a,b)->a.getStartDatetime().compareTo(b.getStartDatetime()));
-        dataList.sort((a,b)->a.getEventId()-b.getEventId());
-        dataList.sort((a,b)->a.getId().compareTo(b.getId()));     
+        dataList.sort((a, b) -> a.getStartDatetime().compareTo(b.getStartDatetime()));
+        dataList.sort((a, b) -> Long.compare(a.getEventId(), b.getEventId()));
+        dataList.sort((a, b) -> a.getId().compareTo(b.getId()));
     }
 
 }

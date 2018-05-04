@@ -58,7 +58,7 @@ public class ProgrammeDataTest {
     //チャンネルid
     private static final String ID = "DUMMY_ID";
     //番組id
-    private static final int EVENT_ID = 33;
+    private static final long EVENT_ID = 33;
     //番組名
     private static final String TITLE = "DUMMY_TITLE";
     //開始時刻
@@ -166,8 +166,8 @@ public class ProgrammeDataTest {
     public void testGetEventId() {
         LOG.info("getEventId");
         ProgrammeData instance = this.getInstance();
-        int expResult = EVENT_ID;
-        int result = instance.getEventId();
+        long expResult = EVENT_ID;
+        long result = instance.getEventId();
         assertEquals(expResult, result);
     }
 
