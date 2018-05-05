@@ -191,11 +191,11 @@ public final class TestData {
     }
 
     public TempExcludechannel getTempEc1() {
-        return this.getEc(CH1_ID);
+        return this.getTempEc(CH1_ID);
     }
 
     public TempExcludechannel getTempEc2() {
-        return this.getEc(CH4_2_ID);
+        return this.getTempEc(CH4_2_ID);
     }
 
     /**
@@ -259,7 +259,7 @@ public final class TestData {
         return p;
     }
 
-    private TempExcludechannel getEc(String ChannelId) {
+    private TempExcludechannel getTempEc(String ChannelId) {
         final TempExcludechannel ec = new TempExcludechannel();
         ec.setChannelId(ChannelId);
         return ec;
@@ -419,26 +419,25 @@ public final class TestData {
 
     private ZonedDateTime d = ZonedDateTime.now();
     private ZonedDateTime d2 = d.truncatedTo(ChronoUnit.MINUTES);
+    private Date nowTime = Date.from(d2.toInstant());
 
     public Date getNowTime() {
+        ZonedDateTime d = ZonedDateTime.now();
+        ZonedDateTime d2 = d.truncatedTo(ChronoUnit.MINUTES);
+        nowTime = Date.from(d2.toInstant());
         return new Date(nowTime.getTime());
     }
-    private Date nowTime = Date.from(d2.toInstant());
 
     public List<Programme> getTestProgrammes() {
         make();
         List<Programme> _t = new ArrayList<>();
-
-        ZonedDateTime d = ZonedDateTime.now();
-        ZonedDateTime d2 = d.truncatedTo(ChronoUnit.MINUTES);
-        nowTime = Date.from(d2.toInstant());
 
         final long pp = (30L * 1000L);
 
         int id = 1000000;
 
 //今から1分後に始まる番組。
-        final Date after60sec = new Date((nowTime.getTime() + ONE_MINUTE_IN_MILLIS));
+        final Date after60sec = new Date((getNowTime().getTime() + ONE_MINUTE_IN_MILLIS));
         p60 = getPg(getCh5(), id++, PG_AFTER_60, after60sec, new Date(after60sec.getTime() + pp));
         _t.add(p60);
 
@@ -739,6 +738,7 @@ public final class TestData {
         }
         return new ArrayList<>();
     }
+
     public static List<TempExcludechannel> dumpTempExcludechannelTable() {
         try (EntityManagerMaker emm = getTestDbEm()) {
             final EntityManager em = emm.getEntityManager();
@@ -754,6 +754,7 @@ public final class TestData {
         }
         return new ArrayList<>();
     }
+
     public static List<Excludechannel> dumpExcludechannelTable() {
         try (EntityManagerMaker emm = getTestDbEm()) {
             final EntityManager em = emm.getEntityManager();
