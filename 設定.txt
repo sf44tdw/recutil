@@ -1,6 +1,6 @@
 ./build.sh && ./install.sh
 
-#DB更新以外はroot以外もできるようにする場合は下記実施。
+#root以外もできるようにする場合は下記実施。
 cd /usr/local/bin/
 chmod a+rx recutil_jar
-chmod a+r excludechannel executerecordcommand getchannel getprogramme reserve simpleatrunner
+chmod a+r excludechannel executerecordcommand getchannel getprogramme reserve simpleatrunner updateepgdb
