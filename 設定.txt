@@ -3,4 +3,4 @@
 #DB更新以外はroot以外もできるようにする場合は下記実施。
 cd /usr/local/bin/
 chmod a+rx recutil_jar
-chmod a+r excludechannel executerecordcommand getchannel getprogramme reserve
+chmod a+r excludechannel executerecordcommand getchannel getprogramme reserve simpleatrunner
