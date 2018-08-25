@@ -59,17 +59,5 @@ public class TempExcludechannelTest {
         assertEquals(expResult, result);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testIsExistChannelId() {
-        LOG.info("isExistChannelId");
-        dat.reloadDB();
-        TempExcludechannel instance = new TempExcludechannel();
-        instance.setChannelId("DUMMY_1234@@@");
-        try (EntityManagerMaker mk = getTestDbEm()) {
-            EntityManager man = mk.getEntityManager();
-            man.persist(instance);
-        }
-    }
-
 
 }

@@ -55,32 +55,6 @@ public class TempExcludechannel implements Serializable {
         this.channelId = channelId;
     }
 
-    /**
-     * チャンネルテーブルにないチャンネルIDの追加、更新を禁止する。(番組情報との間に制約がつけられないので、一々確認する。)
-     * このテーブルへの登録後に、チャンネルテーブルからチャンネルIDが削除されるケースは関知しない。
-     * レコードの追加、更新の際に、チャンネルテーブルにないチャンネルIDが送られてきたら、例外を発生させる。
-     *
-     * @throws IllegalArgumentException
-     */
-    @PrePersist
-    @PreUpdate
-    protected void isExistChannelId() {
-        if (this.channelId == null) {
-            return;
-        }
-        try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
-            EntityManager man = mk.getEntityManager();
-            final TypedQuery<Channel> ql = man.createNamedQuery("Channel.findByChannelId", Channel.class);
-            ql.setParameter("channelId", channelId);
-            List<Channel> res = ql.getResultList();
-            if (res.isEmpty()) {
-                MessageFormat msg = new MessageFormat("チャンネルテーブルに登録のないチャンネルID {0}");
-                Object[] parameters = {this.channelId};
-                throw new IllegalArgumentException(msg.format(parameters));
-            }
-        }
-    }
-
     public String getChannelId() {
         return channelId;
     }
