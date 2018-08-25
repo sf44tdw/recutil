@@ -132,6 +132,22 @@ public class Main {
         }
     }
 
+    /**
+     * 与えられた文字列内の'と"を_に置き換え、''で囲んで返す。
+     *
+     * @param src 文字列
+     * @return 処理済みの文字列
+     */
+    public final String quoteString(String src) {
+        final String QSQ = "\'";
+        final String QSW = "\"";
+        final String UB = "_";
+        //クォーテーション除去(引数に渡す前に)
+        final String s1 = src.replace(QSQ, UB);
+        final String s2 = s1.replace(QSW, UB);
+        return QSQ + s2 + QSQ;
+    }
+
     public void start(final CommandExecutor exec, final String pid, final Date nowTime, final String[] args) throws ParseException, IOException, InterruptedException, TimeParseException {
 
         LOG.debug("引数 = " + dumpArgs(args));
@@ -306,18 +322,10 @@ public class Main {
             if (p != null) {
 
                 params = new Object[]{p.getChannelId().getChannelId(), p.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), pid, p.getTitle()};
+               
+                String ss=quoteString( Main.FILENAME_FORMAT.format(params));
 
-                final String QSQ = "\'";
-                final String QSW = "\"";
-                final String UB = "_";
-
-                //クォーテーション除去(引数に渡す前に)
-                final String fileName1 = Main.FILENAME_FORMAT.format(params);
-                final String fileName2 = fileName1.replace(QSQ, UB);
-                final String fileName3 = fileName2.replace(QSW, UB);
-                final String fileName4 = QSQ + fileName3 + QSQ;
-
-                param = new RecordParameter(p.getChannelId().getChannelNo(), duration_second, new File(destDirPath,fileName4).getAbsolutePath());
+                param = new RecordParameter(p.getChannelId().getChannelNo(), duration_second, new File(destDirPath, ss).getAbsolutePath());
             } else if (c != null) {
                 params = new Object[]{c.getChannelId(), c.getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), pid, "",};
                 param = new RecordParameter(c.getChannelNo(), duration_second, new File(destDirPath, Main.FILENAME_FORMAT.format(params)).getAbsolutePath());

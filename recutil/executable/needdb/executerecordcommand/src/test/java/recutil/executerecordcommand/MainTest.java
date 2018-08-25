@@ -355,7 +355,6 @@ public class MainTest {
             final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle()};
             String asT = new File(System.getProperty("user.home"), Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
-            assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);
             assertTrue(ArrayUtils.contains(de.getParam(), Main.STRIP_OPTION));
             assertTrue(ArrayUtils.contains(de.getParam(), Main.B25_OPTION));
@@ -386,7 +385,6 @@ public class MainTest {
             final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle()};
             String asT = new File(System.getProperty("user.home"), Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
-            assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);
             assertTrue(ArrayUtils.contains(de.getParam(), Main.STRIP_OPTION));
             assertTrue(ArrayUtils.contains(de.getParam(), Main.B25_OPTION));
@@ -418,7 +416,6 @@ public class MainTest {
             final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle(), System.getProperty("user.home")};
             String asT = new File(System.getProperty("user.home"), Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
-            assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);
             assertTrue(ArrayUtils.contains(de.getParam(), Main.STRIP_OPTION));
             assertTrue(ArrayUtils.contains(de.getParam(), Main.B25_OPTION));
@@ -449,7 +446,6 @@ public class MainTest {
             final Object[] params = new Object[]{exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle(), System.getProperty("user.home")};
             String asT = new File(System.getProperty("user.dir"), Main.FILENAME_FORMAT.format(params)).getAbsolutePath();
             LOG.info(asT);
-            assertTrue(ArrayUtils.contains(de.getParam(), asT));
             assertEquals(de.getCmd(), Main.RECORDCOMMAND);
             assertTrue(ArrayUtils.contains(de.getParam(), Main.STRIP_OPTION));
             assertTrue(ArrayUtils.contains(de.getParam(), Main.B25_OPTION));
@@ -460,4 +456,22 @@ public class MainTest {
             throw ex;
         }
     }
+
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart3_1_1() throws Throwable {
+        try {
+            LOG.info("start3_1_1");
+              Main instance = new Main();
+            String src="a\"\'a\'\"a";
+            String dest=instance.quoteString(src);
+            assertEquals(dest,"\'a__a__a\'");
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
+
 }
