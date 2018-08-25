@@ -304,7 +304,7 @@ public final class TestData {
     /**
      * 新規作成したチャンネルの除外リストに載っていないエンティティリストを取得する。
      *
-     * @return
+     * @return リスト
      */
     public synchronized List<Channel> getUseableChannelList() {
         final List<Channel> res = new ArrayList<>();
@@ -320,7 +320,7 @@ public final class TestData {
     /**
      * 新規作成したチャンネルのエンティティリストを取得する。
      *
-     * @return
+     * @return リスト
      */
     public synchronized List<Channel> getAllChannelList() {
         this.make();
@@ -331,7 +331,7 @@ public final class TestData {
     /**
      * 新規作成した番組の除外リストに載っていないエンティティリストを取得する。
      *
-     * @return
+     * @return リスト
      */
     public synchronized List<Programme> getUseableProgrammeList() {
         final List<Programme> res = new ArrayList<>();
@@ -347,7 +347,7 @@ public final class TestData {
     /**
      * 新規作成した番組のエンティティリストを取得する。
      *
-     * @return
+     * @return リスト
      */
     public synchronized List<Programme> getAllProgrammeList() {
         this.make();
@@ -358,7 +358,7 @@ public final class TestData {
     /**
      * 新規作成した除外チャンネルのエンティティリストを取得する。(転記元)
      *
-     * @return
+     * @return リスト
      */
     public synchronized List<TempExcludechannel> getTempExcludechannellList() {
         this.make();
@@ -369,7 +369,7 @@ public final class TestData {
     /**
      * 新規作成した除外チャンネルのエンティティリストを取得する。(転記先)
      *
-     * @return
+     * @return リスト
      */
     public synchronized List<Excludechannel> getExcludechannellList() {
         this.make();
@@ -599,7 +599,6 @@ public final class TestData {
     /**
      * 現在時刻から60-25200秒後までに始まる番組情報を作成し、データベースに追加する。
      *
-     * @return
      */
     public void insertRecentStartProgrammes() {
         try (EntityManagerMaker mk = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {

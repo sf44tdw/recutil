@@ -117,7 +117,7 @@ public class Programme implements Serializable {
     /**
      * 放送開始時刻が放送終了時刻以前になっていたら、例外を発生させる。<br>
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException 例外
      */
     @PrePersist
     @PreUpdate

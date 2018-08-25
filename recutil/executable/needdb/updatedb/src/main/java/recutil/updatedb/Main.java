@@ -190,16 +190,18 @@ public class Main {
                 LOG.info("番組登録 = {}", ToStringBuilder.reflectionToString(pg));
             }
             LOG.info("番組登録完了。");
-            LOG.info("除外チャンネル登録転記開始。");
+            trans.commit();
+            LOG.info("番組登録トランザクションコミット。");
+            trans.begin();
+            LOG.info("除外チャンネル登録転記トランザクション開始。");
             final TypedQuery<TempExcludechannel> ql = manager.createNamedQuery("TempExcludechannel.findAll", TempExcludechannel.class);
             final List<TempExcludechannel> res = ql.getResultList();
             for (TempExcludechannel tech : res) {
                 manager.persist(new Excludechannel(tech.getChannelId()));
                 LOG.info("転記した除外登録チャンネルID = {}", tech.getChannelId());
             }
-            LOG.info("除外チャンネル登録転記完了。");
             trans.commit();
-            LOG.info("番組登録トランザクションコミット。");
+            LOG.info("除外チャンネル登録転記トランザクションコミット。");
             manager.close();
 
         }

@@ -40,8 +40,8 @@ public final class SelectedPersistenceName {
             if (x == null || "".equals(x)) {
                 throw new IllegalArgumentException("接続先が選択されていません。");
             }
-
             instance = new SelectedPersistenceName(nameHolder);
+            LOG.info("接続先が設定されました。 接続先 = {}", nameHolder.getPersistenceName());
         } else {
             LOG.warn("接続先は設定済みです。変更できません。引数は無視されます。 現在 = {} 引数 = {}", instance.getPersistenceName(), nameHolder.getPersistenceName());
         }
