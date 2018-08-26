@@ -59,6 +59,8 @@ import recutil.timeclioption.TimeParseException;
  * 実行時刻とチャンネルIDから番組名、 チャンネルIDからチャンネル番号を確認し、 recpt1コマンドを実行する。
  *
  * これが実行されてから指定の秒数以内に始まる番組のうち、最近のものを選択して録画ファイルのファイル名の一部とする。
+ * 
+ * 番組情報に含まれる空白文字とクォートはアンダーバーに置き換えてから使用する。
  *
  * ファイルは基本的に実行者のホームディレクトリに作成される。
  *
@@ -133,19 +135,20 @@ public class Main {
     }
 
     /**
-     * 与えられた文字列内の'と"を_に置き換え、''で囲んで返す。
-     *
+     * 以下の文字を_に置き換える。
+     * 半角:空白、'、"
+     * 全角:空白、”“’'‘
      * @param src 文字列
      * @return 処理済みの文字列
      */
-    public final String quoteString(String src) {
-        final String QSQ = "\'";
-        final String QSW = "\"";
-        final String UB = "_";
-        //クォーテーション除去(引数に渡す前に)
-        final String s1 = src.replace(QSQ, UB);
-        final String s2 = s1.replace(QSW, UB);
-        return QSQ + s2 + QSQ;
+    public final String quoteString(final String src) {
+        final String replaceTarget = "_";
+        System.out.println(src);
+        final String repZenkakuSpace = src.replaceAll("[　”“’'‘]", replaceTarget);
+        System.out.println(repZenkakuSpace);
+        final String ret = repZenkakuSpace.replaceAll("[\\s\\\"\\']", replaceTarget);
+        System.out.println(ret);
+        return ret;
     }
 
     public void start(final CommandExecutor exec, final String pid, final Date nowTime, final String[] args) throws ParseException, IOException, InterruptedException, TimeParseException {
@@ -322,8 +325,8 @@ public class Main {
             if (p != null) {
 
                 params = new Object[]{p.getChannelId().getChannelId(), p.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), pid, p.getTitle()};
-               
-                String ss=quoteString( Main.FILENAME_FORMAT.format(params));
+
+                String ss = quoteString(Main.FILENAME_FORMAT.format(params));
 
                 param = new RecordParameter(p.getChannelId().getChannelNo(), duration_second, new File(destDirPath, ss).getAbsolutePath());
             } else if (c != null) {

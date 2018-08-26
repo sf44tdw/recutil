@@ -464,14 +464,132 @@ public class MainTest {
     public void testStart3_1_1() throws Throwable {
         try {
             LOG.info("start3_1_1");
-              Main instance = new Main();
-            String src="a\"\'a\'\"a";
-            String dest=instance.quoteString(src);
-            assertEquals(dest,"\'a__a__a\'");
+            Main instance = new Main();
+            String src = " a bあ　い　";
+            String dest = instance.quoteString(src);
+            assertEquals(dest, "_a_bあ_い_");
         } catch (Throwable ex) {
             LOG.error("エラー。", ex);
             throw ex;
         }
     }
 
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart3_1_2() throws Throwable {
+        try {
+            LOG.info("start3_1_2");
+            Main instance = new Main();
+            String src = "\"a\"b\"";
+            String dest = instance.quoteString(src);
+            assertEquals(dest, "_a_b_");
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart3_1_3() throws Throwable {
+        try {
+            LOG.info("start3_1_3");
+            Main instance = new Main();
+            String src = "\'a\'b\'";
+            String dest = instance.quoteString(src);
+            assertEquals(dest, "_a_b_");
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart3_1_4() throws Throwable {
+        try {
+            LOG.info("start3_1_4");
+            Main instance = new Main();
+            String src = "a”b";
+            String dest = instance.quoteString(src);
+            assertEquals(dest, "a_b");
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart3_1_5() throws Throwable {
+        try {
+            LOG.info("start3_1_5");
+            Main instance = new Main();
+            String src = "a“b";
+            String dest = instance.quoteString(src);
+            assertEquals(dest, "a_b");
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart3_1_6() throws Throwable {
+        try {
+            LOG.info("start3_1_6");
+            Main instance = new Main();
+            String src = "a’b";
+            String dest = instance.quoteString(src);
+            assertEquals(dest, "a_b");
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart3_1_7() throws Throwable {
+        try {
+            LOG.info("start3_1_7");
+            Main instance = new Main();
+            String src = "a'b";
+            String dest = instance.quoteString(src);
+            assertEquals(dest, "a_b");
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Test of start method, of class Main.
+     */
+    @Test
+    public void testStart3_1_8() throws Throwable {
+        try {
+            LOG.info("start3_1_8");
+            Main instance = new Main();
+            String src = "a‘b";
+            String dest = instance.quoteString(src);
+            assertEquals(dest, "a_b");
+        } catch (Throwable ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
 }
