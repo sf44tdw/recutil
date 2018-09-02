@@ -81,7 +81,7 @@ public final class AtExecutor {
         }
         long x = dat.getTime();
         long y = System.currentTimeMillis();
-        if (x >= y + DIFF) {
+        if (x >= (y + DIFF)) {
             return true;
         } else {
             LOG.warn("現在から見て一定時間以内は指定できません。 予約限度時刻 = {}, 現在時刻 ={}", new Date(y), new Date(x + DIFF));

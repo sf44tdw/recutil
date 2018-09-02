@@ -5,10 +5,12 @@
  */
 package recutil.reserve;
 
+import org.apache.commons.cli.ParseException;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -78,9 +80,10 @@ public class MainTest {
     private final String[] args_I = {"-i", TestData.CH3_ID};
     private final String[] args_V = {"-v", Integer.toString(TestData.PG2_EVENTID)};
 
-    
     /**
      * Test of start method, of class Main.
+     *
+     * @throws java.lang.Throwable
      */
     @Test(expected = IllegalArgumentException.class)
     public void testStart1_1_1() throws Throwable {
@@ -89,7 +92,7 @@ public class MainTest {
             String[] args = null;
             Main instance = new Main();
             instance.start(exe, args);
-        } catch (Throwable ex) {
+        } catch (InterruptedException | ParseException ex) {
             LOG.error("エラー。", ex);
             throw ex;
         }
@@ -97,6 +100,8 @@ public class MainTest {
 
     /**
      * Test of start method, of class Main.
+     *
+     * @throws java.lang.Throwable
      */
     @Test(expected = org.apache.commons.cli.ParseException.class)
     public void testStart1_1_2() throws Throwable {
@@ -105,7 +110,7 @@ public class MainTest {
             String[] args = args_I;
             Main instance = new Main();
             instance.start(exe, args);
-        } catch (Throwable ex) {
+        } catch (InterruptedException | ParseException ex) {
             LOG.error("エラー。", ex);
             throw ex;
         }
@@ -113,6 +118,8 @@ public class MainTest {
 
     /**
      * Test of start method, of class Main.
+     *
+     * @throws java.lang.Throwable
      */
     @Test(expected = org.apache.commons.cli.ParseException.class)
     public void testStart1_1_3() throws Throwable {
@@ -121,16 +128,16 @@ public class MainTest {
             String[] args = args_V;
             Main instance = new Main();
             instance.start(exe, args);
-        } catch (Throwable ex) {
+        } catch (InterruptedException | ParseException ex) {
             LOG.error("エラー。", ex);
             throw ex;
         }
     }
 
-
-
     /**
      * Test of start method, of class Main.
+     *
+     * @throws java.lang.Throwable
      */
     @Test
     public void testStart3_1() throws Throwable {
@@ -146,10 +153,30 @@ public class MainTest {
             String[] param = exe.getParam();
             assertEquals(param[0], RESERVE_COMMAND_PARAMS.OPTION_TIME);
             assertEquals(param[2], RESERVE_COMMAND_PARAMS.OPTION_FILE);
-        } catch (Throwable ex) {
+        } catch (InterruptedException | ParseException ex) {
             LOG.error("エラー。", ex);
             throw ex;
         }
     }
 
+    /**
+     * Test of start method, of class Main.
+     *
+     * @throws java.lang.Throwable
+     */
+    @Test
+    public void testStart3_2() throws Throwable {
+        try {
+            LOG.info("start3_2");
+            dat.insertRecentStartProgrammes();
+            String[] args = {"-i", dat.getPb60().getChannelId().getChannelId(), "-v", Long.toString(dat.getPb60().getEventId())};
+            Main instance = new Main();
+            instance.start(exe, args);
+            String out = this.stdout.getOutput();
+            assertTrue(out.contains("放送開始時刻が現在時刻以前の番組は予約できません。"));
+        } catch (InterruptedException | ParseException ex) {
+            LOG.error("エラー。", ex);
+            throw ex;
+        }
+    }
 }

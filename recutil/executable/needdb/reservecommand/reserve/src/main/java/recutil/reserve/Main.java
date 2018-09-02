@@ -52,6 +52,8 @@ public class Main {
 
     private static final Logger LOG = LoggerConfigurator.getCallerLogger();
 
+    protected static final MessageFormat WRONG_START_DATETIME = new MessageFormat("放送開始時刻が現在時刻以前の番組は予約できません。放送開始時刻 = {0}, 現在時刻 ={1}");
+
     protected static final MessageFormat AT_FILE_HEADER = new MessageFormat("タイトル = {0} ,開始時刻 = {1} ,終了時刻 = {2}");
 
     //秒数をカンマ区切りにはしないように。
@@ -158,6 +160,13 @@ public class Main {
         }
 
         if (p == null) {
+            return;
+        }
+
+        final Date nowTime = new Date(System.currentTimeMillis());
+        if (p.getStartDatetime().getTime() <= nowTime.getTime()) {
+            final Object[] wrong_datetime = {parseDateToString(p.getStartDatetime()), parseDateToString(nowTime)};
+            System.out.println(WRONG_START_DATETIME.format(wrong_datetime));
             return;
         }
 

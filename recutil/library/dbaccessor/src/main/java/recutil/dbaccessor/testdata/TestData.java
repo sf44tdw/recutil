@@ -377,6 +377,7 @@ public final class TestData {
         return this.excludechannellList;
     }
 
+    public static final String PG_BEFORE_60 = "BEFORE_60_SECOND";
     public static final String PG_AFTER_60 = "AFTER_60_SECOND";
     public static final String PG_AFTER_120 = "AFTER_120_SECOND";
     public static final String PG_AFTER_180 = "AFTER_180_SECOND";
@@ -398,6 +399,7 @@ public final class TestData {
     public static final String PG_AFTER_21600 = "AFTER_21600_SECOND";
     public static final String PG_AFTER_25200 = "AFTER_25200_SECOND";
     public static final long ONE_HOUR_IN_MILLIS = ONE_MINUTE_IN_MILLIS * 60L;
+    private Programme pb60;
     private Programme p60;
     private Programme p120;
     private Programme p180;
@@ -435,6 +437,11 @@ public final class TestData {
         final long pp = (30L * 1000L);
 
         int id = 1000000;
+
+//今から1分前に始まった番組。
+        final Date before60sec = new Date((getNowTime().getTime() - ONE_MINUTE_IN_MILLIS));
+        pb60 = getPg(getCh5(), id++, PG_BEFORE_60, before60sec, new Date(before60sec.getTime() + pp));
+        _t.add(pb60);
 
 //今から1分後に始まる番組。
         final Date after60sec = new Date((getNowTime().getTime() + ONE_MINUTE_IN_MILLIS));
@@ -526,6 +533,10 @@ public final class TestData {
         p25200 = getPg(getCh5(), id++, PG_AFTER_25200, after7hour, new Date(after7hour.getTime() + pp));
         _t.add(p25200);
         return _t;
+    }
+
+    public Programme getPb60() {
+        return pb60;
     }
 
     public Programme getP120() {
