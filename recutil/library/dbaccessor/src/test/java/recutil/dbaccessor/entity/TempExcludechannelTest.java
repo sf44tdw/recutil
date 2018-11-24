@@ -5,7 +5,6 @@
  */
 package recutil.dbaccessor.entity;
 
-import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,9 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.slf4j.Logger;
-import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.testdata.TestData;
-import static recutil.dbaccessor.testdata.TestData.getTestDbEm;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
