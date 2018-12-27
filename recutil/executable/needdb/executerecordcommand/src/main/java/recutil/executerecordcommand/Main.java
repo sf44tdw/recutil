@@ -59,7 +59,7 @@ import recutil.timeclioption.TimeParseException;
  * 実行時刻とチャンネルIDから番組名、 チャンネルIDからチャンネル番号を確認し、 recpt1コマンドを実行する。
  *
  * これが実行されてから指定の秒数以内に始まる番組のうち、最近のものを選択して録画ファイルのファイル名の一部とする。
- * 
+ *
  * 番組情報に含まれる空白文字とクォートはアンダーバーに置き換えてから使用する。
  *
  * ファイルは基本的に実行者のホームディレクトリに作成される。
@@ -135,9 +135,8 @@ public class Main {
     }
 
     /**
-     * 以下の文字を_に置き換える。
-     * 半角:空白、'、"
-     * 全角:空白、”“’'‘
+     * 以下の文字を_に置き換える。 半角:空白、'、" 全角:空白、”“’'‘
+     *
      * @param src 文字列
      * @return 処理済みの文字列
      */
@@ -153,7 +152,9 @@ public class Main {
 
     public void start(final CommandExecutor exec, final String pid, final Date nowTime, final String[] args) throws ParseException, IOException, InterruptedException, TimeParseException {
 
-        LOG.debug("引数 = " + dumpArgs(args));
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("引数 = " + dumpArgs(args));
+        }
 
         final TimeCliOption timeOpt = new TimeCliOption(
                 "録画時間オプション。ほかの録画時間オプションとは同時に使用できない。録画時間を秒単位で指定する。",
@@ -336,7 +337,9 @@ public class Main {
                 param = null;
             }
 
-            LOG.debug("コマンド用情報 = " + param.toString());
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("コマンド用情報 = " + param.toString());
+            }
 
             CommandResult res = exec.execCommand(RECORDCOMMAND, STRIP_OPTION, B25_OPTION, LONG_TO_STRING.format(new Object[]{param.getPhysicalChannelNumber()}), LONG_TO_STRING.format(new Object[]{param.getDuration()}), param.getFileName());
 

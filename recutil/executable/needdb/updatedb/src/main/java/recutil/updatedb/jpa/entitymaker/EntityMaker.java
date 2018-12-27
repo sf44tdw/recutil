@@ -53,7 +53,9 @@ public final class EntityMaker {
     public synchronized void makeEntities() {
         String DEFAULT_LINE_SEPARATOR = recutil.commmonutil.Util.getDefaultLineSeparator();
 
-        LOG.debug("チャンネルエンティティ作成開始。");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("チャンネルエンティティ作成開始。");
+        }
         Map<String, recutil.dbaccessor.entity.Channel> m = new HashMap<>();
         for (ChannelData ch : this.channels) {
             recutil.dbaccessor.entity.Channel chE = new recutil.dbaccessor.entity.Channel();
@@ -61,12 +63,18 @@ public final class EntityMaker {
             chE.setChannelNo(ch.getPhysicalChannelNumber());
             chE.setDisplayName(ch.getBroadcastingStationName());
             m.put(chE.getChannelId(), chE);
-            LOG.debug("チャンネルエンティティ作成。" + DEFAULT_LINE_SEPARATOR + "from:{}" + DEFAULT_LINE_SEPARATOR + "to:{}", ch, ReflectionToStringBuilder.toString(chE));
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("チャンネルエンティティ作成。" + DEFAULT_LINE_SEPARATOR + "from:{}" + DEFAULT_LINE_SEPARATOR + "to:{}", ch, ReflectionToStringBuilder.toString(chE));
+            }
         }
         this.channelEntities = Collections.unmodifiableMap(m);
-        LOG.debug("チャンネルエンティティ作成完了。 件数 = {}", m.size());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("チャンネルエンティティ作成完了。 件数 = {}", m.size());
+        }
 
-        LOG.debug("番組エンティティ作成開始。");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("番組エンティティ作成開始。");
+        }
         List<recutil.dbaccessor.entity.Programme> l = new ArrayList<>();
         for (ProgrammeData pg : this.programmes) {
             recutil.dbaccessor.entity.Programme pgE = new recutil.dbaccessor.entity.Programme();
@@ -76,10 +84,14 @@ public final class EntityMaker {
             pgE.setStopDatetime(pg.getStopDatetime());
             pgE.setTitle(pg.getTitle());
             l.add(pgE);
-            LOG.debug("番組エンティティ生成" + DEFAULT_LINE_SEPARATOR + "from:{}" + DEFAULT_LINE_SEPARATOR + "to:{}", pg, ReflectionToStringBuilder.toString(pgE));
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("番組エンティティ生成" + DEFAULT_LINE_SEPARATOR + "from:{}" + DEFAULT_LINE_SEPARATOR + "to:{}", pg, ReflectionToStringBuilder.toString(pgE));
+            }
         }
         this.programmeEntities = Collections.unmodifiableList(l);
-        LOG.debug("番組エンティティ作成完了。 件数 = {}", l.size());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("番組エンティティ作成完了。 件数 = {}", l.size());
+        }
     }
 
     public List<recutil.dbaccessor.entity.Channel> getChannelEntities() {

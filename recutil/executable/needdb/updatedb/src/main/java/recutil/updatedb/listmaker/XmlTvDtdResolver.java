@@ -32,6 +32,7 @@ public class XmlTvDtdResolver implements EntityResolver {
 
     private static final Logger LOG = LoggerConfigurator.getCallerLogger();
     public static final String DTD_NAME = "xmltv.dtd";
+
     /**
      * @author normal
      */
@@ -47,16 +48,20 @@ public class XmlTvDtdResolver implements EntityResolver {
     public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
 
         ClassLoader cll = java.lang.ClassLoader.getSystemClassLoader();
-        LOG.info("DTDファイル ={}",cll.getResource(DTD_NAME).toString());
+        LOG.info("DTDファイル ={}", cll.getResource(DTD_NAME).toString());
 
         if ((publicId != null && publicId.contains(DTD_NAME)) || (systemId != null && systemId.contains(DTD_NAME))) {
-            LOG.trace("識別子を確認しました。");
+            if (LOG.isTraceEnabled()) {
+                LOG.trace("識別子を確認しました。");
+            }
             InputSource source = new InputSource(cll.getResourceAsStream(DTD_NAME));
             source.setPublicId(publicId);
             source.setSystemId(systemId);
             return source;
         } else {
-            LOG.trace("公開識別子、システム識別子とも、{}を含む文字列ではありませんでした。",DTD_NAME);
+            if (LOG.isTraceEnabled()) {
+                LOG.trace("公開識別子、システム識別子とも、{}を含む文字列ではありませんでした。", DTD_NAME);
+            }
             return null;
         }
     }

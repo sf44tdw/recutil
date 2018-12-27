@@ -73,20 +73,20 @@ public class ChannelDataExtractor extends AbstractEpgFileExtractor<ChannelData> 
      * EPG関連 チャンネル要素の局名の要素名
      */
     private static final String EPG_CHANNEL_DISPLAY_NAME = "display-name";
-    
+
     private static final MessageFormat DUMP_FORMAT = new MessageFormat("ch:{0}_TP:{1}_display-name:{2}");
-    
+
     public ChannelDataExtractor(Document doc) {
         super(doc, ChannelDataExtractor.EPG_CHANNEL);
     }
 
-   
-    
     private synchronized long getChannelNumber(String ch_S, String tp_S) throws IllegalArgumentException {
 //チャンネルidの頭2文字を取り出す。
         long r;
         String pref = ch_S.substring(0, 2);
-        LOG.debug("チャンネルid:{} その頭2文字:{}", ch_S, pref);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("チャンネルid:{} その頭2文字:{}", ch_S, pref);
+        }
         switch (pref) {
             case ChannelDataExtractor.PREFIX_GR:
                 //地上波の場合
@@ -130,9 +130,13 @@ public class ChannelDataExtractor extends AbstractEpgFileExtractor<ChannelData> 
                 if (gchild.getNodeName().equals(ChannelDataExtractor.EPG_CHANNEL_DISPLAY_NAME)) {
                     display_name_S = gchild.getFirstChild().getNodeValue();
                 }
-                LOG.trace("放送局名有り。");
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace("放送局名有り。");
+                }
             } catch (NullPointerException e) {
-                LOG.trace("放送局名無し。");
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace("放送局名無し。");
+                }
                 display_name_S = "Unknown display-name";
             } finally {
                 if (LOG.isTraceEnabled()) {
@@ -147,8 +151,8 @@ public class ChannelDataExtractor extends AbstractEpgFileExtractor<ChannelData> 
         try {
             return new ChannelData(ch_S, getChannelNumber(ch_S, tp_S), display_name_S);
         } catch (IllegalArgumentException ex) {
-             Object[] message = {ch_S, tp_S, display_name_S};
-             throw new IllegalArgumentException(ChannelDataExtractor.DUMP_FORMAT.format(message), ex);
+            Object[] message = {ch_S, tp_S, display_name_S};
+            throw new IllegalArgumentException(ChannelDataExtractor.DUMP_FORMAT.format(message), ex);
         }
     }
 }

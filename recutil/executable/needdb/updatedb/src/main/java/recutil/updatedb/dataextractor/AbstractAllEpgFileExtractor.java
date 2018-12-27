@@ -57,7 +57,7 @@ public abstract class AbstractAllEpgFileExtractor<T extends EpgData, U extends A
 
     /**
      * 抽出された情報をソートする処理を実装する。getAllEPGRecords()が使用する。
-     * 
+     *
      * @param dataList ソートしたいリスト。
      */
     protected abstract void sortRersult(List<T> dataList);
@@ -70,7 +70,9 @@ public abstract class AbstractAllEpgFileExtractor<T extends EpgData, U extends A
      */
     public final synchronized List<T> getAllEPGRecords() {
         List<T> temp_List1 = Collections.synchronizedList(new ArrayList<T>());
-        LOG.debug("ファイル数={}", this.EPGXMLs.size());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("ファイル数={}", this.EPGXMLs.size());
+        }
         Iterator<Document> it_EPG = this.EPGXMLs.iterator();
         while (it_EPG.hasNext()) {
             Document D = it_EPG.next();

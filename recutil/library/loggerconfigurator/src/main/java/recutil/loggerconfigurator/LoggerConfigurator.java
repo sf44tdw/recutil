@@ -50,10 +50,14 @@ public final class LoggerConfigurator {
 
         SuppressLog issup = target_class.getAnnotation(SuppressLog.class);
         if ((issup != null) && issup.value()) {
-            LOG.debug("ログ出力抑止。クラス = {}",className);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("ログ出力抑止。クラス = {}", className);
+            }
             return NOPLogger.NOP_LOGGER;
         } else {
-            LOG.debug("ログ出力。クラス = {}",className);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("ログ出力。クラス = {}", className);
+            }
             return LoggerFactory.getLogger(className);
         }
     }

@@ -132,7 +132,7 @@ public class Main {
         if (cl.hasOption(updateAllOption.getOpt())) {
             channelIds.addAll(Arrays.asList(cl.getOptionValues(updateAllOption.getOpt())));
         }
-        
+
         try (EntityManagerMaker emm = new EntityManagerMaker(SelectedPersistenceName.getInstance())) {
             final EntityManager em = emm.getEntityManager();
 
@@ -150,7 +150,9 @@ public class Main {
                 final TypedQuery<Channel> ql_chs = em.createNamedQuery("Channel.findAll", Channel.class);
                 ql_chs.setLockMode(LockModeType.PESSIMISTIC_READ);
                 List<Channel> lock_ch = ql_chs.getResultList();
-                LOG.debug("チャンネルテーブルをロック。");
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("チャンネルテーブルをロック。");
+                }
 
                 TRANSACTION:
                 {
