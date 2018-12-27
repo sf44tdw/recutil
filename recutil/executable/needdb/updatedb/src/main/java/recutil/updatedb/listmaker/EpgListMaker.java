@@ -66,10 +66,10 @@ public class EpgListMaker {
             File F = it_F.next();
             Document d = new XmlLoader(charset).Load(F);
             if (d != null) {
-                LOG.info("EPGファイルが読み込まれました。 EPG FILE={0}", F.toString());
+                LOG.info("EPGファイルが読み込まれました。 EPG FILE = {}", F.toString());
                 EPGs.add(d);
             } else {
-                LOG.warn("EPGファイルが読み込まれませんでした。このファイルは無視されます。 EPG FILE={0}", F.toString());
+                LOG.warn("EPGファイルが読み込まれませんでした。このファイルは無視されます。 EPG FILE = {}", F.toString());
             }
         }
         return Collections.unmodifiableList(EPGs);

@@ -90,7 +90,7 @@ public abstract class AbstractEpgFileExtractor<T extends EpgData> {
                 T recoed_val = dump(N);
                 records.add(recoed_val);
             } catch (IllegalArgumentException ex) {
-                LOG.warn("ノードの内容に問題があるため、無視します。 ノード = {0}", dumpNode(N));
+                LOG.warn("ノードの内容に問題があるため、無視します。 ノード = {}", dumpNode(N));
             }
         }
         return records;

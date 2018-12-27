@@ -56,7 +56,7 @@ public class XmlTvDtdResolver implements EntityResolver {
             source.setSystemId(systemId);
             return source;
         } else {
-            LOG.trace("公開識別子、システム識別子とも、{0}を含む文字列ではありませんでした。");
+            LOG.trace("公開識別子、システム識別子とも、{}を含む文字列ではありませんでした。",DTD_NAME);
             return null;
         }
     }
