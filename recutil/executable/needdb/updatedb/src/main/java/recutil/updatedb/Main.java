@@ -32,6 +32,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
+import org.w3c.dom.Document;
 import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.entity.TempExcludechannel;
@@ -159,10 +160,12 @@ public class Main {
         LOG.info("文字コードを設定しました。文字コード = {}", charset);
 
         EpgListMaker elm = new EpgListMaker(targetDir, charset);
+        
+        List<Document> docs=elm.getEpgList();
 
-        List<ChannelData> chs = new AllChannelDataExtractor(elm.getEpgList()).getAllEPGRecords();
+        List<ChannelData> chs = new AllChannelDataExtractor(docs).getAllEPGRecords();
 
-        List<ProgrammeData> ps = new AllProgrammeDataExtractor(elm.getEpgList()).getAllEPGRecords();
+        List<ProgrammeData> ps = new AllProgrammeDataExtractor(docs).getAllEPGRecords();
 
         EntityMaker em = new EntityMaker(chs, ps);
 
