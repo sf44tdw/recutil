@@ -47,7 +47,6 @@ public abstract class CommandExecutor {
      * 外部コマンドを引数（パラメータ）を指定して実行します。 また、標準出力、エラー出力 、リターンコードを取得します。 例：
      * execCommand(new String[]{"notepad.exe","C:\test.txt"});
      *
-     * Process.waitFor()を実行していますので、外部コマンドの実行が 終了するまでこのメソッドは待機します。
      *
      * @param cmd コマンド
      * @param param 実行するコマンドに渡す引数(引数,引数,...)

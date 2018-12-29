@@ -59,7 +59,7 @@ public class EpgListMaker {
      * @return 見つかったファイルを変換したDocumentオブジェクトのリスト。変更不可。読み込みに失敗したファイルは無視する。
      */
     public synchronized List<Document> getEpgList() {
-        List<Document> EPGs = Collections.synchronizedList(new ArrayList<Document>());
+        List<Document> EPGs = Collections.synchronizedList(new ArrayList<>());
         List<File> FL = this.seeker.seek();
         Iterator<File> it_F = FL.iterator();
         while (it_F.hasNext()) {

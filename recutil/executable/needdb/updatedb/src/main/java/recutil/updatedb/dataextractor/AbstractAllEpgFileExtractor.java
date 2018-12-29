@@ -69,7 +69,7 @@ public abstract class AbstractAllEpgFileExtractor<T extends EpgData, U extends A
      * @return 取得された情報を納めた変更不可リスト。実装に従ってソートされる。
      */
     public final synchronized List<T> getAllEPGRecords() {
-        List<T> temp_List1 = Collections.synchronizedList(new ArrayList<T>());
+        List<T> temp_List1 = Collections.synchronizedList(new ArrayList<>());
         if (LOG.isDebugEnabled()) {
             LOG.debug("ファイル数={}", this.EPGXMLs.size());
         }
@@ -82,7 +82,7 @@ public abstract class AbstractAllEpgFileExtractor<T extends EpgData, U extends A
         }
         //重複排除
         Set<T> set = new HashSet<>(temp_List1);
-        List<T> temp_List3 = Collections.synchronizedList(new ArrayList<T>(set));
+        List<T> temp_List3 = Collections.synchronizedList(new ArrayList<>(set));
         this.sortRersult(temp_List3);
         return Collections.unmodifiableList(temp_List3);
     }

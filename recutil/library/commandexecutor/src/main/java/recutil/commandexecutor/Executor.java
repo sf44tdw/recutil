@@ -36,13 +36,16 @@ public class Executor extends CommandExecutor {
     private static final Logger log = LoggerConfigurator.getCallerLogger();
 
     /**
+     * 
+     * Process.waitFor()を実行していますので、外部コマンドの実行が 終了するまでこのメソッドは待機します。
+     * 
      * @return 継承元参照
      * @throws java.io.IOException 継承元参照
      * @throws java.lang.InterruptedException 継承元参照
      * @see CommandExecutor#execCommand(java.lang.String, java.lang.String...)
      */
     @Override
-    public synchronized CommandResult _execCommand(String cmd, String... param) throws IOException, InterruptedException {
+    protected synchronized CommandResult _execCommand(String cmd, String... param) throws IOException, InterruptedException {
 
         try {
 
