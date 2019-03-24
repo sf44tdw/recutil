@@ -22,18 +22,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.text.MessageFormat;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.slf4j.Logger;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import java.nio.charset.Charset;
-import java.text.MessageFormat;
-import org.slf4j.Logger;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -77,7 +77,6 @@ public class XmlLoader {
             DocumentBuilder documentBuilder = factory.newDocumentBuilder();
             documentBuilder.setEntityResolver(new XmlTvDtdResolver());
             Document document = documentBuilder.parse(new InputSource(new InputStreamReader(new FileInputStream(F), getCharset())));
-            Element root = document.getDocumentElement();
             LOG.info(MSG_READ_COMPLETE.format(parameters1));
             return document;
         } catch (ParserConfigurationException | UnsupportedEncodingException | FileNotFoundException ex) {

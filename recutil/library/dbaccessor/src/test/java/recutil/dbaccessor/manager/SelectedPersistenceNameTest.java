@@ -16,15 +16,18 @@
  */
 package recutil.dbaccessor.manager;
 
+import static org.junit.Assert.*;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.slf4j.Logger;
+
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -67,7 +70,7 @@ public class SelectedPersistenceNameTest {
                 modifiersField.setAccessible(true);                                        // modifiers自体もprivateなのでアクセス可能にする。
                 modifiersField.setInt(targetField,
                         targetField.getModifiers() & ~Modifier.PRIVATE & ~Modifier.FINAL); // 更新対象アクセス用のFieldオブジェクトのmodifiersからprivateとfinalを外す。
-                targetField.set(null, null);                                               // 値更新: 
+                targetField.set(null, null);                                               // 値更新:
             } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException ex) {
                 LOG.error("Reflection error.", ex);
             }
@@ -154,7 +157,8 @@ public class SelectedPersistenceNameTest {
     @Test(expected = IllegalStateException.class)
     public void testGetInstance_02() {
         LOG.info("getInstance_02");
-        SelectedPersistenceName result = SelectedPersistenceName.getInstance();
+        @SuppressWarnings("unused")
+		SelectedPersistenceName result = SelectedPersistenceName.getInstance();
     }
 
 }

@@ -5,12 +5,14 @@
  */
 package recutil.timeclioption;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
@@ -22,8 +24,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.slf4j.Logger;
+
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -96,7 +98,7 @@ public class TimeCliOptionTest {
         return new TimeCliOption(DESC_SECOND, DESC_MINUTE, DESC_HOUR);
     }
 
-    
+
 
     /**
      * Test of getTimeOptionGroup method, of class TimeCliOption.
@@ -126,7 +128,6 @@ public class TimeCliOptionTest {
         Options opts = new Options();
         opts.addOptionGroup(instance.getTimeOptionGroup(true));
         CommandLineParser parser = new DefaultParser();
-        HelpFormatter help = new HelpFormatter();
         CommandLine cl;
         cl = parser.parse(opts, args);
         return instance.getValueBySecond(cl);

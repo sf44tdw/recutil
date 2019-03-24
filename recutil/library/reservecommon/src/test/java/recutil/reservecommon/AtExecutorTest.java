@@ -16,10 +16,13 @@
  */
 package recutil.reservecommon;
 
-import java.text.MessageFormat;
+import static org.junit.Assert.*;
+import static recutil.reservecommon.AtExecutor.*;
+
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -27,12 +30,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.slf4j.Logger;
+
 import recutil.commandexecutor.CommandResult;
 import recutil.commandexecutor.DummyExecutor;
 import recutil.loggerconfigurator.LoggerConfigurator;
-import static recutil.reservecommon.AtExecutor.DATE_FORMAT;
 
 /**
  *
@@ -78,7 +80,7 @@ public class AtExecutorTest {
         AtExecutor instance = new AtExecutor(de);
         CommandResult result = instance.executeAt(reserveDateTime, sign, targetCommand);
 
-        final MessageFormat f = new MessageFormat(DummyExecutor.DUMMY_STDOUT_MESSAGE_FORMAT);
+        //final MessageFormat f = new MessageFormat(DummyExecutor.DUMMY_STDOUT_MESSAGE_FORMAT);
 
         LOG.info(result.toString());
 
@@ -87,7 +89,7 @@ public class AtExecutorTest {
         LOG.info(ArrayUtils.toString(Params));
 
         final String[] Params__withoutTempFile = Arrays.copyOf(Params, 3);
-        
+
         LOG.info(ArrayUtils.toString(Params__withoutTempFile));
 
         final String[] extParams_withoutTempFile = {AtExecutor.RESERVE_COMMAND_PARAMS.OPTION_TIME, new SimpleDateFormat(DATE_FORMAT).format(reserveDateTime), AtExecutor.RESERVE_COMMAND_PARAMS.OPTION_FILE};

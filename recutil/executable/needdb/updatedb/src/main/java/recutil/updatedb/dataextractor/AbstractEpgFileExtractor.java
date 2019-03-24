@@ -20,14 +20,15 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
 import org.slf4j.Logger;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -80,8 +81,6 @@ public abstract class AbstractEpgFileExtractor<T extends EpgData> {
      */
     public final synchronized List<T> makeList() {
         List<T> records = Collections.synchronizedList(new ArrayList<T>());
-        Element root;
-        root = this.doc.getDocumentElement();
         NodeList nl = doc.getElementsByTagName(this.nodeName);
         int Nodes = nl.getLength();
         for (int i = 0; i < Nodes; i++) {

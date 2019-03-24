@@ -3,10 +3,10 @@
 <configuration>
     <property name="LOG_DIR" value="recutil_log" /><property name="FILENAME_COMMON" value="excludechannel_test" />
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${HOME}/${LOG_DIR}/${FILENAME_COMMON}.log</file>
+        <file>${user.home}/${LOG_DIR}/${FILENAME_COMMON}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>${HOME}/${LOG_DIR}/${FILENAME_COMMON}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${user.home}/${LOG_DIR}/${FILENAME_COMMON}.%d{yyyy-MM-dd}.log</fileNamePattern>
 
             <!-- keep 30 days worth of history -->
             <maxHistory>30</maxHistory> 
