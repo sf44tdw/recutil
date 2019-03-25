@@ -16,10 +16,15 @@
  */
 package recutil.getchannel;
 
+import static recutil.commmonutil.Util.*;
+import static recutil.dbaccessor.query.QueryString.Channel.*;
+import static recutil.dbaccessor.query.QueryString.Common.*;
+
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
@@ -28,6 +33,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -37,15 +43,13 @@ import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
-import static recutil.commmonutil.Util.getDefaultLineSeparator;
+
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.entity.comparator.ChannelComparator_AscendingByChannelNo;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
-import static recutil.dbaccessor.query.QueryString.Channel.PARAMNAME_CHANNEL_NO;
-import static recutil.dbaccessor.query.QueryString.Common.PARAMNAME_CHANNEL_ID;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -172,7 +176,7 @@ public class Main {
             if (exclude == excludeState.USEABLE) {
                 //除外チャンネルテーブルの内容を含めない条件を追加する。
                 final Subquery<Excludechannel> subquery = query.subquery(Excludechannel.class);
-                final Root root_Excludechannel = subquery.from(Excludechannel.class);
+                final Root<Excludechannel> root_Excludechannel = subquery.from(Excludechannel.class);
                 final List<Predicate> subQueryPredicates = new ArrayList<>();
                 subquery.select(root_Excludechannel.get(PARAMNAME_CHANNEL_ID));
                 subQueryPredicates.add(builder.equal(root_Channel.get(PARAMNAME_CHANNEL_ID), root_Excludechannel.get(PARAMNAME_CHANNEL_ID)));

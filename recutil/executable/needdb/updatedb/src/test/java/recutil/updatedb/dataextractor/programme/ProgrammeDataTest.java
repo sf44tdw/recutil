@@ -16,15 +16,18 @@
  */
 package recutil.updatedb.dataextractor.programme;
 
+import static org.junit.Assert.*;
+
 import java.sql.Timestamp;
 import java.util.Date;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.slf4j.Logger;
+
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.common.EqualsChecker;
 
@@ -90,61 +93,71 @@ public class ProgrammeDataTest {
     @Test(expected = IllegalArgumentException.class)
     public void id_Null() {
         LOG.info("id_Null");
-        ProgrammeData temp = new ProgrammeData(null, EVENT_ID, TITLE, START_DATETIME, STOP_DATETIME);
+        @SuppressWarnings("unused")
+		ProgrammeData temp = new ProgrammeData(null, EVENT_ID, TITLE, START_DATETIME, STOP_DATETIME);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void id_Blank() {
         LOG.info("id_Blank");
-        ProgrammeData temp = new ProgrammeData("", EVENT_ID, TITLE, START_DATETIME, STOP_DATETIME);
+        @SuppressWarnings("unused")
+		ProgrammeData temp = new ProgrammeData("", EVENT_ID, TITLE, START_DATETIME, STOP_DATETIME);
     }
 
     @Test
     public void event_Zero() {
         LOG.info("event_Zero");
-        ProgrammeData temp = new ProgrammeData(ID, 0, TITLE, START_DATETIME, STOP_DATETIME);
+		ProgrammeData temp = new ProgrammeData(ID, 0, TITLE, START_DATETIME, STOP_DATETIME);
+
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void event_Minus() {
         LOG.info("event_Minus");
-        ProgrammeData temp = new ProgrammeData(ID, -1, TITLE, START_DATETIME, STOP_DATETIME);
+        @SuppressWarnings("unused")
+		ProgrammeData temp = new ProgrammeData(ID, -1, TITLE, START_DATETIME, STOP_DATETIME);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void title_Null() {
         LOG.info("title_Null");
-        ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, null, START_DATETIME, STOP_DATETIME);
+        @SuppressWarnings("unused")
+		ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, null, START_DATETIME, STOP_DATETIME);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void title_Blank() {
         LOG.info("title_Blank");
-        ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, "", START_DATETIME, STOP_DATETIME);
+        @SuppressWarnings("unused")
+		ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, "", START_DATETIME, STOP_DATETIME);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void startDatetime_Null() {
         LOG.info("startDatetime_Null");
-        ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, TITLE, null, STOP_DATETIME);
+        @SuppressWarnings("unused")
+		ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, TITLE, null, STOP_DATETIME);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void stopDatetime_Null() {
         LOG.info("stopDatetime_Null");
-        ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, TITLE, START_DATETIME, null);
+        @SuppressWarnings("unused")
+		ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, TITLE, START_DATETIME, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void allDatetime_Null() {
         LOG.info("allDatetime_Null");
-        ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, TITLE, null, null);
+        @SuppressWarnings("unused")
+		ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, TITLE, null, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void Datetime_StopBeforeStart() {
         LOG.info("Datetime_StopBeforeStart");
-        ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, TITLE, STOP_DATETIME, START_DATETIME);
+        @SuppressWarnings("unused")
+		ProgrammeData temp = new ProgrammeData(ID, EVENT_ID, TITLE, STOP_DATETIME, START_DATETIME);
     }
 
     /**

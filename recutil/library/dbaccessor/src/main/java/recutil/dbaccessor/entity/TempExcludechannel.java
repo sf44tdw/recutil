@@ -6,26 +6,20 @@
 package recutil.dbaccessor.entity;
 
 import java.io.Serializable;
-import java.text.MessageFormat;
-import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.persistence.TypedQuery;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import recutil.dbaccessor.manager.EntityManagerMaker;
-import recutil.dbaccessor.manager.SelectedPersistenceName;
 
 /**
  * 除外チャンネル登録テーブル。番組情報更新時にここの内容を除外チャンネルテーブルに転記する。

@@ -16,16 +16,19 @@
  */
 package recutil.updatedb.dataextractor;
 
+import static org.junit.Assert.*;
+import static recutil.commmonutil.Util.*;
+
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.List;
+
 import org.junit.After;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.w3c.dom.Document;
-import static recutil.commmonutil.Util.dumpList;
+
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.common.Const;
 import recutil.updatedb.common.TestData;
@@ -58,7 +61,7 @@ public class ProgrammeDataExtractorTest {
     @Test
     public void testSomeMethod() {
 
-        final String pattern = TestData.PATTERN;
+
         List<ProgrammeData> expResult = TestData.get24chProgramme();
         LOG.info(dumpList(expResult));
         XmlLoader loader = new XmlLoader(CHARCODE);

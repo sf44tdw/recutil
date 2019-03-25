@@ -16,18 +16,21 @@
  */
 package recutil.updatedb.listmaker.fileseeker;
 
-import recutil.updatedb.common.Const;
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.slf4j.Logger;
+
 import recutil.loggerconfigurator.LoggerConfigurator;
+import recutil.updatedb.common.Const;
 import recutil.updatedb.common.util.Util;
 import recutil.updatedb.listmaker.XmlSuffix;
 
@@ -87,8 +90,8 @@ public class FileSeekerTest {
     public void testSeek_rec() {
         LOG.info("seek_rec");
 
-        File testDataDir = Const.getTESTDATADIR();
-        File recursiveDirConst = Const.getXMLTESTDATADIR_RECURSIVE();
+        //File testDataDir = Const.getTESTDATADIR();
+        //File recursiveDirConst = Const.getXMLTESTDATADIR_RECURSIVE();
 
         FileSeeker instance = new FileSeeker(Const.getXMLTESTDATADIR(), XmlSuffix.getFilter());
         instance.setRecursive(true);
@@ -110,8 +113,8 @@ public class FileSeekerTest {
     public void testSeek_notrec() {
         LOG.info("seek_notrec");
 
-        File testDataDir = Const.getTESTDATADIR();
-        File recursiveDirConst = Const.getXMLTESTDATADIR_RECURSIVE();
+        //File testDataDir = Const.getTESTDATADIR();
+        //File recursiveDirConst = Const.getXMLTESTDATADIR_RECURSIVE();
 
         FileSeeker instance = new FileSeeker(Const.getXMLTESTDATADIR(), XmlSuffix.getFilter());
         instance.setRecursive(false);
