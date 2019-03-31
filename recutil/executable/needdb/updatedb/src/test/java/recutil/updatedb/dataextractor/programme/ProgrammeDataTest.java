@@ -16,6 +16,7 @@
  */
 package recutil.updatedb.dataextractor.programme;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.sql.Timestamp;
@@ -108,6 +109,7 @@ public class ProgrammeDataTest {
     public void event_Zero() {
         LOG.info("event_Zero");
 		ProgrammeData temp = new ProgrammeData(ID, 0, TITLE, START_DATETIME, STOP_DATETIME);
+		assertThat(temp, is(any(ProgrammeData.class)));
 
     }
 

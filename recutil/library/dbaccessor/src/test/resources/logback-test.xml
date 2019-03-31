@@ -1,5 +1,5 @@
 <!-- 全てのログを標準出力から追い出す。-->
-
+<!DOCTYPE configuration>
 <configuration>
     <property name="LOG_DIR" value="recutil_log" /><property name="FILENAME_COMMON" value="dbaccessor_test" />
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">

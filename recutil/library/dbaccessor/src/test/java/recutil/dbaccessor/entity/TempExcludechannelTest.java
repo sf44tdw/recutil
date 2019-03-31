@@ -5,13 +5,15 @@
  */
 package recutil.dbaccessor.entity;
 
+import static org.junit.Assert.*;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.slf4j.Logger;
+
 import recutil.dbaccessor.testdata.TestData;
 import recutil.loggerconfigurator.LoggerConfigurator;
 
@@ -41,7 +43,6 @@ public class TempExcludechannelTest {
     @After
     public void tearDown() {
     }
-    private final TestData dat = new TestData();
 
     /**
      * Test of getChannelId method, of class TempExcludechannel.

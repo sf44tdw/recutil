@@ -19,8 +19,6 @@ package recutil.executerecordcommand;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.slf4j.Logger;
-import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
  * コマンドの実行に必要なパラメータの保持を行う。
@@ -29,7 +27,7 @@ import recutil.loggerconfigurator.LoggerConfigurator;
  */
 public final class RecordParameter {
 
-    private static final Logger log = LoggerConfigurator.getCallerLogger();
+    //private static final Logger log = LoggerConfigurator.getCallerLogger();
 
     //物理チャンネル番号
     private final long physicalChannelNumber;

@@ -16,26 +16,30 @@
  */
 package recutil.updatedb;
 
+import static org.junit.Assert.*;
+import static recutil.dbaccessor.testdata.TestData.*;
+
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
+
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.TempExcludechannel;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.dbaccessor.testdata.TestData;
-import static recutil.dbaccessor.testdata.TestData.getTestDbEm;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.common.Const;
 import recutil.updatedb.dataextractor.channel.AllChannelDataExtractor;
@@ -231,7 +235,6 @@ public class MainTest {
                 final EntityManager em = emm.getEntityManager();
                 final EntityTransaction trans = em.getTransaction();
                 trans.begin();
-                final TypedQuery<TempExcludechannel> tex_del;
 
                 TestData x = new TestData();
                 x.deleteAll(em);
