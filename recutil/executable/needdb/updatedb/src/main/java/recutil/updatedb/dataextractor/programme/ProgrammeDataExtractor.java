@@ -17,6 +17,7 @@
 package recutil.updatedb.dataextractor.programme;
 
 import java.text.MessageFormat;
+
 import org.slf4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -105,6 +106,11 @@ public class ProgrammeDataExtractor extends AbstractEpgFileExtractor<ProgrammeDa
                 title_s = gchild.getFirstChild().getNodeValue();
             }
         }
+        
+		//文字化け等の原因になりそうな文字を除去する。
+		title_s = recutil.commmonutil.Util.quoteString(title_s);
+		title_s = recutil.commmonutil.Util.replaceProhibitedCharacter(title_s);
+        
         if (LOG.isDebugEnabled()) {
             Object[] message = {event_id_s, start_time_s, stop_time_s, channel_id_s, title_s};
             LOG.debug(ProgrammeDataExtractor.DUMP_FORMAT.format(message));

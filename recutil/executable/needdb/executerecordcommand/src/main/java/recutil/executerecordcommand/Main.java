@@ -16,6 +16,8 @@
  */
 package recutil.executerecordcommand;
 
+import static recutil.commmonutil.Util.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -25,8 +27,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -39,16 +43,15 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
+
 import recutil.commandexecutor.CommandExecutor;
 import recutil.commandexecutor.CommandResult;
 import recutil.commandexecutor.Executor;
-import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
-
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.timeclioption.TimeCliOption;
 import recutil.timeclioption.TimeParseException;
@@ -134,21 +137,7 @@ public class Main {
         }
     }
 
-    /**
-     * 以下の文字を_に置き換える。 半角:空白、'、" 全角:空白、”“’'‘
-     *
-     * @param src 文字列
-     * @return 処理済みの文字列
-     */
-    public final String quoteString(final String src) {
-        final String replaceTarget = "_";
-        System.out.println(src);
-        final String repZenkakuSpace = src.replaceAll("[　”“’'‘]", replaceTarget);
-        System.out.println(repZenkakuSpace);
-        final String ret = repZenkakuSpace.replaceAll("[\\s\\\"\\']", replaceTarget);
-        System.out.println(ret);
-        return ret;
-    }
+
 
     public void start(final CommandExecutor exec, final String pid, final Date nowTime, final String[] args) throws ParseException, IOException, InterruptedException, TimeParseException {
 
@@ -327,7 +316,7 @@ public class Main {
 
                 params = new Object[]{p.getChannelId().getChannelId(), p.getChannelId().getChannelNo(), new SimpleDateFormat(DATE_PATTERN).format(nowTime), pid, p.getTitle()};
 
-                String ss = quoteString(Main.FILENAME_FORMAT.format(params));
+                String ss = Main.FILENAME_FORMAT.format(params);
 
                 param = new RecordParameter(p.getChannelId().getChannelNo(), duration_second, new File(destDirPath, ss).getAbsolutePath());
             } else if (c != null) {
