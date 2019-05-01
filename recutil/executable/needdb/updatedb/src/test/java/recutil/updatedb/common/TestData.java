@@ -19,6 +19,7 @@ package recutil.updatedb.common;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import recutil.updatedb.dataextractor.channel.ChannelData;
 import recutil.updatedb.dataextractor.programme.ProgrammeData;
 import recutil.updatedb.dateconverter.Converter;
@@ -47,7 +48,8 @@ public final class TestData {
     public static List<ProgrammeData> get24chProgramme() {
         final String pattern = TestData.PATTERN;
         List<ProgrammeData> result = new ArrayList<>();
-        result.add(new ProgrammeData("GR_1064", 7431, "ワイド！スクランブル　年末スペシャル【字】", Converter.stringToDate("2014-12-29 12:00", pattern), Converter.stringToDate("2014-12-29 15:00", pattern)));
+        //置き換え処理前提。
+        result.add(new ProgrammeData("GR_1064", 7431, "ワイド！スクランブル_年末スペシャル【字】", Converter.stringToDate("2014-12-29 12:00", pattern), Converter.stringToDate("2014-12-29 15:00", pattern)));
         result.add(new ProgrammeData("GR_1064", 7433, "年末相棒セレクション・スペシャル版１月１日夜９時は相棒スペシャル！【字】", Converter.stringToDate("2014-12-29 15:00", pattern), Converter.stringToDate("2014-12-29 17:25", pattern)));
         result.add(new ProgrammeData("GR_1064", 7434, "大晦日はクイズサバイバー【字】", Converter.stringToDate("2014-12-29 17:25", pattern), Converter.stringToDate("2014-12-29 17:30", pattern)));
         return Collections.unmodifiableList(result);
