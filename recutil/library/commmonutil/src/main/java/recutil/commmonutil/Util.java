@@ -36,7 +36,7 @@ public final class Util {
 	private static final Logger LOG = LoggerConfigurator.getCallerLogger();
 
 	public static enum REPLACE_PAIR {
-		QUOTE_AND_SPACE("[　”“’'‘\\s\\\"\\']", "_"), WAVE_DASH("～", "_WAVEDASH_"), ZENKAKU_MINUS("－", "-"), CENT("￠",
+		QUOTE_AND_SPACE("[　”“’'‘\\s\\\"\\']", "_"), WAVE_DASH("[〜～]", "_WAVEDASH_"), ZENKAKU_MINUS("－", "-"), CENT("￠",
 				"_CENT_"), POUND("￡", "_POUND_"), NOT("￢",
 						"_NOT_"), DASH("―", "_DASH_"), PARALLEL("∥", "_PARALLEL_");
 
@@ -88,7 +88,7 @@ public final class Util {
 
 	/**
 	 * 以下の文字を置き換える。<br>
-	 *  ～(ウェーブダッシュ)->_WAVEDASH_<br>
+	 *  〜(ウェーブダッシュ)->_WAVEDASH_<br>
 	 *  －(全角マイナス)->-<br>
 	 *  ￠(セント)->_CENT_<br>
 	 *  ￡(ポンド)->_POUND_<br>

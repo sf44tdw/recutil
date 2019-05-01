@@ -219,9 +219,9 @@ public class UtilTest {
 		try {
 			LOG.info("start3_2_1");
 			REPLACE_PAIR pair = REPLACE_PAIR.WAVE_DASH;
-			String src = "a" + pair.getSrc() + "b";
+			String src = "a〜ba～b";
 			String dest = Util.replaceProhibitedCharacter(src);
-			assertEquals(dest, "a" + pair.getDest() + "b");
+			assertEquals(dest, "a" + pair.getDest() + "ba" + pair.getDest() + "b");
 		} catch (Throwable ex) {
 			LOG.error("エラー。", ex);
 			throw ex;
@@ -340,8 +340,7 @@ public class UtilTest {
 			StringBuilder srcs = new StringBuilder();
 			StringBuilder dests = new StringBuilder();
 
-			List<REPLACE_PAIR> rpList=new ArrayList<>();
-			rpList.add(REPLACE_PAIR.WAVE_DASH);
+			List<REPLACE_PAIR> rpList = new ArrayList<>();
 			rpList.add(REPLACE_PAIR.ZENKAKU_MINUS);
 			rpList.add(REPLACE_PAIR.CENT);
 			rpList.add(REPLACE_PAIR.POUND);
@@ -353,9 +352,14 @@ public class UtilTest {
 				srcs.append(pair.getSrc());
 				dests.append(pair.getDest());
 			}
-			String srcs_s=new String (srcs);
-			String dests_s=new String (dests);
-			String dest=Util.replaceProhibitedCharacter(srcs_s);
+
+			srcs.append("〜～");
+			dests.append(REPLACE_PAIR.WAVE_DASH.getDest());
+			dests.append(REPLACE_PAIR.WAVE_DASH.getDest());
+
+			String srcs_s = new String(srcs);
+			String dests_s = new String(dests);
+			String dest = Util.replaceProhibitedCharacter(srcs_s);
 			assertEquals(dests_s, dest);
 		} catch (Throwable ex) {
 			LOG.error("エラー。", ex);
