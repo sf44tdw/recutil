@@ -17,6 +17,7 @@
 package recutil.dbaccessor.manager;
 
 import org.slf4j.Logger;
+
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -56,7 +57,7 @@ public final class SelectedPersistenceName {
 
     private final String PersistenceName;
 
-    public SelectedPersistenceName(PersistenceNameHolder nameHolder) {
+    private SelectedPersistenceName(PersistenceNameHolder nameHolder) {
         this.PersistenceName = nameHolder.getPersistenceName();
     }
 
