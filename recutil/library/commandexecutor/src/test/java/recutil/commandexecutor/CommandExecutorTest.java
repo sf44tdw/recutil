@@ -6,8 +6,10 @@
 package recutil.commandexecutor;
 
 import java.io.IOException;
+
 import org.junit.Test;
 import org.slf4j.Logger;
+
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -25,7 +27,7 @@ public class CommandExecutorTest {
     @Test
     public void testExecCommand_String() throws Exception {
         LOG.info("execCommand");
-        String cmd = "java";
+        String cmd = "at";
         Executor instance = new Executor();
         CommandResult result = instance.execCommand(cmd);
         LOG.info(result.toString());

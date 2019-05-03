@@ -16,13 +16,15 @@
  */
 package recutil.commandexecutor;
 
+import static recutil.commmonutil.Util.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import org.apache.commons.lang3.ArrayUtils;
+
 import org.slf4j.Logger;
-import static recutil.commmonutil.Util.getDefaultLineSeparator;
+
 import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
@@ -36,32 +38,21 @@ public class Executor extends CommandExecutor {
     private static final Logger log = LoggerConfigurator.getCallerLogger();
 
     /**
-     * 
+     *
      * Process.waitFor()を実行していますので、外部コマンドの実行が 終了するまでこのメソッドは待機します。
-     * 
+     *
      * @return 継承元参照
      * @throws java.io.IOException 継承元参照
      * @throws java.lang.InterruptedException 継承元参照
-     * @see CommandExecutor#execCommand(java.lang.String, java.lang.String...)
+     * @see CommandExecutor#_execCommand(String[])
      */
     @Override
-    protected synchronized CommandResult _execCommand(String cmd, String... param) throws IOException, InterruptedException {
+    protected synchronized CommandResult _execCommand(String[] cmds) throws IOException, InterruptedException {
 
         try {
 
-            if (log.isDebugEnabled()) {
-                log.debug("cmd = {}, param = {}", cmd, ArrayUtils.toString(param, "コマンドなし。"));
-            }
-
-            String[] cmds1 = {cmd};
-            String[] cmds2 = ArrayUtils.addAll(cmds1, param);
-
-            if (log.isDebugEnabled()) {
-                log.debug("cmds2 = {}, length = {}", ArrayUtils.toString(cmds2, "コマンドなし。"), cmds2.length);
-            }
-
             Runtime r = Runtime.getRuntime();
-            Process p = r.exec(cmds2);
+            Process p = r.exec(cmds);
             InputStream in;
 
             //標準出力

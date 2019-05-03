@@ -161,7 +161,7 @@ public class MainTest {
                     recutil.commmonutil.Util.dumpList(res);
                 } else {
                     ret = false;
-                    LOG.info("登録なし。");
+                    LOG.error("登録なし。");
                 }
             }
             return ret;
@@ -187,7 +187,7 @@ public class MainTest {
                     recutil.commmonutil.Util.dumpList(res);
                 } else {
                     ret = false;
-                    LOG.info("登録なし。");
+                    LOG.error("登録なし。");
                 }
             }
             return ret;

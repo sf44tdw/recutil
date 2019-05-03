@@ -19,11 +19,18 @@ package recutil.commandexecutor;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.Logger;
+
+import recutil.loggerconfigurator.LoggerConfigurator;
+
 /**
  *
  * @author normal
  */
 public abstract class CommandExecutor {
+
+    private static final Logger log = LoggerConfigurator.getCallerLogger();
 
     private String cmd = null;
 
@@ -58,12 +65,21 @@ public abstract class CommandExecutor {
     public final CommandResult execCommand(String cmd, String... param) throws IOException, InterruptedException {
         this.cmd = cmd;
         this.param = Arrays.copyOf(param, param.length);
-        return this._execCommand(cmd, param);
+
+        if (log.isDebugEnabled()) {
+            log.debug("cmd = {}, param = {}", cmd, ArrayUtils.toString(param, "引数なし。"));
+        }
+
+        String[] cmds1 = {cmd};
+        String[] cmds2 = ArrayUtils.addAll(cmds1, param);
+
+
+        return this._execCommand(cmds2);
     }
 
     /**
-     * @param cmd リンク先参照
-     * @param param リンク先参照
+     * @param cmds コマンドと引数を配列に格納したもの(コマンド,引数,引数,...)<br>
+     * 例:{"ls","-l","-a","-R","/home"}
      * @return リンク先参照
      * @throws java.io.IOException リンク先参照
      * @throws java.lang.InterruptedException リンク先参照
@@ -71,6 +87,6 @@ public abstract class CommandExecutor {
      * recutil.commandexecutor.CommandExecutor#execCommand(java.lang.String,
      * java.lang.String...)
      */
-    protected abstract CommandResult _execCommand(String cmd, String... param) throws IOException, InterruptedException;
+    protected abstract CommandResult _execCommand(String[] cmds) throws IOException, InterruptedException;
 
 }
