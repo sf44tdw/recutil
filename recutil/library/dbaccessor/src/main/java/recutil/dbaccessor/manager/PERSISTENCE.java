@@ -21,7 +21,7 @@ package recutil.dbaccessor.manager;
  * @author normal
  */
 public enum PERSISTENCE implements PersistenceNameHolder {
-    PRODUCT("RecUtil_dbaccessor"), TEST("recutil_dbaccessor_Test");
+    PRODUCT("recutil_dbaccessor"), TEST("recutil_dbaccessor_Test");
     private final String persistenceName;
 
     private PERSISTENCE(String persistenceName) {
