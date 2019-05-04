@@ -16,10 +16,14 @@
  */
 package recutil.reserve;
 
+import static recutil.commmonutil.Util.*;
+
 import java.text.MessageFormat;
 import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -30,18 +34,16 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
+
 import recutil.commandexecutor.CommandExecutor;
 import recutil.commandexecutor.CommandResult;
 import recutil.commandexecutor.Executor;
-import static recutil.commmonutil.Util.getDefaultLineSeparator;
-import static recutil.commmonutil.Util.parseDateToString;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.reservecommon.AtExecutor;
-import static recutil.reservecommon.Const.RECORD_COMMAND;
 
 /**
  * チャンネルIDと番組IDに該当する番組を予約する。
@@ -57,7 +59,7 @@ public class Main {
     protected static final MessageFormat AT_FILE_HEADER = new MessageFormat("タイトル = {0} ,開始時刻 = {1} ,終了時刻 = {2}");
 
     //秒数をカンマ区切りにはしないように。
-    protected static final MessageFormat RECORD_COMMAND_FORMAT = new MessageFormat(RECORD_COMMAND);
+    protected static final MessageFormat RECORD_COMMAND_FORMAT = new MessageFormat(recutil.reservecommon.Const.RECORD_COMMAND);
 
     protected static final String DATETIME_FORMAT = recutil.commmonutil.Util.getDbDatePattern();
 

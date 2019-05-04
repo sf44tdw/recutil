@@ -5,22 +5,22 @@
  */
 package recutil.reserve;
 
+import static org.junit.Assert.*;
+import static recutil.reserve.Main.*;
+
 import org.apache.commons.cli.ParseException;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
+
 import recutil.commandexecutor.CommandExecutor;
 import recutil.commandexecutor.DummyExecutor;
 import recutil.consolesnatcher.ConsoleSnatcher;
 import recutil.dbaccessor.testdata.TestData;
 import recutil.loggerconfigurator.LoggerConfigurator;
-import static recutil.reserve.Main.getSep;
 import recutil.reservecommon.AtExecutor.RESERVE_COMMAND_PARAMS;
 
 /**
