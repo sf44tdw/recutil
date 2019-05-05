@@ -7,6 +7,8 @@ separator () {
 }
 
 maven_install(){
+	#テスト用ダミーコマンドに実行権限付加
+	chmod u+x ${THIS_DIR}/recutil/recutil/executable/needdb/executerecordcommand/recpt1
     separator
     cd recutil
     mvn install >> ${LOGFILE} 2>&1
