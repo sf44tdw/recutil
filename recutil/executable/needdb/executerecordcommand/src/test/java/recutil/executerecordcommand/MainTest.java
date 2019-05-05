@@ -467,4 +467,39 @@ public class MainTest {
 			throw ex;
 		}
 	}
+
+	/**
+	 * Test of start method, of class Main.
+	 */
+	@Test
+	public void testStart2_2_4() throws Throwable {
+		try {
+			LOG.info("start2_2_4");
+
+			Programme exP = dat.getTestProgrammes().get(0);
+			LOG.info(ReflectionToStringBuilder.reflectionToString(exP));
+			long x = (exP.getStopDatetime().getTime() - exP.getStartDatetime().getTime()) / 1000;
+			String[] args = { "-i", TestData.CH5_ID, "-s", LONG_TO_STRING.format(new Object[] { x }), "-d",
+					System.getProperty("user.dir"), "-p", System.getProperty("user.dir") };
+			Main instance = new Main();
+
+			DummyExecutor de = new DummyExecutor();
+			instance.start(de, PID, nowTime, args);
+			final Object[] params = new Object[] { exP.getChannelId().getChannelId(), exP.getChannelId().getChannelNo(),
+					new SimpleDateFormat(DATE_PATTERN).format(nowTime), PID, exP.getTitle(),
+					System.getProperty("user.home") };
+			String asT = new File(System.getProperty("user.dir"), Main.FILENAME_FORMAT.format(params))
+					.getAbsolutePath();
+			String command_exp=new File(System.getProperty("user.dir"),Main.RECORDCOMMAND).getAbsolutePath();
+			LOG.info(asT);
+			assertEquals(de.getCmd(), command_exp);
+			assertTrue(ArrayUtils.contains(de.getParam(), Main.STRIP_OPTION));
+			assertTrue(ArrayUtils.contains(de.getParam(), Main.B25_OPTION));
+			assertTrue(ArrayUtils.contains(de.getParam(), Integer.toString(TestData.CH5_CHNO)));
+			assertTrue(ArrayUtils.contains(de.getParam(), Long.toString(x)));
+		} catch (Throwable ex) {
+			LOG.error("エラー。", ex);
+			throw ex;
+		}
+	}
 }
