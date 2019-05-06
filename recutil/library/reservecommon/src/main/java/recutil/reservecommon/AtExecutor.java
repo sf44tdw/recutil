@@ -16,6 +16,8 @@
  */
 package recutil.reservecommon;
 
+import static recutil.reservecommon.AtExecutor.RESERVE_COMMAND_PARAMS.*;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,15 +25,16 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import org.slf4j.Logger;
+
 import recutil.commandexecutor.CommandExecutor;
 import recutil.commandexecutor.CommandResult;
 import recutil.loggerconfigurator.LoggerConfigurator;
-import static recutil.reservecommon.AtExecutor.RESERVE_COMMAND_PARAMS.OPTION_FILE;
-import static recutil.reservecommon.AtExecutor.RESERVE_COMMAND_PARAMS.OPTION_TIME;
-import static recutil.reservecommon.AtExecutor.RESERVE_COMMAND_PARAMS.RESERVE_COMMAND;
 
 /**
+ *atコマンドを使用して指定の日時において何らかのコマンドを実行するよう設定する。<br>
+ *実行環境において。atコマンドへのパスが通っていることを前提とする。
  *
  * @author normal
  */

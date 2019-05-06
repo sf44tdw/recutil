@@ -16,6 +16,9 @@
  */
 package recutil.commmonutil;
 
+import java.io.File;
+import java.nio.file.LinkOption;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +37,37 @@ public final class Util {
 	}
 
 	private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+
+	/**
+	 * デフォルトの改行文字<br>
+	 * 定数にすると再コンパイルすることになるため、関数化。
+	 * @return 改行文字
+	 */
+	public static String getDefaultLineSeparator() {
+		return System.getProperty("line.separator");
+	}
+
+	/**
+	 * 与えられたパス文字列を以下のように変換する。変換後の値を指定したFileオブジェクトを返す。<br>
+	 * 相対パスが与えられた場合は、絶対パスに変換した値。<br>
+	 * 絶対パスが与えられた場合は、与えられた値。<br>
+	 * シンボリックリンクのパスが与えられた場合は、リンク先を辿らず、リンクの絶対パス。<br>
+	 * @param pathString パスの文字列
+	 * @return 変換後の値を指定したFileオブジェクト。(空文字列が与えられたか、変換に失敗した場合はnullを返す。)
+	 * @see {@link java.nio.file.Paths#get(String, String...)}
+	 * */
+	public static File relativePahtToAbsolutePath(String pathString) {
+		if (pathString == null || pathString == "") {
+			LOG.error("無効な引数。 引数 = {}", pathString);
+			return null;
+		}
+		try {
+			return new File(Paths.get(pathString).toRealPath(LinkOption.NOFOLLOW_LINKS).toString());
+		} catch (Exception e) {
+			LOG.error("絶対パスへの変換でエラー 引数 = {}", pathString, e);
+			return null;
+		}
+	}
 
 	public static enum REPLACE_PAIR {
 		QUOTE_AND_SPACE("[　”“’'‘\\s\\\"\\']", "_"), WAVE_DASH("[〜～]", "_WAVEDASH_"), ZENKAKU_MINUS("－", "-"), CENT("￠",
@@ -88,7 +122,7 @@ public final class Util {
 
 	/**
 	 * 以下の文字を置き換える。<br>
-	 *  〜(ウェーブダッシュ)->_WAVEDASH_<br>
+	 *  〜～(ウェーブダッシュ)->_WAVEDASH_<br>
 	 *  －(全角マイナス)->-<br>
 	 *  ￠(セント)->_CENT_<br>
 	 *  ￡(ポンド)->_POUND_<br>
@@ -129,15 +163,6 @@ public final class Util {
 	}
 
 	/**
-	 * デフォルトの改行文字<br>
-	 * 定数にすると再コンパイルすることになるため、関数化。
-	 * @return 改行文字
-	 */
-	public static String getDefaultLineSeparator() {
-		return System.getProperty("line.separator");
-	}
-
-	/**
 	 * <p>
 	 * long型⇒Date型への変換処理</p>
 	 *
@@ -173,7 +198,7 @@ public final class Util {
 			//            System.out.println("S****************************************************************************** " + str);
 			return str;
 		} catch (Exception ex) {
-			LOG.error("日付の変換中に問題が発生しました。", ex);
+			LOG.error("日付の変換中に問題が発生しました。引数 = {}", date, ex);
 			return null;
 		}
 	}

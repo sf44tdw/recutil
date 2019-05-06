@@ -235,31 +235,38 @@ public class Main {
 			throw new IllegalArgumentException(s);
 		}
 
+		final String optVal_d;
 		final File destDirPath;
 		if (cl.hasOption(destinationOption.getOpt())) {
-			destDirPath = new File(cl.getOptionValue(destinationOption.getOpt()));
+			optVal_d = cl.getOptionValue(destinationOption.getOpt());
+			destDirPath = relativePahtToAbsolutePath(optVal_d);
+
 		} else {
+			optVal_d = "NOT_DEFINED";
 			destDirPath = new File(System.getProperty("user.home"));
 		}
-		if (!destDirPath.isDirectory() || !destDirPath.canWrite()) {
-			final String s = "保存先ディレクトリが見つからないか、使用できません。パス = " + destDirPath.getAbsolutePath();
+		if (destDirPath == null || !destDirPath.isDirectory() || !destDirPath.canWrite()) {
+			final String s = "保存先ディレクトリが見つからないか、使用できません。値 = " + optVal_d;
 			throw new IllegalArgumentException(s);
 		}
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("保存先ディレクトリ{}", destDirPath.getAbsolutePath());
 		}
 
+		final String optVal_p;
 		final File recpt1Path;
 		if (cl.hasOption(recpt1PathOption.getOpt())) {
-			recpt1Path = new File(cl.getOptionValue(recpt1PathOption.getOpt()));
-			if (!recpt1Path.isDirectory() || !recpt1Path.canRead()) {
-				final String s = "recpt1格納先のディレクトリが見つからないか、使用できません。パス = " + recpt1Path.getAbsolutePath();
+			optVal_p = cl.getOptionValue(recpt1PathOption.getOpt());
+			recpt1Path = relativePahtToAbsolutePath(optVal_p);
+			if (recpt1Path == null || !recpt1Path.isDirectory() || !recpt1Path.canRead()) {
+				final String s = "recpt1格納先のディレクトリが見つからないか、使用できません。値 = " + optVal_p;
 				throw new IllegalArgumentException(s);
 			}
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("recpt1格納先ディレクトリ{}", recpt1Path.getAbsolutePath());
 			}
 		} else {
+			optVal_p = "NOT_DEFINED";
 			recpt1Path = null;
 		}
 
@@ -270,12 +277,12 @@ public class Main {
 				final String s = "recpt1が見つからないか、実行できません。パス = " + recpt1Dest.getAbsolutePath();
 				throw new IllegalArgumentException(s);
 			}
-			recpt1Command=recpt1Dest.getAbsolutePath();
+			recpt1Command = recpt1Dest.getAbsolutePath();
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("recpt1フルパス{}", recpt1Command);
 			}
 		} else {
-			recpt1Command=RECORDCOMMAND;
+			recpt1Command = RECORDCOMMAND;
 		}
 
 		//放送開始日時範囲末尾
