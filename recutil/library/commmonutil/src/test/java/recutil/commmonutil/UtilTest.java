@@ -18,6 +18,7 @@ package recutil.commmonutil;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -365,6 +366,38 @@ public class UtilTest {
 			LOG.error("エラー。", ex);
 			throw ex;
 		}
+	}
+
+	@Test
+	public void testStartRelativePahtToAbsolutePath_1_1() {
+		LOG.info("testStartRelativePahtToAbsolutePath_1_1");
+		final File pathF = Util.relativePahtToAbsolutePath("notfoundpath");
+		assertNull(pathF);
+	}
+
+	@Test
+	public void testStartRelativePahtToAbsolutePath_1_2() {
+		LOG.info("testStartRelativePahtToAbsolutePath_1_2");
+		final File pathF = Util.relativePahtToAbsolutePath("");
+		assertNull(pathF);
+	}
+
+	@Test
+	public void testStartRelativePahtToAbsolutePath_1_3() {
+		LOG.info("testStartRelativePahtToAbsolutePath_1_3");
+		final File pathF = Util.relativePahtToAbsolutePath(null);
+		assertNull(pathF);
+	}
+
+	@Test
+	public void testStartRelativePahtToAbsolutePath_2() {
+		LOG.info("testStartRelativePahtToAbsolutePath_2");
+		final String fileName="test_dummy";
+		final String userDir=System.getProperty("user.dir");
+
+		final String fullPath_exp=new File(userDir,fileName).getAbsolutePath();
+		final String fullPath=Util.relativePahtToAbsolutePath(fileName).getAbsolutePath();
+		assertEquals(fullPath_exp, fullPath);
 	}
 
 }

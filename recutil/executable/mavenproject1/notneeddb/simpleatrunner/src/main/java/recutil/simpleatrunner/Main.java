@@ -89,9 +89,11 @@ public class Main {
             throw ex;
         }
 
+        final String optVal_f;
         final File inputCsvFile;
         if (cl.hasOption(inputCsvFileOption.getOpt())) {
-            inputCsvFile = new File(cl.getOptionValue(inputCsvFileOption.getOpt()));
+        	optVal_f = cl.getOptionValue(inputCsvFileOption.getOpt());
+        	inputCsvFile = relativePahtToAbsolutePath(optVal_f);
         } else {
             inputCsvFile = null;
         }

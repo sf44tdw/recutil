@@ -37,6 +37,8 @@ import recutil.updatedb.dataextractor.AbstractEpgFileExtractor;
  *
  * を取得し、リストに格納する。
  *
+ * テレビ局名内の文字化けの原因になりそうな文字、空白文字とクォートは別の文字に置き換える。
+ * 
  * @author dosdiaopfhj
  */
 public class ChannelDataExtractor extends AbstractEpgFileExtractor<ChannelData> {

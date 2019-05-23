@@ -31,6 +31,8 @@ import recutil.updatedb.dateconverter.Converter;
 /**
  * EPGから番組関係の情報を取得する。 番組ID :event_id チャンネルID :channel タイトル :title 開始時刻 :start
  * 終了時刻 :stop
+ * 
+ * タイトル内の文字化けの原因になりそうな文字、空白文字とクォートは別の文字に置き換える。
  *
  * @author dosdiaopfhj
  */
