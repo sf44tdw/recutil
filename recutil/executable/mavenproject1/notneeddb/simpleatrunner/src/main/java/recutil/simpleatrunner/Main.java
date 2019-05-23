@@ -1,13 +1,15 @@
 package recutil.simpleatrunner;
 
-import com.orangesignal.csv.CsvConfig;
-import com.orangesignal.csv.manager.CsvManagerFactory;
+import static recutil.commmonutil.Util.*;
+import static recutil.reservecommon.AtExecutor.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -17,13 +19,15 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
+
+import com.orangesignal.csv.CsvConfig;
+import com.orangesignal.csv.manager.CsvManagerFactory;
+
 import recutil.commandexecutor.CommandExecutor;
 import recutil.commandexecutor.CommandResult;
 import recutil.commandexecutor.Executor;
-import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.reservecommon.AtExecutor;
-import static recutil.reservecommon.AtExecutor.DATE_FORMAT;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
