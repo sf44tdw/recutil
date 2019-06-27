@@ -4,6 +4,28 @@
 #EPG取得のため、地上波物理チャンネル全てと、BSチャンネルから1つを選択し、90秒間録画する。
 #BSch=101(NHK BS1)
 
+usage_exit() {
+        echo "Usage: $0 [-f]" 1>&2
+        echo '記載されたチャンネルを録画し、epgdumpにてEPGを取得。EPGをDBに格納する。
+        -f 設定(実行時間の制限を無視する。)' 1>&2
+        exit 1
+}
+
+ENABLE_f="f"
+
+
+while getopts "f" OPT
+do
+    case $OPT in
+        f)  ENABLE_f="t"
+            ;;
+        :|\?) usage_exit
+            ;;
+    esac
+done
+
+shift $((OPTIND - 1))
+
 #録画ファイル,EPGファイル,ログの保存先ディレクトリ(cron.dailyはrootで動くらしく、/varなどにしても場合によって動く)
 PDIR=${HOME}/epg_update
 
@@ -25,6 +47,7 @@ separator () {
     echo "`date "+%Y-%m-%d %H:%M:%S"`***************************************************************************************************************************************" >> ${LOGFILE}
 }
 
+if [ "${ENABLE_f}" != "t" ]
 #cron.houry用
  #今の時間(何時?)
  NowHour=`date +%k`
@@ -48,6 +71,9 @@ separator () {
 #  echo ${NowMin} " は、01～03分以外です。">> ${LOGFILE}
 #  exit 1
 #fi
+
+fi
+
 
 
 #多重起動防止機講
