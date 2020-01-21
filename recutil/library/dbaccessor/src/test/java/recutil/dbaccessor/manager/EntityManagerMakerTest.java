@@ -16,19 +16,23 @@
  */
 package recutil.dbaccessor.manager;
 
+import static org.junit.Assert.*;
+import static recutil.dbaccessor.testdata.TestData.*;
+
 import java.text.ParseException;
 import java.util.List;
+
 import javax.persistence.EntityManager;
+
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
+
+import loggerconfigurator.LoggerConfigurator;
 import recutil.dbaccessor.entity.Channel;
-import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.dbaccessor.testdata.TestData;
-import static recutil.dbaccessor.testdata.TestData.getTestDbEm;
 
 /**
  *

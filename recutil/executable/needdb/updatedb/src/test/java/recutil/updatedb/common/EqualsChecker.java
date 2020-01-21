@@ -17,7 +17,8 @@
 package recutil.updatedb.common;
 
 import org.slf4j.Logger;
-import recutil.loggerconfigurator.LoggerConfigurator;
+
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  *

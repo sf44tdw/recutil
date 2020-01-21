@@ -22,11 +22,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import org.slf4j.Logger;
 
+import org.slf4j.Logger;
 import org.w3c.dom.Document;
 
-import recutil.loggerconfigurator.LoggerConfigurator;
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  * チャンネル。番組の情報を全てのXMLファイルから抽出し、リストにまとめる。

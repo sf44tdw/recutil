@@ -32,7 +32,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import recutil.loggerconfigurator.LoggerConfigurator;
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  * 読み込んだEPG XMLから必要な情報を取り出す。

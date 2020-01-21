@@ -17,11 +17,13 @@
 package recutil.updatedb.listmaker;
 
 import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import recutil.loggerconfigurator.LoggerConfigurator;
+
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  * クラスパス上に配置したxmltv.dtdを読み込ませる。

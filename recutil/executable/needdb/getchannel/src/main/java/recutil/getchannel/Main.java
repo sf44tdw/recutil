@@ -44,13 +44,13 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 
+import loggerconfigurator.LoggerConfigurator;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.entity.comparator.ChannelComparator_AscendingByChannelNo;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
-import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
  *

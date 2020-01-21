@@ -21,11 +21,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 
+import loggerconfigurator.LoggerConfigurator;
 import recutil.commandexecutor.DummyExecutor;
 import recutil.consolesnatcher.ConsoleSnatcher;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.testdata.TestData;
-import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
  *

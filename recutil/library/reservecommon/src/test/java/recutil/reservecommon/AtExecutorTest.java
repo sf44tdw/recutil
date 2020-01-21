@@ -32,9 +32,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 
+import loggerconfigurator.LoggerConfigurator;
 import recutil.commandexecutor.CommandResult;
 import recutil.commandexecutor.DummyExecutor;
-import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
  *

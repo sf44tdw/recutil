@@ -16,19 +16,22 @@
  */
 package recutil.updatedb.listmaker;
 
+import static org.junit.Assert.*;
+import static recutil.updatedb.common.util.Util.*;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.w3c.dom.Document;
-import recutil.loggerconfigurator.LoggerConfigurator;
+
+import loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.common.Const;
-import static recutil.updatedb.common.util.Util.docToString;
 
 /**
  *
@@ -83,7 +86,7 @@ public class EPGListMakerTest {
         }
 
 //        LOG.info(dumpList(rstl));
-        
+
         assertTrue(rstl.containsAll(exRstl));
 
     }

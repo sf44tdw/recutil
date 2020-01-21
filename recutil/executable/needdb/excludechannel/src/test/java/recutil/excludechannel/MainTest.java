@@ -16,24 +16,26 @@
  */
 package recutil.excludechannel;
 
+import static org.junit.Assert.*;
+import static recutil.commmonutil.Util.*;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
+
+import loggerconfigurator.LoggerConfigurator;
 import recutil.consolesnatcher.ConsoleSnatcher;
-import recutil.dbaccessor.testdata.TestData;
-import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.dbaccessor.entity.TempExcludechannel;
-import recutil.loggerconfigurator.LoggerConfigurator;
+import recutil.dbaccessor.testdata.TestData;
 
 /**
  *

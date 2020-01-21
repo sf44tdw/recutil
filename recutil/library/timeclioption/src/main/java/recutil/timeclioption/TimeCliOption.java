@@ -16,20 +16,21 @@
  */
 package recutil.timeclioption;
 
+import static recutil.timeclioption.TimeCliOption.OPTION_NAME.*;
+
 import java.text.MessageFormat;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.lang3.Range;
 import org.slf4j.Logger;
-import recutil.loggerconfigurator.LoggerConfigurator;
-import static recutil.timeclioption.TimeCliOption.OPTION_NAME.HOUR;
-import static recutil.timeclioption.TimeCliOption.OPTION_NAME.MINUTE;
-import static recutil.timeclioption.TimeCliOption.OPTION_NAME.SECOND;
+
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  * 時間、分、秒を指定するオプションを生成する。 オプションのdesc欄はコンストラクタで指定できる。
- * 
+ *
  *
  *
  * @author normal

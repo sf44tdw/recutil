@@ -16,18 +16,20 @@
  */
 package recutil.updatedb.listmaker;
 
+import static org.junit.Assert.*;
+
 import java.io.IOException;
+
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import recutil.loggerconfigurator.LoggerConfigurator;
+
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  *

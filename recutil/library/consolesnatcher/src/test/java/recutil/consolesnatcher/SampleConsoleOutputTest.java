@@ -3,14 +3,16 @@
  */
 package recutil.consolesnatcher;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import static recutil.commmonutil.Util.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.slf4j.Logger;
-import static recutil.commmonutil.Util.getDefaultLineSeparator;
-import recutil.loggerconfigurator.LoggerConfigurator;
+
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  * SampleConsoleOutputクラステスト.<br>

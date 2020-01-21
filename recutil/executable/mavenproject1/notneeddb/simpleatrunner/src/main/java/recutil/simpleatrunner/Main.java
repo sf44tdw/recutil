@@ -23,10 +23,10 @@ import org.slf4j.Logger;
 import com.orangesignal.csv.CsvConfig;
 import com.orangesignal.csv.manager.CsvManagerFactory;
 
+import loggerconfigurator.LoggerConfigurator;
 import recutil.commandexecutor.CommandExecutor;
 import recutil.commandexecutor.CommandResult;
 import recutil.commandexecutor.Executor;
-import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.reservecommon.AtExecutor;
 
 /*

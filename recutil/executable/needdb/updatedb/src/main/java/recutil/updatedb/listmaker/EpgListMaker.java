@@ -17,15 +17,16 @@
 package recutil.updatedb.listmaker;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import org.slf4j.Logger;
 import org.w3c.dom.Document;
 
-import java.nio.charset.Charset;
-import org.slf4j.Logger;
-import recutil.loggerconfigurator.LoggerConfigurator;
+import loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.listmaker.fileseeker.FileSeeker;
 
 /**

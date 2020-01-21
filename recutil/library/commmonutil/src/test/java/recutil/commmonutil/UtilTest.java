@@ -31,7 +31,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import recutil.commmonutil.Util.REPLACE_PAIR;
-import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
  *
@@ -39,7 +38,7 @@ import recutil.loggerconfigurator.LoggerConfigurator;
  */
 public class UtilTest {
 
-	private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+	private static final Logger LOG = loggerconfigurator.LoggerConfigurator.getCallerLogger();
 
 	public UtilTest() {
 	}

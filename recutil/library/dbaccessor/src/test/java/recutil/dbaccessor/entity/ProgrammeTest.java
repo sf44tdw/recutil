@@ -16,17 +16,20 @@
  */
 package recutil.dbaccessor.entity;
 
+import static org.junit.Assert.*;
+
 import java.util.Date;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.slf4j.Logger;
-import recutil.loggerconfigurator.LoggerConfigurator;
+
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  *

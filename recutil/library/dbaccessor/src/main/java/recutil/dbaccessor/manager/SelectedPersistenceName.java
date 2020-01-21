@@ -18,7 +18,7 @@ package recutil.dbaccessor.manager;
 
 import org.slf4j.Logger;
 
-import recutil.loggerconfigurator.LoggerConfigurator;
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  * 接続先の名前を保持するクラス。一度設定した接続先名は変更できない。

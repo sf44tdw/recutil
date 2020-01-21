@@ -14,8 +14,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 
+import loggerconfigurator.LoggerConfigurator;
 import recutil.dbaccessor.testdata.TestData;
-import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
  *

@@ -34,13 +34,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 
+import loggerconfigurator.LoggerConfigurator;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.TempExcludechannel;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.dbaccessor.testdata.TestData;
-import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.common.Const;
 import recutil.updatedb.dataextractor.channel.AllChannelDataExtractor;
 import recutil.updatedb.dataextractor.channel.ChannelData;

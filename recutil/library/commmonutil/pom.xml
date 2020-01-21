@@ -8,15 +8,6 @@
     </parent>
     <artifactId>commmonutil</artifactId>
     <packaging>jar</packaging>
-    <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>loggerconfigurator</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
     <properties>
-loggerconfigurator.LoggerConfigurator
-loggerconfigurator.LoggerConfigurator
     </properties>
 </project>

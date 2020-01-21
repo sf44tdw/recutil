@@ -44,6 +44,7 @@ import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 
+import loggerconfigurator.LoggerConfigurator;
 import recutil.commandexecutor.CommandExecutor;
 import recutil.commandexecutor.CommandResult;
 import recutil.commandexecutor.Executor;
@@ -52,7 +53,6 @@ import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
-import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.timeclioption.TimeCliOption;
 import recutil.timeclioption.TimeParseException;
 

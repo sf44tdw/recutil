@@ -16,15 +16,17 @@
  */
 package recutil.updatedb.listmaker;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
+
 import org.junit.After;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.w3c.dom.Document;
-import recutil.loggerconfigurator.LoggerConfigurator;
+
+import loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.common.Const;
 
 /**

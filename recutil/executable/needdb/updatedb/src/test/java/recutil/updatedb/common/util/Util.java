@@ -21,15 +21,18 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
 import org.slf4j.Logger;
 import org.w3c.dom.Document;
-import recutil.loggerconfigurator.LoggerConfigurator;
+
+import loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.common.Const;
 
 /**

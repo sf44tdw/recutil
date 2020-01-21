@@ -45,7 +45,7 @@ import recutil.dbaccessor.entity.TempExcludechannel;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
-import recutil.loggerconfigurator.LoggerConfigurator;
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  * BS_191 BS_192 BS_193 BS_200 BS_201 BS_202 BS_231 BS_232 BS_233 BS_234 BS_236

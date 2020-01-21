@@ -6,6 +6,7 @@
 package recutil.getprogramme;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
@@ -14,15 +15,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
 import org.junit.Test;
 import org.slf4j.Logger;
+
+import loggerconfigurator.LoggerConfigurator;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.entity.Programme;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
 import recutil.dbaccessor.testdata.TestData;
-import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
  * Criteria API動作確認用

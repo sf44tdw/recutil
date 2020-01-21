@@ -16,11 +16,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 
+import loggerconfigurator.LoggerConfigurator;
 import recutil.commandexecutor.CommandExecutor;
 import recutil.commandexecutor.DummyExecutor;
 import recutil.consolesnatcher.ConsoleSnatcher;
 import recutil.dbaccessor.testdata.TestData;
-import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.reservecommon.AtExecutor.RESERVE_COMMAND_PARAMS;
 
 /**

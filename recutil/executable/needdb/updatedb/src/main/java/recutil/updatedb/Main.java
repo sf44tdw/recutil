@@ -16,30 +16,34 @@
  */
 package recutil.updatedb;
 
+import static recutil.commmonutil.Util.*;
+
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.w3c.dom.Document;
-import static recutil.commmonutil.Util.getDefaultLineSeparator;
+
+import loggerconfigurator.LoggerConfigurator;
 import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.entity.TempExcludechannel;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
-import recutil.loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.dataextractor.channel.AllChannelDataExtractor;
 import recutil.updatedb.dataextractor.channel.ChannelData;
 import recutil.updatedb.dataextractor.programme.AllProgrammeDataExtractor;

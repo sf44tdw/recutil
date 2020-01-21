@@ -23,11 +23,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
+
+import loggerconfigurator.LoggerConfigurator;
 import recutil.dbaccessor.entity.Channel;
 import recutil.dbaccessor.entity.Excludechannel;
 import recutil.dbaccessor.entity.Programme;
@@ -35,7 +39,6 @@ import recutil.dbaccessor.entity.TempExcludechannel;
 import recutil.dbaccessor.manager.EntityManagerMaker;
 import recutil.dbaccessor.manager.PERSISTENCE;
 import recutil.dbaccessor.manager.SelectedPersistenceName;
-import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
  * テストデータ。 別にするとdbaccessorとの相互依存が発生するので同梱している。

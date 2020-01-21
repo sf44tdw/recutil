@@ -24,7 +24,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import recutil.loggerconfigurator.LoggerConfigurator;
+import loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.dataextractor.AbstractEpgFileExtractor;
 import recutil.updatedb.dateconverter.Converter;
 

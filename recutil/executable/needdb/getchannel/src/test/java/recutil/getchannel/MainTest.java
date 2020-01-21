@@ -16,21 +16,24 @@
  */
 package recutil.getchannel;
 
+import static org.junit.Assert.*;
+import static recutil.commmonutil.Util.*;
+import static recutil.getchannel.Main.*;
+
 import java.text.MessageFormat;
 import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
+
+import loggerconfigurator.LoggerConfigurator;
 import recutil.consolesnatcher.ConsoleSnatcher;
-import recutil.dbaccessor.testdata.TestData;
-import static recutil.commmonutil.Util.getDefaultLineSeparator;
 import recutil.dbaccessor.entity.Channel;
-import static recutil.getchannel.Main.OUTPUT_FORMAT;
-import recutil.loggerconfigurator.LoggerConfigurator;
+import recutil.dbaccessor.testdata.TestData;
 
 /**
  *

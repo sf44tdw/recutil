@@ -5,27 +5,29 @@
  */
 package recutil.getprogramme;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import static recutil.commmonutil.Util.*;
+import static recutil.getprogramme.Main.*;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.ArrayUtils;
-import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
+
+import loggerconfigurator.LoggerConfigurator;
 import recutil.consolesnatcher.ConsoleSnatcher;
 import recutil.dbaccessor.entity.Programme;
-import recutil.dbaccessor.testdata.TestData;
-import static recutil.commmonutil.Util.parseLongToString;
 import recutil.dbaccessor.entity.comparator.PrograammeListSorter;
+import recutil.dbaccessor.testdata.TestData;
 import recutil.getprogramme.Main.OUTPUT_FORMAT_TYPE;
-import static recutil.getprogramme.Main.getSep;
-import recutil.loggerconfigurator.LoggerConfigurator;
 
 /**
  *
@@ -368,9 +370,9 @@ public class MainTest {
     @Test
     public void testStart5_3_1() throws Exception {
         LOG.info("start5_3_1");
-        
+
         dat.insertRecentStartProgrammes();
-        
+
         String[] args = {"-d", parseLongToString(dat.getP180().getStartDatetime().getTime()), "-s", "60"};
         Main instance = new Main();
         instance.start(args);
@@ -382,8 +384,8 @@ public class MainTest {
         expl.add(dat.getP180());
         expl.add(dat.getP240());
         String exp = getExpRes_NotOnlyTitle_NotFirstOnly(expl);
-        
-        
+
+
         LOG.info("std={}", std);
         LOG.info("exp={}", exp);
         assertEquals(std, exp);
@@ -395,9 +397,9 @@ public class MainTest {
     @Test
     public void testStart5_3_2() throws Exception {
         LOG.info("start5_3_2");
-        
+
         dat.insertRecentStartProgrammes();
-        
+
         String[] args = {"-d", parseLongToString(dat.getP1800().getStartDatetime().getTime()), "-m", "10"};
         Main instance = new Main();
         instance.start(args);
@@ -409,23 +411,23 @@ public class MainTest {
         expl.add(dat.getP1800());
         expl.add(dat.getP2400());
         String exp = getExpRes_NotOnlyTitle_NotFirstOnly(expl);
-        
-        
+
+
         LOG.info("std={}", std);
         LOG.info("exp={}", exp);
         assertEquals(std, exp);
         assertThat(std_err.length(), is(0));
     }
-    
+
         /**
      * Test of start method, of class Main.
      */
     @Test
     public void testStart5_3_3() throws Exception {
         LOG.info("start5_3_3");
-        
+
         dat.insertRecentStartProgrammes();
-        
+
         String[] args = {"-d", parseLongToString(dat.getP18000().getStartDatetime().getTime()), "-h", "1"};
         Main instance = new Main();
         instance.start(args);
@@ -437,8 +439,8 @@ public class MainTest {
         expl.add(dat.getP18000());
         expl.add(dat.getP21600());
         String exp = getExpRes_NotOnlyTitle_NotFirstOnly(expl);
-        
-        
+
+
         LOG.info("std={}", std);
         LOG.info("exp={}", exp);
         assertEquals(std, exp);

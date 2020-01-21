@@ -22,7 +22,7 @@ import java.util.Arrays;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 
-import recutil.loggerconfigurator.LoggerConfigurator;
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  *

@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.w3c.dom.Document;
 
-import recutil.loggerconfigurator.LoggerConfigurator;
+import loggerconfigurator.LoggerConfigurator;
 import recutil.updatedb.common.Const;
 import recutil.updatedb.common.TestData;
 import recutil.updatedb.dataextractor.programme.ProgrammeData;

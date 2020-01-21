@@ -26,8 +26,6 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 
-import recutil.loggerconfigurator.LoggerConfigurator;
-
 /**
  *
  * @author normal
@@ -36,7 +34,7 @@ public final class Util {
 	private Util() {
 	}
 
-	private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+	private static final Logger LOG = loggerconfigurator.LoggerConfigurator.getCallerLogger();
 
 	/**
 	 * デフォルトの改行文字<br>

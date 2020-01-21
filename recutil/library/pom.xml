@@ -13,7 +13,6 @@
         <module>commmonutil</module>
         <module>consolesnatcher</module>
         <module>dbaccessor</module>
-        <module>loggerconfigurator</module>
         <module>reservecommon</module>
         <module>timeclioption</module>
     </modules>
@@ -24,4 +23,13 @@
             <version>1.3.1</version>
         </dependency>
     </dependencies>
+    <dependencyManagement>
+    	<dependencies>
+    		<dependency>
+    			<groupId>${project.groupId}</groupId>
+    			<artifactId>commmonutil</artifactId>
+    			<version>${project.version}</version>
+    		</dependency>
+    	</dependencies>
+    </dependencyManagement>
 </project>

@@ -16,8 +16,6 @@
  */
 package recutil.commandexecutor;
 
-import static recutil.commmonutil.Util.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +23,7 @@ import java.io.InputStreamReader;
 
 import org.slf4j.Logger;
 
-import recutil.loggerconfigurator.LoggerConfigurator;
+import loggerconfigurator.LoggerConfigurator;
 
 /**
  *
@@ -82,7 +80,7 @@ public class Executor extends CommandExecutor {
     private synchronized String processMessage(InputStream in) {
         StringBuilder sB = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
-            String LINE_SEPA = getDefaultLineSeparator();
+            String LINE_SEPA = recutil.commmonutil.Util.getDefaultLineSeparator();
             String line;
             while ((line = br.readLine()) != null) {
                 sB.append(line).append(LINE_SEPA);
