@@ -6,10 +6,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>recutil</groupId>
     <artifactId>getchannel</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>    
+    <packaging>jar</packaging>
     <build>
         <plugins>
             <plugin>
