@@ -175,13 +175,16 @@ public class Main {
         Object[] header_parameters = {p.getTitle(), parseDateToString(p.getStartDatetime()), parseDateToString(p.getStopDatetime())};
         String s0 = AT_FILE_HEADER.format(header_parameters);
 
-        //放送時間に120秒足す。
-        long duration = this.getAirtimeBySecond(p) + 120;
+        //放送時間に900秒足す。
+        final long ADD_SECOND=900L;
+        long duration = this.getAirtimeBySecond(p) + ADD_SECOND;
+
         Object[] command_parameters = {p.getChannelId().getChannelId(), duration};
         String s1 = RECORD_COMMAND_FORMAT.format(command_parameters);
 
         //放送開始1分前
-        Date t2 = new Date(p.getStartDatetime().getTime() - 60000);
+        final long PRE_START_MILLISECOND=60000L;
+        Date t2 = new Date(p.getStartDatetime().getTime() - PRE_START_MILLISECOND);
 
         final AtExecutor exec = new AtExecutor(executor);
 
