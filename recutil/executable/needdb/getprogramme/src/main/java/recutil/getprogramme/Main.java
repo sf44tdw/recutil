@@ -227,6 +227,10 @@ public class Main {
 			args_ = args;
 		}
 
+
+		LOG.info("受け取った引数 {}",Main.dumpArgs(args_));
+
+
 		CommandLine cl;
 		try {
 			cl = parser.parse(opts, args_);
