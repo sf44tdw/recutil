@@ -30,7 +30,7 @@ public enum PERSISTENCE implements PersistenceNameHolder {
 
     @Override
     public String getPersistenceName() {
-        return persistenceName;
+        return this.persistenceName;
     }
 
 }
