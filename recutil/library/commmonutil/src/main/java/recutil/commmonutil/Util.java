@@ -34,7 +34,7 @@ public final class Util {
 	private Util() {
 	}
 
-	private static final Logger LOG = loggerconfigurator.LoggerConfigurator.getCallerLogger();
+	private static final Logger LOG = loggerconfigurator.LoggerConfigurator.getlnstance().getCallerLogger();
 
 	/**
 	 * デフォルトの改行文字<br>

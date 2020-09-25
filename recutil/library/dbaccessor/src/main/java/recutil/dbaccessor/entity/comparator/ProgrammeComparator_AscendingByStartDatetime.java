@@ -25,7 +25,7 @@ import recutil.dbaccessor.entity.Programme;
  */
 public class ProgrammeComparator_AscendingByStartDatetime implements Comparator<Programme> {
 
-//    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+//    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     public ProgrammeComparator_AscendingByStartDatetime() {
     }

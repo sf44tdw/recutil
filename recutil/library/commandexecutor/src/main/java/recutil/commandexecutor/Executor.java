@@ -33,7 +33,7 @@ import loggerconfigurator.LoggerConfigurator;
  */
 public class Executor extends CommandExecutor {
 
-    private static final Logger log = LoggerConfigurator.getCallerLogger();
+    private static final Logger log = LoggerConfigurator.getlnstance().getCallerLogger();
 
     /**
      *

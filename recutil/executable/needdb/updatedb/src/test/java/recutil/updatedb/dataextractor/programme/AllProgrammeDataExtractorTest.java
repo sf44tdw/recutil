@@ -44,7 +44,7 @@ import recutil.updatedb.listmaker.XmlLoader;
  */
 public class AllProgrammeDataExtractorTest {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     private final Charset CHARCODE = Const.CHARCODE;
     private final File F1 = Const.getTESTDATA_XML_1();

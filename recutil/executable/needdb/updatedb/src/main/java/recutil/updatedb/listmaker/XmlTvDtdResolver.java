@@ -32,7 +32,7 @@ import loggerconfigurator.LoggerConfigurator;
  */
 public class XmlTvDtdResolver implements EntityResolver {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
     public static final String DTD_NAME = "xmltv.dtd";
 
     /**

@@ -58,7 +58,7 @@ import recutil.dbaccessor.manager.SelectedPersistenceName;
  */
 public class Main {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     private static enum excludeState {
         ALL, USEABLE

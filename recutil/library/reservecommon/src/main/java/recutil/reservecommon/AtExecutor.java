@@ -60,7 +60,7 @@ public final class AtExecutor {
      */
     public static final long DIFF = 120000L;
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
     private final CommandExecutor executor;
 
     public AtExecutor(CommandExecutor executor) {

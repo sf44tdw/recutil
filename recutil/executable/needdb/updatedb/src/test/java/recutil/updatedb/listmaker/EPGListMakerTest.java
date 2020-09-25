@@ -39,7 +39,7 @@ import recutil.updatedb.common.Const;
  */
 public class EPGListMakerTest {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     public EPGListMakerTest() {
     }

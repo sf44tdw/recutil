@@ -37,7 +37,7 @@ import loggerconfigurator.LoggerConfigurator;
  */
 public final class TimeCliOption {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     private static final long SIXTY = 60L;
 

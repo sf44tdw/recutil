@@ -27,7 +27,7 @@ import loggerconfigurator.LoggerConfigurator;
  */
 public class EqualsChecker<T> {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     public EqualsChecker() {
     }

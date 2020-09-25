@@ -45,7 +45,7 @@ public class XmlLoader {
 
     private final Charset charset;
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     /**
      * @param charset XMLファイルの文字コード

@@ -69,7 +69,7 @@ import recutil.timeclioption.TimeParseException;
  */
 public class Main {
 
-	private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+	private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
 	/**
 	 * 番組情報を取得するクエリ。(チャンネル情報は自動的についてくる。) 特定チャンネルIDの、放送開始日時が指定時間の範囲内にある番組情報を取得する。

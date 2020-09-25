@@ -23,7 +23,7 @@ import recutil.dbaccessor.testdata.TestData;
  */
 public class TempExcludechannelTest {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     public TempExcludechannelTest() {
     }

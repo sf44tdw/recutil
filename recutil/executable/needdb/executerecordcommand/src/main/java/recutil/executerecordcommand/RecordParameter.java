@@ -27,7 +27,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
  */
 public final class RecordParameter {
 
-    //private static final Logger log = LoggerConfigurator.getCallerLogger();
+    //private static final Logger log = LoggerConfigurator.getlnstance().getCallerLogger();
 
     //物理チャンネル番号
     private final long physicalChannelNumber;

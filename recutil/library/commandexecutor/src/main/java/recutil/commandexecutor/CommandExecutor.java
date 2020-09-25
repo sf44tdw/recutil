@@ -30,7 +30,7 @@ import loggerconfigurator.LoggerConfigurator;
  */
 public abstract class CommandExecutor {
 
-    private static final Logger log = LoggerConfigurator.getCallerLogger();
+    private static final Logger log = LoggerConfigurator.getlnstance().getCallerLogger();
 
     private String cmd = null;
 

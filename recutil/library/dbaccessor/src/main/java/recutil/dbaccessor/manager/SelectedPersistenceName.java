@@ -27,7 +27,7 @@ import loggerconfigurator.LoggerConfigurator;
  */
 public final class SelectedPersistenceName {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
     private static SelectedPersistenceName instance;
 
     public static synchronized void selectPersistence(PersistenceNameHolder nameHolder) {

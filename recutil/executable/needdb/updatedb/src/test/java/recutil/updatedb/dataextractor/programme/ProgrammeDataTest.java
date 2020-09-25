@@ -41,7 +41,7 @@ public class ProgrammeDataTest {
     public ProgrammeDataTest() {
     }
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     @BeforeClass
     public static void setUpClass() {

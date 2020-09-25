@@ -63,7 +63,7 @@ import recutil.timeclioption.TimeParseException;
  */
 public class Main {
 
-	private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+	private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
 	protected static final String DATETIME_FORMAT = recutil.commmonutil.Util.getDbDatePattern();
 

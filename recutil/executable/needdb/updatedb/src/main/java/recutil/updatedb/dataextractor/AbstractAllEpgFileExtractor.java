@@ -37,7 +37,7 @@ import loggerconfigurator.LoggerConfigurator;
  */
 public abstract class AbstractAllEpgFileExtractor<T extends EpgData, U extends AbstractEpgFileExtractor<T>> {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
     private final List<Document> EPGXMLs;
 
     /**

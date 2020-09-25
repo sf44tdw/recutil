@@ -52,7 +52,7 @@ import recutil.reservecommon.AtExecutor;
  */
 public class Main {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     protected static final MessageFormat WRONG_START_DATETIME = new MessageFormat("放送開始時刻が現在時刻以前の番組は予約できません。放送開始時刻 = {0}, 現在時刻 ={1}");
 

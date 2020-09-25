@@ -41,7 +41,7 @@ import recutil.dbaccessor.testdata.TestData;
  */
 public class MainTest {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
     private static final MessageFormat FORMAT = new MessageFormat(OUTPUT_FORMAT);
     /**
      * 標準出力・標準エラー出力変更管理オブジェクト.

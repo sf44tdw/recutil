@@ -35,7 +35,7 @@ import recutil.updatedb.common.EqualsChecker;
  */
 public class ChannelDataTest {
 
-	private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+	private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
 	public ChannelDataTest() {
 	}

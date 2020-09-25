@@ -41,7 +41,7 @@ import recutil.updatedb.common.Const;
  */
 public final class Util {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     private Util() {
     }

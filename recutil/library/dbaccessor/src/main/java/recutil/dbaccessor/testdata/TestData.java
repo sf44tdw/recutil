@@ -47,7 +47,7 @@ import recutil.dbaccessor.manager.SelectedPersistenceName;
  */
 public final class TestData {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     public static synchronized EntityManagerMaker getTestDbEm() {
         return new EntityManagerMaker(SelectedPersistenceName.getInstance());

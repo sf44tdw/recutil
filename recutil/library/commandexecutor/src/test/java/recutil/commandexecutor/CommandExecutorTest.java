@@ -18,7 +18,7 @@ import loggerconfigurator.LoggerConfigurator;
  */
 public class CommandExecutorTest {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     /**
      * Test of execCommand method, of class CommandExecutor.

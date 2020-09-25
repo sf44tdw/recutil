@@ -22,7 +22,7 @@ import recutil.commandexecutor.DummyExecutor;
  */
 public class MainTest {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     public MainTest() {
     }

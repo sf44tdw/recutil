@@ -57,7 +57,7 @@ import recutil.updatedb.listmaker.EpgListMaker;
  */
 public class Main {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     public static final String getSep() {
         return getDefaultLineSeparator();

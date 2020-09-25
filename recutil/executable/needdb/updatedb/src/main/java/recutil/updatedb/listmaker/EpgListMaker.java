@@ -40,7 +40,7 @@ public class EpgListMaker {
 
     private final Charset charset;
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     /**
      * EPG XMLファイルを読み込む際、文字コードを指定する。

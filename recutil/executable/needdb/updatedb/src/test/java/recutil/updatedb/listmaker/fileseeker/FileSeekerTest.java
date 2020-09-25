@@ -40,7 +40,7 @@ import recutil.updatedb.listmaker.XmlSuffix;
  */
 public class FileSeekerTest {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     public FileSeekerTest() {
     }

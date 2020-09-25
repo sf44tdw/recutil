@@ -43,7 +43,7 @@ public class QueryStringTest {
 
     private static final boolean EXECUTE_FLAG = true;
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
     final TestData dat;
 
     public QueryStringTest() {

@@ -38,7 +38,7 @@ import recutil.updatedb.dataextractor.programme.ProgrammeData;
  */
 public final class EntityMaker {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
     private final Set<ChannelData> channels;
     private final Set<ProgrammeData> programmes;
 

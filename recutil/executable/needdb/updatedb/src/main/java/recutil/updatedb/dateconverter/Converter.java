@@ -31,7 +31,7 @@ import loggerconfigurator.LoggerConfigurator;
  */
 public final class Converter {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     private Converter() {
     }

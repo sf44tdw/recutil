@@ -43,7 +43,7 @@ import recutil.dbaccessor.testdata.TestData;
  */
 public class ChannelTest {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     private final TestData dat;
 

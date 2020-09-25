@@ -42,7 +42,7 @@ import recutil.commandexecutor.DummyExecutor;
  */
 public class AtExecutorTest {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     public AtExecutorTest() {
     }

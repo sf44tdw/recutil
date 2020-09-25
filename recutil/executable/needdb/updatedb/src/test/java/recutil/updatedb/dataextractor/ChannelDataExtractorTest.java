@@ -40,7 +40,7 @@ import recutil.updatedb.listmaker.XmlLoader;
  */
 public class ChannelDataExtractorTest {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     public ChannelDataExtractorTest() {
     }

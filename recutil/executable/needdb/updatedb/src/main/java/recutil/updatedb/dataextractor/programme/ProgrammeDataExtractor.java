@@ -38,7 +38,7 @@ import recutil.updatedb.dateconverter.Converter;
  */
 public class ProgrammeDataExtractor extends AbstractEpgFileExtractor<ProgrammeData> {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     /**
      * EPGの放送日データをDate型に変換するためのフォーマット

@@ -54,7 +54,7 @@ import recutil.updatedb.listmaker.EpgListMaker;
  */
 public class MainTest {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
     public MainTest() {
         SelectedPersistenceName.selectPersistence(PERSISTENCE.TEST);

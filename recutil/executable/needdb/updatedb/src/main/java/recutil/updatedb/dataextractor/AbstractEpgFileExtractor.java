@@ -42,7 +42,7 @@ import loggerconfigurator.LoggerConfigurator;
  */
 public abstract class AbstractEpgFileExtractor<T extends EpgData> {
 
-    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
     private final Document doc;
     private final String nodeName;
 

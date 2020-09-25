@@ -38,7 +38,7 @@ import recutil.commmonutil.Util.REPLACE_PAIR;
  */
 public class UtilTest {
 
-	private static final Logger LOG = loggerconfigurator.LoggerConfigurator.getCallerLogger();
+	private static final Logger LOG = loggerconfigurator.LoggerConfigurator.getlnstance().getCallerLogger();
 
 	public UtilTest() {
 	}

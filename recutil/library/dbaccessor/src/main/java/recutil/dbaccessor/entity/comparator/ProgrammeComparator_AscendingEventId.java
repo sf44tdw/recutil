@@ -25,7 +25,7 @@ import recutil.dbaccessor.entity.Programme;
  */
 public class ProgrammeComparator_AscendingEventId implements Comparator<Programme> {
 
-//    private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+//    private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
     @Override
     public int compare(Programme o1, Programme o2) {
         long no1 = o1.getEventId();

@@ -60,7 +60,7 @@ public class Main {
 
 	protected static final String CHANNELS_TEMP = "物理チャンネル番号 = {0}, チャンネルID = {1} ,局名 = {2}";
 
-	private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+	private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
 	public static final String getSep() {
 		return getDefaultLineSeparator();

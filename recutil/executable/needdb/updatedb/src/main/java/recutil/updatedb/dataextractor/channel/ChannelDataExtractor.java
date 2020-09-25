@@ -43,7 +43,7 @@ import recutil.updatedb.dataextractor.AbstractEpgFileExtractor;
  */
 public class ChannelDataExtractor extends AbstractEpgFileExtractor<ChannelData> {
 
-	private static final Logger LOG = LoggerConfigurator.getCallerLogger();
+	private static final Logger LOG = LoggerConfigurator.getlnstance().getCallerLogger();
 
 	/**
 	 * EPG関連 チャンネル要素の要素名
